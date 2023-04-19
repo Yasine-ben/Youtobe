@@ -13,10 +13,10 @@ class Comment(db.Model, UserMixin):
     comment = db.Column(db.String(10000), nullable=False)
     user_name = db.Column(db.String(255), nullable=False)
     user_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('users.id'))) # maybe add on delete cascade
-    video_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('videos.id'), ondelete='CASCADE'))
+    video_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('videos.id')))
     
     user = db.relationship('User', back_populates='comments')
-    video = db.relationship('Video', back_populates='comments')
+    videos = db.relationship('Video', back_populates='comments')
     
     def to_dict(self):
         return{

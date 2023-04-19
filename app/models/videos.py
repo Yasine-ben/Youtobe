@@ -1,10 +1,9 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
 from sqlalchemy import ForeignKey
 
 
-class Video(db.Model, UserMixin):
+class Video(db.Model):
     __tablename__ = 'videos'
 
     if environment == "production":
@@ -12,7 +11,7 @@ class Video(db.Model, UserMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100),nullable=False)
-    description = db.Column(db.String(5000), nullable=False)
+    description = db.Column(db.String(5000), nullable=True)
     video = db.Column(db.String(255), nullable=False)
     thumbnail = db.Column(db.String(255), nullable=False)
     length = db.Column(db.Float, nullable=False)
@@ -20,7 +19,7 @@ class Video(db.Model, UserMixin):
     
     user_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('users.id')))
 
-    user = db.relationships('User', back_populates='videos')
+    user = db.relationship('User', back_populates='videos')
     comments = db.relationship('Comment', back_populates='videos', cascade='all, delete')
 
     def to_dict(self):

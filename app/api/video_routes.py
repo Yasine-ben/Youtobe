@@ -74,7 +74,7 @@ def updateVideo(video_id):
         return { 'error': 'Video not found or no data sent', 'status' : 404 }
 
 # UNTESTED
-@video_routes.rote('/deleteVideo/<int:video_id>', methods=['DELETE'])
+@video_routes.route('/deleteVideo/<int:video_id>', methods=['DELETE'])
 def deleteVideo(video_id):
     """
     Delete Video
