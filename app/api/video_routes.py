@@ -6,6 +6,7 @@ from app.forms import comment_form
 
 video_routes = Blueprint('video', __name__)
 
+# UNTESTED
 @video_routes.route('/allVideos')
 def allVideos():
     """
@@ -14,6 +15,7 @@ def allVideos():
     videos = Video.query.all()
     return { 'videos': [video.to_dict() for video in videos] }
 
+# UNTESTED
 @video_routes.route('/singleVideo/<int:video_id>')
 def singleVideo(video_id):
     """
@@ -25,7 +27,8 @@ def singleVideo(video_id):
     
     else:
         return { 'video': video.to_dict() }
-    
+
+# UNTESTED    
 @video_routes.route('/createVideo', methods=['POST'])
 @login_required
 def createVideo():
@@ -52,16 +55,34 @@ def createVideo():
         return { 'error': 'error with data or user is not logged in' }
     
 
+# UNTESTED
 @video_routes.route('/updateVideo/<int:video_id>', methods=['PUT'])
 def updateVideo(video_id):
     """
     Update Video
     """
+    video = Video.query.get(video_id)
+    data = request.json()
     
+    if (video and data):
+        video.title = data.get('title')
+        video.description = data.get('description')
+        video.thumbnail = data.get('thumbnail')
+        db.session.commit()
+        return { 'message': 'Video updated successfully', 'status': 200 }
+    else:
+        return { 'error': 'Video not found or no data sent', 'status' : 404 }
 
+# UNTESTED
 @video_routes.rote('/deleteVideo/<int:video_id>', methods=['DELETE'])
 def deleteVideo(video_id):
     """
     Delete Video
     """
-    
+    video = Video.query.get(video_id)
+    if(video):
+        db.session.delete(video)
+        db.session.commit()
+        return { 'message' : 'Video Deleted Successfully' }
+    else:
+        return { 'error' : 'Video Not Found', 'status' : 404}
