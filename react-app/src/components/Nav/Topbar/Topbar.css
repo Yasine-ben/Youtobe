@@ -1,0 +1,80 @@
+.TB-wrapper{
+    height: 55px;
+    width: 100%;
+    
+    position: absolute;
+    top: 0;
+    left:0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid gray;
+}
+
+.TB-LeftSide-Wrapper{
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+}
+
+#TB-Menu{
+    display: flex;
+    flex-direction: row;
+    padding-left: 15px;
+    color: white;
+}
+
+.TB-IconName-Wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.TB-Youtobe-Icon{
+    width: auto;
+    height: 34px;
+}
+
+.TB-Title{
+    color:white;
+}
+
+.TB-Search-Wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+}
+
+.TB-Search-Input{
+    display: flex;
+    height: 37px;
+    width: 25vw;
+    border-radius: 15px;
+    border: 1px solid rgb(48, 48, 48);
+    background-color: rgb(15, 15, 15);
+    color: white;
+    padding-left: 10px;
+}
+
+.TB-SearchIcon-Wrapper{
+    position: relative;
+    right: 8%;
+}
+
+#search-icon{
+    color: white;
+}
+
+.TB-RightSide-Wrapper{
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+}
+
+#userIcon{
+    color: white;
+    
+}

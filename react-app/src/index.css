@@ -1,1 +1,6 @@
 /* TODO Add site wide styles */
+body{
+    /* font-family: 'Josefin Sans', sans-serif; */
+    font-family: 'Roboto', sans-serif;
+    background-color: rgb(15, 15, 15);
+}
