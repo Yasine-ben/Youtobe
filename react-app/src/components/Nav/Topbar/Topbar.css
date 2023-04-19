@@ -30,6 +30,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    padding-left: 10px;
+    gap: 5px;
 }
 
 .TB-Youtobe-Icon{
@@ -39,6 +41,8 @@
 
 .TB-Title{
     color:white;
+    font-weight: 500;
+    font-size: 1.2em;
 }
 
 .TB-Search-Wrapper{

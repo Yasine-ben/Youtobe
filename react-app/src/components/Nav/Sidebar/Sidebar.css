@@ -1,0 +1,83 @@
+.SB-Wrapper{
+    border-right: 1px solid gray;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    width: 237px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.SB-Body{
+    display: flex;
+    flex-direction: column;
+    width: 205px;
+    align-self: center;
+}
+
+.SB-Home-Subs{
+    /* border-bottom: 1px solid grey; */
+    position: relative;
+    top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 95px;
+    border-bottom: 1px solid grey;
+}
+
+.SB-Home{
+    display: flex;
+    flex-direction: row;
+    padding: 0 0 0 10px;
+    gap: 25px;
+    height: 36px;
+    border-radius: 10px;
+}
+
+.SB-Home:hover{
+    background-color: grey;
+}
+
+#Home-Icon{
+    color:white;
+    display: flex;
+    align-self: center;
+    
+}
+
+.SB-Home-Title{
+    color: white;
+    display: flex;
+    padding-top: 2px;
+    text-align: center;
+    align-self: center;
+}
+
+.SB-Sub{
+    display: flex;
+    flex-direction: row;
+    padding-left: 10px;
+    gap: 25px;
+    border-radius: 10px;
+    height: 36px;
+}
+
+.SB-Sub:hover{
+    background-color: grey;
+}
+
+#Sub-icon{
+    color:white;
+    display: flex;
+    align-self: center;
+}
+
+.SB-Sub-Title{
+    color: white;
+    display: flex;
+    padding-top: 2px;
+    text-align: center;
+    align-self: center;
+}

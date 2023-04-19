@@ -19,7 +19,7 @@ function App() {
     <>
       {/* <Navigation isLoaded={isLoaded} /> */}
       <Topbar isLoaded={isLoaded} />
-      {/* <Sidebar isLoaded={isLoaded} /> */}
+      <Sidebar isLoaded={isLoaded} />
 
       {isLoaded && (
         <Switch>
