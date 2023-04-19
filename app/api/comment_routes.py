@@ -6,18 +6,18 @@ from app.forms import comment_form
 
 comment_routes = Blueprint('comment', __name__)
 
-# UNTESTED
+# Working
 @comment_routes.route('/allComments/<int:video_id>')
 def all_comments(video_id):
     """
     Query for all comments belonging to a particular video
     """
-    comments = Comment.query.filter_by(comment_id=video_id).all()
+    comments = Comment.query.filter_by(video_id=video_id).all()
     
     if not comments:
         return {'message': 'There are no comments for this video' , 'status': 404}
     
-    return { 'comments': [comment.to_dict for comment in comments] }
+    return { 'comments': [comment.to_dict() for comment in comments] }
 
 # UNTESTED
 @comment_routes.route('/createComment/<int:user_id>/<int:video_id>' , methods=['POST'])

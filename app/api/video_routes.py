@@ -6,7 +6,7 @@ from app.forms import comment_form
 
 video_routes = Blueprint('video', __name__)
 
-# UNTESTED
+# Working
 @video_routes.route('/allVideos')
 def allVideos():
     """
@@ -15,8 +15,8 @@ def allVideos():
     videos = Video.query.all()
     return { 'videos': [video.to_dict() for video in videos] }
 
-# UNTESTED
-@video_routes.route('/singleVideo/<int:video_id>')
+# Working
+@video_routes.route('/<int:video_id>')
 def singleVideo(video_id):
     """
     Query for single video using video_id passed in
