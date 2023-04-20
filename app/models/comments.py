@@ -16,7 +16,7 @@ class Comment(db.Model, UserMixin):
     video_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('videos.id'), ondelete='CASCADE'))
     
     user = db.relationship('User', back_populates='comments')
-    video = db.relationship('Video', back_populates='comments')
+    videos = db.relationship('Video', back_populates='comments')
     
     def to_dict(self):
         return{

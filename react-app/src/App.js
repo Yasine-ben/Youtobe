@@ -7,6 +7,8 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import Topbar from "./components/Nav/Topbar";
 import Sidebar from "./components/Nav/Sidebar";
+import HomePage from "./components/HomePage";
+import SingleVideoPage from "./components/SingleVideoPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,16 +20,26 @@ function App() {
   return (
     <>
       {/* <Navigation isLoaded={isLoaded} /> */}
-      <Topbar isLoaded={isLoaded} />
-      <Sidebar isLoaded={isLoaded} />
-
       {isLoaded && (
         <Switch>
           <Route path="/login" >
+            <Topbar isLoaded={isLoaded} />
+            <Sidebar isLoaded={isLoaded} />
             <LoginFormPage />
           </Route>
           <Route path="/signup">
+            <Topbar isLoaded={isLoaded} />
+            <Sidebar isLoaded={isLoaded} />
             <SignupFormPage />
+          </Route>
+          <Route path='/Home'>
+            <Topbar isLoaded={isLoaded} />
+            <Sidebar isLoaded={isLoaded} />
+            <HomePage />
+          </Route>
+          <Route path='/Videos/:title/:video_id'>
+            <Topbar isLoaded={isLoaded} />
+            <SingleVideoPage />
           </Route>
         </Switch>
       )}

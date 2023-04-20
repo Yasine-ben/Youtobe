@@ -1,0 +1,66 @@
+.VP-Left-Wrapper{
+    padding-top: 50px;
+    /* padding-left: 20px; */
+    padding-right: 20px; 
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+
+}
+
+.VP-Wrapper{
+    display: flex;
+    flex-direction: row;
+}
+
+.VP-Player-Wrapper{
+    width: 1180px;
+
+    /* glow radius (as high as possible for now) */
+    box-shadow: 0 0 6000px rgba(255, 255, 255, 0.13);
+}
+
+.VP-Player{
+
+}
+
+.VP-UnderPlayer-Wrapper{
+
+}
+
+.VP-Title-Wrapper{
+
+}
+
+.VP-Title{
+    font-size: 1.35em;
+}
+
+.VP-Lower-Wrapper{
+
+}
+
+/* RECOMENDED */
+
+.VP-Right-Wrapper{
+
+}
+
+.VP-Recomended-Wrapper{
+    position: absolute;
+    top: 100px;
+    right: 30px;
+}
+
+.VP-Rec-Card-Wrapper{
+    width: 380px;
+    height: 106px;
+}
+
+.VP-Recomended-Img{
+    width: 169px;
+    height: 96px;
+    border-radius: 10px;
+}

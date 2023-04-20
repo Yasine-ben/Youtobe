@@ -1,0 +1,25 @@
+.HP-Wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+    grid-gap: 20px;
+    padding-top: 100px;
+    /* Height of the top bar */
+    padding-left: 260px;
+    padding-right: 20px;
+    /* Width of the sidebar */
+}
+
+.HP-Video-Wrapper {}
+
+.HP-Thumbnail-Wrapper {}
+
+.HP-Thumbnail {
+    width: 334px;
+    height: 186px;
+    border-radius: 8px;
+}
+
+.HP-Title-Wrapper {}
+
+.HP-Title {}
