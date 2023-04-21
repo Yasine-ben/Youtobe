@@ -22,7 +22,7 @@ function SingleVideoPage() {
     const [url, setUrl] = useState('')
     const [title, setTitle] = useState('')
     const [discription, setDescription] = useState('')
-    // add views and createdAt/updatedAt
+    const [date, setDate] = useState('')
     // console.log(video)
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -59,9 +59,12 @@ function SingleVideoPage() {
             setUrl(video.video)
             setTitle(video.title)
             setDescription(video.description)
+            setDate(video.updated_at)
         }
     }, [video])
 
+    console.log(date)
+    
     useEffect(() => {
         dispatch(thunkSingleVideo(video_id))
         dispatch(thunkAllVideos())
