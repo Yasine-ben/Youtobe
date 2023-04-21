@@ -1,7 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import ForeignKey
-
+from datetime import datetime
 
 class Video(db.Model):
     __tablename__ = 'videos'
@@ -16,6 +16,8 @@ class Video(db.Model):
     thumbnail = db.Column(db.String(255), nullable=False)
     length = db.Column(db.Float, nullable=False)
     uploader = db.Column(db.String, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     user_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('users.id')))
 
@@ -31,5 +33,7 @@ class Video(db.Model):
             'thumbnail': self.thumbnail,
             'length': self.length,
             'uploader': self.uploader,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
             'user_id': self.user_id,
         }

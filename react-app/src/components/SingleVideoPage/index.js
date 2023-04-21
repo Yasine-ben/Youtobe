@@ -17,7 +17,7 @@ function SingleVideoPage() {
     const user = useSelector(state => state.session.user)
     const comments = Object.values(useSelector(state => state.comments.allComments))
     
-    console.log(Object.values(comments))
+    console.log('commentsssssssssssssss',comments)
 
     const [url, setUrl] = useState('')
     const [title, setTitle] = useState('')
@@ -119,17 +119,27 @@ function SingleVideoPage() {
                             </div>
                         </div>
                     </div>
-                    <div className='VP-UserComments-Wrapper'>
-                        {!comments.status ? comments.map((comment,idx) => (
-                            <div key={`Comment_${idx}`} className='VP-Comment-Wrapper'>
-                                <div className='VP-UserIcon-Wrapper'>
+                    <div className='VP-UC-Wrapper'>
+                        {!(comments.status === 404) ? comments.map((comment,idx) => (
+                            <div key={`Comment_${idx}`} className='VP-UC-Wrapper'>
+                                <div className='VP-UC-Icon-Wrapper'>
                                     <i class="fa-solid fa-circle-user"></i>
                                 </div>
-                                <div className='VP-RightBox-Wrapper'>
-                                    <div></div>
+                                <div className='VP-UC-RightBox-Wrapper'>
+                                    <div className='VP-UC-Commenter-Wrapper'>
+                                        <p className='VP-UC-Commenter'>{comment.user_name}</p>
+                                        <p className='VP-UC-Time'>1 year ago</p>
+                                    </div>
+                                    <div className='VP-UC-Comment-Wrapper'>
+                                        <p className='VP-UC-Comment'>{comment.comment}</p>
+                                    </div>
                                 </div>
                             </div>
-                        )) : <div>NONE</div>} 
+                        )) 
+                        : 
+                        <div className='VP-UC-NoComments-Wrapper'>
+                            <p className='VP-UC-NoComment-Title'>No Comments Yet</p>
+                        </div>} 
                     </div>
                 </div>
             </div>

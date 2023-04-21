@@ -1,20 +1,19 @@
 """empty message
 
-Revision ID: a5614e8d9a46
+Revision ID: a0786fa5549d
 Revises: 
-Create Date: 2023-04-19 13:08:53.793933
+Create Date: 2023-04-20 22:08:21.036830
 
 """
 from alembic import op
 import sqlalchemy as sa
-
 
 import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = 'a5614e8d9a46'
+revision = 'a0786fa5549d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -39,6 +38,8 @@ def upgrade():
     sa.Column('thumbnail', sa.String(length=255), nullable=False),
     sa.Column('length', sa.Float(), nullable=False),
     sa.Column('uploader', sa.String(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -49,6 +50,8 @@ def upgrade():
     sa.Column('user_name', sa.String(length=255), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('video_id', sa.Integer(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.ForeignKeyConstraint(['video_id'], ['videos.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
@@ -58,6 +61,7 @@ def upgrade():
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE videos SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
+    
     # ### end Alembic commands ###
 
 
