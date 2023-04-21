@@ -1,6 +1,8 @@
 from app.models import db, Video, environment, SCHEMA
 from sqlalchemy.sql import text
+from datetime import datetime
 
+date_format = '%a, %d %b %Y %H:%M:%S %Z'
 
 def seed_videos():
     video1 = Video( 
@@ -10,7 +12,9 @@ def seed_videos():
         thumbnail = 'https://i.ibb.co/QH5TZ5m/weird-russian-singer.jpg',
         length = 4.05,
         uploader = 'marnie',
-        user_id = 2
+        user_id = 2,
+        created_at = datetime.strptime('Fri, 21 Apr 2013 02:08:34 GMT', date_format),
+        updated_at = datetime.strptime('Fri, 21 Apr 2013 02:08:34 GMT', date_format),
     )
     video2 = Video( 
         title = 'Charlie The Unicorn',
@@ -19,7 +23,9 @@ def seed_videos():
         thumbnail = 'https://i.ibb.co/dgw6RYz/charlie-1.jpg',
         length = 3.45,
         uploader = 'bobbie',
-        user_id = 4
+        user_id = 4,
+        created_at = datetime.strptime('Fri, 21 Apr 2009 02:08:34 GMT', date_format),
+        updated_at = datetime.strptime('Fri, 21 Apr 2009 02:08:34 GMT', date_format),
     )
     video3 = Video( 
         title = 'Charlie the Unicorn 2',
@@ -28,7 +34,9 @@ def seed_videos():
         thumbnail = 'https://i.ibb.co/RCT1mxS/charlie-2.jpg',
         length = 6.00,
         uploader = 'bobbie',
-        user_id = 4
+        user_id = 4,
+        created_at = datetime.strptime('Fri, 21 Apr 2010 02:08:34 GMT', date_format),
+        updated_at = datetime.strptime('Fri, 21 Apr 2010 02:08:34 GMT', date_format),
     )
     video4 = Video( 
         title = 'Charlie the Unicorn 3',
@@ -37,7 +45,9 @@ def seed_videos():
         thumbnail = 'https://i.ibb.co/hszyBV7/charlie-3.jpg',
         length = 5.57,
         uploader = 'bobbie',
-        user_id = 4
+        user_id = 4,
+        created_at = datetime.strptime('Fri, 21 Apr 2011 02:08:34 GMT', date_format),
+        updated_at = datetime.strptime('Fri, 21 Apr 2011 02:08:34 GMT', date_format),
     )
     video5 = Video( 
         title = 'Charlie the Unicorn 4',
@@ -46,7 +56,9 @@ def seed_videos():
         thumbnail = 'https://i.ibb.co/tL2tK2v/charlie-4.jpg',
         length = 5.07,
         uploader = 'bobbie',
-        user_id = 4
+        user_id = 4,
+        created_at = datetime.strptime('Fri, 21 Apr 2012 02:08:34 GMT', date_format),
+        updated_at = datetime.strptime('Fri, 21 Apr 2012 02:08:34 GMT', date_format),
     )
     video6 = Video( 
         title = 'Nyan Cat [original]',
@@ -55,7 +67,9 @@ def seed_videos():
         thumbnail = 'https://i.ibb.co/1zC6rH4/nyan.jpg',
         length = 3.36,
         uploader = 'gobbie',
-        user_id = 5
+        user_id = 5,
+        created_at = datetime.strptime('Fri, 1 Apr 2008 02:08:34 GMT', date_format),
+        updated_at =datetime.strptime( 'Fri, 1 Apr 2008 02:08:34 GMT', date_format),
     )
     video7 = Video( 
         title = 'BEST CROISSANT IN PARIS',
@@ -64,7 +78,9 @@ def seed_videos():
         thumbnail = 'https://i.ibb.co/gFPFg8j/best-croissant-in-paris.jpg',
         length = 6.40,
         uploader = 'scobbie',
-        user_id = 6
+        user_id = 6,
+        created_at = datetime.strptime('Sun, 2 Apr 2023 02:08:34 GMT', date_format),
+        updated_at =datetime.strptime( 'Sun, 2 Apr 2023 02:08:34 GMT', date_format),
     )
     video8 = Video( 
         title = "It's Peanut Butter Jelly Time!!!",
@@ -73,7 +89,9 @@ def seed_videos():
         thumbnail = 'https://i.ibb.co/4gd3q3C/peanutbutter-jelly-time.jpg',
         length = 1.46,
         uploader = 'lobbie',
-        user_id = 7
+        user_id = 7,
+        created_at = datetime.strptime('Fri, 21 Apr 2008 02:08:34 GMT', date_format),
+        updated_at = datetime.strptime('Fri, 21 Apr 2008 02:08:34 GMT', date_format),
     )
     video9 = Video( 
         title = '"GOLD BOND LIQUI-SHAQ" - TV SHERIFF VIDEO REMIX',
@@ -82,7 +100,9 @@ def seed_videos():
         thumbnail = 'https://i.ibb.co/C1MrymS/shaq-goldbond.jpg',
         length = 1.10,
         uploader = 'tobby',
-        user_id = 8
+        user_id = 8,
+        created_at = datetime.strptime('Fri, 21 Apr 2019 02:08:34 GMT', date_format),
+        updated_at = datetime.strptime('Fri, 21 Apr 2019 02:08:34 GMT', date_format),
     )
     # video10 = Video( 
     #     title = 
