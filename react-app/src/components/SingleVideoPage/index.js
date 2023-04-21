@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { thunkAllVideos, thunkSingleVideo } from '../../store/video';
 import ReactPlayer from 'react-player';
+import dayjs from 'dayjs';
 
 import './SingleVideoPage.css'
 import { thunkAllComments } from '../../store/comments';
@@ -12,12 +13,19 @@ function SingleVideoPage() {
     const history = useHistory()
     const { video_id } = useParams();
 
+    //import dayjs from 'dayjs' // ES 2015
+    const dayjs = require('dayjs')
+    let relativeTime = require('dayjs/plugin/relativeTime')
+    dayjs().format()
+    
+    dayjs.extend(relativeTime)
+
+
     const video = Object.values(useSelector(state => state.videos.singleVideo))[0]
     const allVideos = Object.values(useSelector(state => state.videos.allVideos))
     const user = useSelector(state => state.session.user)
     const comments = Object.values(useSelector(state => state.comments.allComments))
     
-    console.log('commentsssssssssssssss',comments)
 
     const [url, setUrl] = useState('')
     const [title, setTitle] = useState('')
@@ -63,8 +71,11 @@ function SingleVideoPage() {
         }
     }, [video])
 
-    console.log(date)
-    
+
+    console.log(dayjs(date).fromNow())
+
+
+
     useEffect(() => {
         dispatch(thunkSingleVideo(video_id))
         dispatch(thunkAllVideos())
@@ -74,6 +85,7 @@ function SingleVideoPage() {
     return (
         <div className='VP-Wrapper'>
             <div className='VP-Left-Wrapper'>
+                {/* VIDEO PLAYER LEFT */}
                 <div className='VP-Player-Wrapper'>
                     <ReactPlayer
                         url={url}
@@ -100,12 +112,15 @@ function SingleVideoPage() {
                 <div className='VP-DescriptionBox-Wrapper'>
                     <div className='VP-Desc-ViewsAndTime'>
                         <p className='VP-Desc-Views'>{`${randomInRange(1, 100)} views`}&nbsp;</p>
-                        <p className='VP-Desc-Time'>1 year ago</p>
+                        <p className='VP-Desc-Time'>{dayjs(date).fromNow()}</p>
                     </div>
                     <div className='VP-Description-Wrapper'>
                         <p className='VP-Description'>{discription}</p>
                     </div>
                 </div>
+
+
+                {/* CREATE COMMENT */}
                 <div className='VP-Comments-Wrapper'>
                     <div className='VP-AddComments-Wrapper'>
                         <div className='VP-Comments-UserIcon'>
@@ -122,16 +137,20 @@ function SingleVideoPage() {
                             </div>
                         </div>
                     </div>
-                    <div className='VP-UC-Wrapper'>
+                    
+
+                    {/* USER COMMENTS */}
+                    <div className='VP-UC-Main-Wrapper'>
+                        {/* THIS TERNARY DOESNT WORK */}
                         {!(comments.status === 404) ? comments.map((comment,idx) => (
-                            <div key={`Comment_${idx}`} className='VP-UC-Wrapper'>
+                            <div key={`Comment_${idx}`} className='VP-UC-Card-Wrapper'>
                                 <div className='VP-UC-Icon-Wrapper'>
-                                    <i class="fa-solid fa-circle-user"></i>
+                                    <i id='VP-UC-Icon' className="fa-solid fa-circle-user"></i>
                                 </div>
                                 <div className='VP-UC-RightBox-Wrapper'>
                                     <div className='VP-UC-Commenter-Wrapper'>
                                         <p className='VP-UC-Commenter'>{comment.user_name}</p>
-                                        <p className='VP-UC-Time'>1 year ago</p>
+                                        <p className='VP-UC-Time'>{dayjs(comment.updated_at).fromNow()}</p>
                                     </div>
                                     <div className='VP-UC-Comment-Wrapper'>
                                         <p className='VP-UC-Comment'>{comment.comment}</p>
@@ -147,6 +166,8 @@ function SingleVideoPage() {
                 </div>
             </div>
 
+
+            {/* RECOMENDED VIDEOS RIGHT SIDE */}
             <div className='VP-Right-Wrapper'>
                 <div className='VP-Recomended-Wrapper'>
                     {allVideos.map((video, idx) => (
@@ -164,7 +185,7 @@ function SingleVideoPage() {
                                     </div>
                                     <div className='VP-Rec-ViewsAndTime-Wrapper'>
                                         <p className='VP-Rec-Views'>{`${randomInRange(1, 100)} views`}&nbsp;</p>
-                                        <p className='VP-Rec-Time'>•&nbsp;1 year ago</p>
+                                        <p className='VP-Rec-Time'>•&nbsp;{dayjs(video.updated_at).fromNow()}</p>
                                     </div>
                                 </div>
                             </div>
