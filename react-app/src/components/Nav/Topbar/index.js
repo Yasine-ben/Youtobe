@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import icon from '../../../Images/yt-Icon.png'
 import './Topbar.css'
+import { useHistory } from 'react-router-dom'
 
 function Topbar() {
+    const history = useHistory()
+
     return (
         <div className='TB-wrapper'>
             <div className='TB-LeftSide-Wrapper'>
                 <i id='TB-Menu' className="fa-solid fa-bars" />
-                <div className='TB-IconName-Wrapper' >
+                <div className='TB-IconName-Wrapper' onClick={((e) => history.push('/Home'))}>
                     <img className='TB-Youtobe-Icon' src={icon} alt='Main Icon' />
                     <p className='TB-Title'>Youtobe</p>
                 </div>
