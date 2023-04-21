@@ -19,11 +19,8 @@
     box-shadow: 0 0 6000px rgba(255, 255, 255, 0.13);
 }
 .VP-Player {}
-
 .VP-UnderPlayer-Wrapper {}
-
 .VP-Title-Wrapper {}
-
 .VP-Title {
     font-size: 1.35em;
 }
@@ -48,14 +45,15 @@
 }
 /* END */
 
-/* Comments */
+
+/* ADD COMMENTS */
 .VP-Comments-Wrapper{
     margin-top: 30px;
     width: 1180px;
     /* height 100 for now remove asap */
     height: 100px;
     position: relative;
-    background-color: grey;
+    /* background-color: grey; */
     
 }
 .VP-AddComments-Wrapper{
@@ -66,6 +64,7 @@
 .VP-Comments-UserIcon{
     width: 57px;
     height: 68px;
+    font-size: 1.3em;
 }
 i.fa-solid.fa-circle-user:before{
     padding-left: 5px;
@@ -114,6 +113,56 @@ i.fa-solid.fa-circle-user:before{
 /* END */
 
 
+/* USER COMMENTS */
+.VP-UC-Main-Wrapper{}
+.VP-UC-Card-Wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+.VP-UC-Icon-Wrapper{
+    width: 57px;
+    height: 68px;
+}
+#VP-UC-Icon{
+    font-size: 1.3em;
+}
+.VP-UC-RightBox-Wrapper{
+    display: flex;
+    flex-direction: column;
+}
+.VP-UC-Commenter-Wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+.VP-UC-Commenter{
+    font-size: .95em;
+    font-weight: 400;
+    text-align: center;
+}
+.VP-UC-Time{
+    color: rgb(163, 163, 163);
+    font-size: .75em;
+    font-weight: 500;
+}
+.VP-UC-Comment-Wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.VP-UC-Comment{
+    display: flex;
+    position: relative;
+    top: -15px;
+}
+.VP-UC-NoComments-Wrapper{}
+.VP-UC-NoComment-Title{}
+/* END */
+
+
 
 /* RECOMENDED */
 .VP-Right-Wrapper {
@@ -122,9 +171,7 @@ i.fa-solid.fa-circle-user:before{
     right: 30px;
 }
 .VP-Recomended-Wrapper {}
-
 .VP-Rec-Card-Wrapper {
-
     width: 380px;
     height: 106px;
 }
@@ -158,8 +205,10 @@ i.fa-solid.fa-circle-user:before{
 .VP-Rec-Title {
     position: relative;
     top: 5px;
-    max-height: 40px;
+    /* change to 40px after making function to add ... to titles that are too long */
+    max-height: 34px;
     margin: 0;
+    overflow: hidden;
 }
 .VP-Rec-Uploader-Wrapper{
 

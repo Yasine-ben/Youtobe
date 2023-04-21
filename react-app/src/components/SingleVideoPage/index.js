@@ -85,6 +85,7 @@ function SingleVideoPage() {
     return (
         <div className='VP-Wrapper'>
             <div className='VP-Left-Wrapper'>
+                {/* VIDEO PLAYER LEFT */}
                 <div className='VP-Player-Wrapper'>
                     <ReactPlayer
                         url={url}
@@ -119,7 +120,7 @@ function SingleVideoPage() {
                 </div>
 
 
-
+                {/* CREATE COMMENT */}
                 <div className='VP-Comments-Wrapper'>
                     <div className='VP-AddComments-Wrapper'>
                         <div className='VP-Comments-UserIcon'>
@@ -137,11 +138,14 @@ function SingleVideoPage() {
                         </div>
                     </div>
                     
-                    <div className='VP-UC-Wrapper'>
+
+                    {/* USER COMMENTS */}
+                    <div className='VP-UC-Main-Wrapper'>
+                        {/* THIS TERNARY DOESNT WORK */}
                         {!(comments.status === 404) ? comments.map((comment,idx) => (
-                            <div key={`Comment_${idx}`} className='VP-UC-Wrapper'>
+                            <div key={`Comment_${idx}`} className='VP-UC-Card-Wrapper'>
                                 <div className='VP-UC-Icon-Wrapper'>
-                                    <i class="fa-solid fa-circle-user"></i>
+                                    <i id='VP-UC-Icon' className="fa-solid fa-circle-user"></i>
                                 </div>
                                 <div className='VP-UC-RightBox-Wrapper'>
                                     <div className='VP-UC-Commenter-Wrapper'>
@@ -163,7 +167,7 @@ function SingleVideoPage() {
             </div>
 
 
-
+            {/* RECOMENDED VIDEOS RIGHT SIDE */}
             <div className='VP-Right-Wrapper'>
                 <div className='VP-Recomended-Wrapper'>
                     {allVideos.map((video, idx) => (
