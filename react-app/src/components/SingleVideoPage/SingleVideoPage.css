@@ -1,66 +1,200 @@
-.VP-Left-Wrapper{
+.VP-Left-Wrapper {
     padding-top: 50px;
     /* padding-left: 20px; */
-    padding-right: 20px; 
+    padding-right: 20px;
     display: flex;
     flex-direction: column;
     position: absolute;
     top: 50px;
     left: 50px;
-
+    height: 100vw;
 }
-
-.VP-Wrapper{
+.VP-Wrapper {
     display: flex;
     flex-direction: row;
 }
-
-.VP-Player-Wrapper{
+.VP-Player-Wrapper {
     width: 1180px;
-
     /* glow radius (as high as possible for now) */
     box-shadow: 0 0 6000px rgba(255, 255, 255, 0.13);
 }
+.VP-Player {}
 
-.VP-Player{
+.VP-UnderPlayer-Wrapper {}
 
-}
+.VP-Title-Wrapper {}
 
-.VP-UnderPlayer-Wrapper{
-
-}
-
-.VP-Title-Wrapper{
-
-}
-
-.VP-Title{
+.VP-Title {
     font-size: 1.35em;
 }
+.VP-Lower-Wrapper {}
+/* END */
 
-.VP-Lower-Wrapper{
+/* Description Box */
+/* in the future add a button to open the description box to see all the text */
+.VP-DescriptionBox-Wrapper{
+    background-color: rgb(39, 39, 39);
+    width: 1180px;
+    height: 105px;
+    position: relative;
+    display: block;
+    border-radius: 13px;
+    overflow: hidden;
+    padding-left: 10px;
+}
+.VP-Desc-ViewsAndTime{
+    display: flex;
+    flex-direction: row;
+}
+/* END */
+
+/* Comments */
+.VP-Comments-Wrapper{
+    margin-top: 30px;
+    width: 1180px;
+    /* height 100 for now remove asap */
+    height: 100px;
+    position: relative;
+    background-color: grey;
+    
+}
+.VP-AddComments-Wrapper{
+    display: flex;
+    flex-direction: row;
+    /* padding-bottom: 20px; */
+}
+.VP-Comments-UserIcon{
+    width: 57px;
+    height: 68px;
+}
+i.fa-solid.fa-circle-user:before{
+    padding-left: 5px;
+    font-size: 2em;
+}
+.VP-InputAndButtons-Wrapper{
 
 }
+.VP-Input-Wrapper{
+
+}
+.VP-Comment-Input{
+    width: 1120px;
+    height: 25px;
+    border: 0;
+    border-bottom: 1px solid grey;
+    color: rgb(163, 163, 163);
+    background-color: rgb(15, 15, 15);
+    padding-bottom: 5px;
+    font-size: 1.1em;
+    cursor:text;
+}
+.VP-Comment-Input:focus{
+    outline: none;
+}
+.VP-CommentInputButton-Wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    height: 40px;
+    align-items: center;
+}
+.VP-Submit{
+    display: flex;
+    width: 90px;
+    height: 34px;
+    background-color: rgb(39, 39, 39);
+    color: rgb(163, 163, 163);
+    border-radius: 25px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    font-size: .9em;
+    cursor: pointer;
+}
+/* END */
+
+
 
 /* RECOMENDED */
-
-.VP-Right-Wrapper{
-
-}
-
-.VP-Recomended-Wrapper{
+.VP-Right-Wrapper {
     position: absolute;
     top: 100px;
     right: 30px;
 }
+.VP-Recomended-Wrapper {}
 
-.VP-Rec-Card-Wrapper{
+.VP-Rec-Card-Wrapper {
+
     width: 380px;
     height: 106px;
 }
-
-.VP-Recomended-Img{
+.VP-Rec-Container {
+    display: flex;
+    flex-direction: row;
+}
+.VP-Rec-Img-Wrapper {
+    margin-right: 10px;
+}
+.VP-Recomended-Img {
     width: 169px;
     height: 96px;
     border-radius: 10px;
 }
+.VP-Rec-Text-Wrapper {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* background-color: gray; */
+    height: 96px;
+    width: 200px;
+    gap: 5px;
+}
+.VP-Rec-Title-Wrapper {
+    /* background-color: green; */
+    height: 40px;
+    font-size: .95em;
+    font-weight: 500;
+}
+.VP-Rec-Title {
+    position: relative;
+    top: 5px;
+    max-height: 40px;
+    margin: 0;
+}
+.VP-Rec-Uploader-Wrapper{
+
+}
+.VP-Rec-Uploader{
+    position: relative;
+    top: 0;
+    height: 40px;
+    margin: 0;
+    /* background-color: green; */
+    height: 20px;
+    color: rgb(163, 163, 163);
+    font-size: .9em;
+    font-weight: 400;
+}
+.VP-Rec-ViewsAndTime-Wrapper{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    top: 0;
+    height: 40px;
+    margin: 0;
+    color: rgb(163, 163, 163);
+    font-size: .9em;
+    font-weight: 400;
+    text-align: center;
+}
+.VP-Rec-Views{
+    top: 0;
+    height: 40px;
+    margin: 0;
+}
+.VP-Rec-Time{
+    top: 0;
+    height: 40px;
+    margin: 0;
+}
+/* END */
