@@ -1,0 +1,29 @@
+.profile-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 70px;
+}
+
+.hidden {
+  display: none;
+}
+
+#Profile-btn-icon{
+  font-size: 1.4em;
+}
+
+/* NOT LOGGED IN BUTTON */
+.TB-NotLoggedInBtn{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  height: 36px;
+  padding: 0px 15px 0px 10px ;
+  border-radius: 30px;
+  color: rgb(61, 166, 255);
+  border: 1px solid rgb(63, 63, 63);
+  font-size: .9em;
+  font-weight: 500;
+  cursor: pointer;
+}

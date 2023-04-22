@@ -1,0 +1,134 @@
+.LI-Wrapper {
+    width: 450px;
+    height: 500px;
+    background-color: rgb(39, 39, 39);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+}
+
+.LI-Inner-Wrapper {
+    width: 367px;
+    height: 410px;
+    /* background-color: green; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.LI-Title-Wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+}
+
+.LI-Goo {
+    width: 75px;
+    height: auto;
+}
+
+.LI-SignIn {
+    font-size: 1.4em;
+    font-weight: 500;
+    position: relative;
+    top: 5px;
+}
+
+.LI-SignIn-Cont {
+    font-size: .9em;
+    font-weight: 400;
+    position: relative;
+    top: -15px;
+}
+
+.LI-Form-Wrapper {}
+
+.LI-Error-Wrapper {
+    /* padding-bottom: 5px; */
+    position: relative;
+    top: -20px;
+    left: 25px;
+}
+
+.LI-Error {
+    color: red;
+}
+
+.LI-Input-Wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    left: -5px;
+
+}
+
+.LI-Email-Label {}
+
+.LI-Email-Input {
+    width: 370px;
+    height: 45px;
+    border-radius: 5px;
+    font-size: .9em;
+    border: none;
+    text-indent: 10px;
+}
+
+.LI-Password-Label {}
+
+.LI-Password-Input {
+    width: 370px;
+    height: 45px;
+    border-radius: 5px;
+    font-size: .9em;
+    border: none;
+    text-indent: 10px;
+}
+
+.LI-Submit-Button-Wrapper {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    top: 50px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.LI-CreateAccount {
+    color: rgb(28, 115, 232);
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.LI-DemoUser{
+    color: rgb(28, 115, 232);
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.LI-Submit-Button {
+    /* REMOVING DECORATION */
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    /* REMOVING DECORATION */
+
+    width: 80px;
+    height: 40px;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+    color: white;
+    background-color: rgb(28, 115, 232);
+}

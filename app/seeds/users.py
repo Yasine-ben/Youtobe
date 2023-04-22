@@ -4,33 +4,87 @@ from sqlalchemy.sql import text
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
-    #1
+    # 1
     demo = User(
-        username='Demo', email='demo@aa.io', password='password')
-    #2
+        username="Demo",
+        first_name="Demo",
+        last_name="User",
+        cover_image="https://i.ibb.co/kxqQT9Y/1.png",
+        email="demo@aa.io",
+        password="password",
+    )
+    # 2
     drake = User(
-        username='drake', email='drake@aa.io', password='password')
-    #3
+        username="drake69",
+        first_name="Drake",
+        last_name="Bake",
+        cover_image="https://i.ibb.co/vzSPbYd/2.png",
+        email="drake@aa.io",
+        password="password",
+    )
+    # 3
     marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
-    #4
+        username="marnie123",
+        first_name="Marnie",
+        last_name="User",
+        cover_image="https://i.ibb.co/PgJCxSS/3.png",
+        email="marnie@aa.io",
+        password="password",
+    )
+    # 4
     bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
-    #5
+        username="bobbie_slobbie192",
+        first_name="Demo",
+        last_name="User",
+        cover_image="https://i.ibb.co/MnWFNf0/4.png",
+        email="bobbie@aa.io",
+        password="password",
+    )
+    # 5
     gobbie = User(
-        username='gobbie', email='gobbie@aa.io', password='password')
-    #6
+        username="gobbiegobbiegobbie",
+        first_name="Demo",
+        last_name="User",
+        cover_image="https://i.ibb.co/PQ6vBqq/5.png",
+        email="gobbie@aa.io",
+        password="password",
+    )
+    # 6
     scobbie = User(
-        username='scobbie', email='scobbie@aa.io', password='password')
-    #7
+        username="scobbie0_0",
+        first_name="Demo",
+        last_name="User",
+        cover_image="https://i.ibb.co/34RBgJ5/6.png",
+        email="scobbie@aa.io",
+        password="password",
+    )
+    # 7
     lobbie = User(
-        username='lobbie', email='lobbie@aa.io', password='password')
-    #8
+        username="lobbiesmobbie",
+        first_name="lobbie",
+        last_name="Smith",
+        cover_image="https://i.ibb.co/YjRfzQx/7.png",
+        email="lobbie@aa.io",
+        password="password",
+    )
+    # 8
     tobby = User(
-        username='tobby', email='tobby@aa.io', password='password')
-    #9
+        username="tobbythefighter",
+        first_name="toby",
+        last_name="Finkja",
+        cover_image="https://i.ibb.co/ky9yvHS/8.png",
+        email="tobby@aa.io",
+        password="password",
+    )
+    # 9
     mobby = User(
-        username='mobby', email='mobby@aa.io', password='password')
+        username="supertoby",
+        first_name="Toby",
+        last_name="Sming",
+        cover_image="https://i.ibb.co/wJP9NXK/9.png",
+        email="mobby@aa.io",
+        password="password",
+    )
 
     db.session.add(demo)
     db.session.add(drake)
@@ -55,5 +109,5 @@ def undo_users():
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM users"))
-        
+
     db.session.commit()
