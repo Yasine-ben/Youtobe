@@ -112,11 +112,11 @@
     background-color: transparent;
     cursor: pointer;
     /* REMOVING DECORATION */
-    
+
     width: 80px;
     height: 40px;
     border-radius: 10px;
-    
+
     display: flex;
     align-items: center;
     text-align: center;

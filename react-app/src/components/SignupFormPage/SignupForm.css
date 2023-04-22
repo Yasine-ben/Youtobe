@@ -60,12 +60,11 @@
     top: 25px;
 }
 
-.SU-Error-Wrapper {
+.SU-ServerError-Wrapper{
     position: absolute;
-}
-
-.SU-Error {
-    color: red;
+    top: -50px;
+    font-size: ;
+    color: white;
 }
 
 .SU-Inputs-Wrapper {
@@ -149,6 +148,7 @@
     font-weight: 500;
     cursor: pointer;
 }
+
 .SU-Submit-Button {
     /* REMOVING DECORATION */
     border: none;
@@ -171,23 +171,26 @@
 }
 
 
-.SU-Right-Wrapper{
+.SU-Right-Wrapper {
     display: flex;
     flex-direction: column;
 }
-.SU-Account-Img{
+
+.SU-Account-Img {
     width: 328px;
     height: 322px;
     position: relative;
     left: -10px;
 }
-.SU-OAAOGWFY-Top{
+
+.SU-OAAOGWFY-Top {
     display: flex;
     align-self: center;
     font-size: 1.2em;
     font-weight: 100;
 }
-.SU-OAAOGWFY-Bot{
+
+.SU-OAAOGWFY-Bot {
     display: flex;
     align-self: center;
     font-size: 1.2em;
