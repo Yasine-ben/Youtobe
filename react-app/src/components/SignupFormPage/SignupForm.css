@@ -67,7 +67,7 @@
 .SU-Inputs-Wrapper {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 35px;
 }
 
 .SU-Username-Wrapper {
@@ -135,7 +135,7 @@
     flex-direction: row;
     justify-content: space-between;
     position: relative;
-    top: 50px;
+    top: 35px;
     align-items: center;
 }
 

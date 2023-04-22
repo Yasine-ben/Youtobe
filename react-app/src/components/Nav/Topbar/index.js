@@ -1,10 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import './Topbar.css'
+import { logout } from '../../../store/session'
 
 import icon from '../../../Images/yt-Icon.png'
-import { logout } from '../../../store/session'
+
+import './Topbar.css'
+import './Menu.css'
+
 
 function Topbar() {
     const history = useHistory()
@@ -13,32 +16,17 @@ function Topbar() {
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
 
+    console.log(sessionUser)
+
     const openMenu = () => {
-        if (showMenu) return;
-        setShowMenu(true);
+        if (showMenu) setShowMenu(false)
+        else setShowMenu(true);
     };
-
-    useEffect(() => {
-        if (!showMenu) return;
-
-        const closeMenu = (e) => {
-            if (!ulRef.current.contains(e.target)) {
-                setShowMenu(false);
-            }
-        };
-
-        document.addEventListener("click", closeMenu);
-
-        return () => document.removeEventListener("click", closeMenu);
-    }, [showMenu]);
 
     const handleLogout = (e) => {
-        e.preventDefault();
         dispatch(logout());
+        history.push('/')
     };
-
-    const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
-    const closeMenu = () => setShowMenu(false);
 
     return (
         <div className='TB-wrapper'>
@@ -56,10 +44,42 @@ function Topbar() {
                 </div>
             </div>
             <div className='TB-RightSide-Wrapper'>
-                
+
                 {sessionUser
                     ? <div className='TB-LoggedIn-Btn'>
-                        <i id='userIcon' class="fa-solid fa-user"></i>
+                        <i id='userIcon' class="fa-solid fa-user" onClick={((e) => openMenu())} />
+                        {showMenu &&
+
+                            <div className="TBM">
+                                <div className='TBM-UserInfo-Wrapper'>
+
+                                    <div className='TBM-UserImg-Wrapper-Wrapper'>
+                                        <div className='TBM-UserImg-Wrapper'>
+                                            <img className='TBM-UserImg' src={sessionUser.cover_image} alt='User-Image' />
+                                        </div>
+                                    </div>
+
+                                    <div className='TBM-NU-Wrapper'>
+                                        <div className='TBM-Name'>{sessionUser.first_name}</div>
+                                        <div className='TBM-Username'>{`@${sessionUser.username}`}</div>
+                                        <p className='TBM-ManageAccount'>Manage your Gooo Account</p>
+                                    </div>
+
+                                </div>
+
+                                <div className='TBM-Manage-Wrapper'>
+                                    <div className='TBM-YourVideos-Wrapper' onClick={((e) => history.push('/'))}>
+                                        <span class="material-symbols-outlined"> account_box </span>
+                                        <p className='TBM-YourVideos'>Your Videos</p>
+                                    </div>
+                                    <div className='TBM-LogOut-Wrapper' onClick={((e) => handleLogout())}>
+                                        <span class="material-symbols-outlined"> logout </span>
+                                        <p className='TBM-LogOut'>Sign out</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
                     </div>
                     : <div className='TB-NotLoggedInBtn' onClick={((e) => history.push('/login'))}>
                         <span class="material-symbols-outlined">account_circle</span>

@@ -12,9 +12,13 @@ function SignupFormPage() {
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
+  const [first_name, setFirst_name] = useState("");
+  const [last_name, setLast_name] = useState("");
+  // const [cover_image, setCover_image] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const cover_image = 'https://i.ibb.co/cr3mJ0m/Default.jpg'
 
   if (sessionUser) return <Redirect to="/" />;
 
@@ -34,7 +38,7 @@ function SignupFormPage() {
     if (Object.values(err).length) return setErrors(err);
 
     if (password === confirmPassword) {
-      const data = await dispatch(signUp(username, email, password));
+      const data = await dispatch(signUp(username, first_name, last_name, cover_image, email, password));
       if (data) {
         let dataErr = {};
         if (data.some(err => err.includes('username'))) dataErr.username = "Username is already in use"
@@ -61,6 +65,30 @@ function SignupFormPage() {
         </div>
         <form className="SU-Form-Wrapper" onSubmit={handleSubmit}>
           <div className="SU-Inputs-Wrapper">
+
+            <div className="SU-PasswordAndConfirm-Wrapper">
+              <label>
+                <input
+                  className="SU-Password-Input"
+                  placeholder="First Name"
+                  type="text"
+                  value={first_name}
+                  onChange={(e) => setFirst_name(e.target.value)}
+                  required
+                />
+              </label>
+              <label>
+                <input
+                  className="SU-Confirm-Input"
+                  placeholder="Last Name"
+                  type="text"
+                  value={last_name}
+                  onChange={(e) => setLast_name(e.target.value)}
+                  required
+                />
+              </label>
+            </div>
+
             <label className="SU-Username-Wrapper">
               <input
                 className="SU-Username-Input"
@@ -71,6 +99,7 @@ function SignupFormPage() {
                 required
               />
             </label>
+
             <label className="SU-Email-Wrapper">
               {/* Email */}
               <input
@@ -82,6 +111,7 @@ function SignupFormPage() {
                 required
               />
             </label>
+
             <div className="SU-PasswordAndConfirm-Wrapper">
               <label>
                 <input
@@ -93,6 +123,7 @@ function SignupFormPage() {
                   required
                 />
               </label>
+
               <label>
                 <input
                   className="SU-Confirm-Input"
@@ -116,10 +147,10 @@ function SignupFormPage() {
         <p className="SU-OAAOGWFY-Top">One account. All of Gooo</p>
         <p className="SU-OAAOGWFY-Bot">working for you.</p>
         <div className="SignUp-Errors">
-            {Object.values(errors).map((error, idx) => (
-              <p className='SignUp-Error' key={idx}>{`* ${error}`}</p>
-            ))}
-          </div>
+          {Object.values(errors).map((error, idx) => (
+            <p className='SignUp-Error' key={idx}>{`* ${error}`}</p>
+          ))}
+        </div>
       </div>
     </div>
   );
