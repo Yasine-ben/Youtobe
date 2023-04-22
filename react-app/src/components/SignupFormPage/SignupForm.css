@@ -60,11 +60,8 @@
     top: 25px;
 }
 
-.SU-ServerError-Wrapper{
-    position: absolute;
-    top: -50px;
-    font-size: ;
-    color: white;
+.SignUp-Errors{
+    color: red;
 }
 
 .SU-Inputs-Wrapper {

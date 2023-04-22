@@ -60,14 +60,8 @@ function SignupFormPage() {
           <h3 className="SU-SignIn-Cont">to continue to YouTobe</h3>
         </div>
         <form className="SU-Form-Wrapper" onSubmit={handleSubmit}>
-
-          {/* {Object.values(errors).map((error, idx) => (
-            <p className='SignUp-Error' key={idx}>{`* ${error}`}</p>
-          ))} */}
-
           <div className="SU-Inputs-Wrapper">
-            <label className="SU-Username-Wrapper"> {errors.username}
-
+            <label className="SU-Username-Wrapper">
               <input
                 className="SU-Username-Input"
                 placeholder="Username"
@@ -76,7 +70,7 @@ function SignupFormPage() {
                 onChange={(e) => setUsername(e.target.value)}
                 required
               />
-            </label> {errors.email}
+            </label>
             <label className="SU-Email-Wrapper">
               {/* Email */}
               <input
@@ -89,7 +83,7 @@ function SignupFormPage() {
               />
             </label>
             <div className="SU-PasswordAndConfirm-Wrapper">
-              <label>{errors.password}
+              <label>
                 <input
                   className="SU-Password-Input"
                   placeholder="Password"
@@ -99,9 +93,7 @@ function SignupFormPage() {
                   required
                 />
               </label>
-
               <label>
-                
                 <input
                   className="SU-Confirm-Input"
                   placeholder="Confirm"
@@ -114,7 +106,7 @@ function SignupFormPage() {
             </div>
           </div>
           <div className="SU-Buttons-Wrapper">
-            <div className="SU-Sign-In-Instead-Button">Sign in instead</div>
+            <div className="SU-Sign-In-Instead-Button" onClick={((e) => history.push('/login'))}>Sign in instead</div>
             <button className="SU-Submit-Button" type="submit">Sign Up</button>
           </div>
         </form>
@@ -123,6 +115,11 @@ function SignupFormPage() {
         <img className="SU-Account-Img" src={account} alt='account img' />
         <p className="SU-OAAOGWFY-Top">One account. All of Gooo</p>
         <p className="SU-OAAOGWFY-Bot">working for you.</p>
+        <div className="SignUp-Errors">
+            {Object.values(errors).map((error, idx) => (
+              <p className='SignUp-Error' key={idx}>{`* ${error}`}</p>
+            ))}
+          </div>
       </div>
     </div>
   );
