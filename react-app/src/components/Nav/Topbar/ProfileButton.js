@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { logout } from "../../store/session";
-import OpenModalButton from "../OpenModalButton";
-import LoginFormModal from "../LoginFormModal";
-import SignupFormModal from "../SignupFormModal";
+import { logout } from "../../../store/session";
+import OpenModalButton from "../../OpenModalButton";
+
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -39,10 +38,10 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
-      <ul className={ulClassName} ref={ulRef}>
+      <div onClick={openMenu}>
+        <i id='Profile-btn-icon' className="fas fa-user-circle" />
+      </div>
+      {/* <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
             <li>{user.username}</li>
@@ -66,7 +65,7 @@ function ProfileButton({ user }) {
             />
           </>
         )}
-      </ul>
+      </ul> */}
     </>
   );
 }

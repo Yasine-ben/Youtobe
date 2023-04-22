@@ -10,7 +10,7 @@ function Sidebar() {
         <div className="SB-Wrapper">
             <div className='SB-Body'>
                 <div className='SB-Home-Subs'>
-                    <div className='SB-Home' onClick={history.push('/Home')}>
+                    <div className='SB-Home' onClick={history.push('/')}>
                         <span id='Home-Icon' class="material-symbols-outlined"> home </span>
                         <p className='SB-Home-Title'>Home</p>
                     </div>

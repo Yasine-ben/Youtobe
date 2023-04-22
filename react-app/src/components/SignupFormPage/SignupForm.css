@@ -1,0 +1,197 @@
+.SU-Wrapper {
+    width: 750px;
+    height: 640px;
+    background-color: rgb(39, 39, 39);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+}
+
+.SU-Left-Wrapper {
+    width: 360px;
+    height: 555px;
+    /* background-color: green; */
+    position: absolute;
+    top: 50%;
+    left: 23%;
+    transform: translate(-40%, -50%);
+}
+
+.SU-Right-Wrapper {
+    width: 300px;
+    height: 555px;
+    /* background-color: yellow; */
+    position: absolute;
+    top: 50%;
+    left: 73%;
+    transform: translate(-40%, -50%);
+}
+
+.SU-Title-Wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 40px;
+}
+
+.SU-Goo {
+    width: 75px;
+    height: auto;
+}
+
+.SU-SignIn {
+    font-size: 1.4em;
+    font-weight: 500;
+    position: relative;
+    top: 5px;
+}
+
+.SU-SignIn-Cont {
+    font-size: 1em;
+    font-weight: 400;
+    position: relative;
+    top: -15px;
+}
+
+.SU-Form-Wrapper {
+    position: relative;
+    top: 25px;
+}
+
+.SU-Error-Wrapper {
+    position: absolute;
+}
+
+.SU-Error {
+    color: red;
+}
+
+.SU-Inputs-Wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.SU-Username-Wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    left: -5px;
+}
+
+.SU-Username-Input {
+    width: 370px;
+    height: 45px;
+    border-radius: 5px;
+    font-size: .9em;
+    border: none;
+    text-indent: 10px;
+}
+
+.SU-Email-Wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    left: -5px;
+}
+
+.SU-Email-Input {
+    width: 370px;
+    height: 45px;
+    border-radius: 5px;
+    font-size: .9em;
+    border: none;
+    text-indent: 10px;
+}
+
+.SU-PasswordAndConfirm-Wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    position: relative;
+    left: -5px;
+}
+
+.SU-Password-Input {
+    width: 178px;
+    height: 45px;
+    border-radius: 5px;
+    font-size: .9em;
+    border: none;
+    text-indent: 10px;
+}
+
+.SU-Confirm-Input {
+    width: 178px;
+    height: 45px;
+    border-radius: 5px;
+    font-size: .9em;
+    border: none;
+    text-indent: 10px;
+}
+
+.SU-Buttons-Wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    top: 50px;
+    align-items: center;
+}
+
+.SU-Sign-In-Instead-Button {
+    color: rgb(28, 115, 232);
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+}
+.SU-Submit-Button {
+    /* REMOVING DECORATION */
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    /* REMOVING DECORATION */
+
+    width: 80px;
+    height: 40px;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+    color: white;
+    background-color: rgb(28, 115, 232);
+}
+
+
+.SU-Right-Wrapper{
+    display: flex;
+    flex-direction: column;
+}
+.SU-Account-Img{
+    width: 328px;
+    height: 322px;
+    position: relative;
+    left: -10px;
+}
+.SU-OAAOGWFY-Top{
+    display: flex;
+    align-self: center;
+    font-size: 1.2em;
+    font-weight: 100;
+}
+.SU-OAAOGWFY-Bot{
+    display: flex;
+    align-self: center;
+    font-size: 1.2em;
+    font-weight: 100;
+    position: relative;
+    top: -25px;
+}

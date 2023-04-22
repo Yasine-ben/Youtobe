@@ -22,17 +22,17 @@ function App() {
       {/* <Navigation isLoaded={isLoaded} /> */}
       {isLoaded && (
         <Switch>
-          <Route path="/login" >
-            <Topbar isLoaded={isLoaded} />
-            <Sidebar isLoaded={isLoaded} />
+          <Route exact path="/login" >
+            {/* <Topbar isLoaded={isLoaded} />
+            <Sidebar isLoaded={isLoaded} /> */}
             <LoginFormPage />
           </Route>
-          <Route path="/signup">
-            <Topbar isLoaded={isLoaded} />
-            <Sidebar isLoaded={isLoaded} />
+          <Route exact path="/signup">
+            {/* <Topbar isLoaded={isLoaded} />
+            <Sidebar isLoaded={isLoaded} /> */}
             <SignupFormPage />
           </Route>
-          <Route path='/Home'>
+          <Route exact path='/'>
             <Topbar isLoaded={isLoaded} />
             <Sidebar isLoaded={isLoaded} />
             <HomePage />
