@@ -105,6 +105,13 @@
     cursor: pointer;
 }
 
+.LI-DemoUser{
+    color: rgb(28, 115, 232);
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+}
+
 .LI-Submit-Button {
     /* REMOVING DECORATION */
     border: none;

@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../../store/session'
+import OpenModalButton from '../../OpenModalButton'
+import VideoForm from '../../Forms/VideoForm'
 
 import icon from '../../../Images/yt-Icon.png'
 
@@ -48,9 +50,9 @@ function Topbar() {
                 {sessionUser
                     ? <div className='TB-LoggedIn-Btn'>
                         <i id='userIcon' class="fa-solid fa-user" onClick={((e) => openMenu())} />
-                        {showMenu &&
+                        {showMenu ?
 
-                            <div className="TBM">
+                            (<div className="TBM">
                                 <div className='TBM-UserInfo-Wrapper'>
 
                                     <div className='TBM-UserImg-Wrapper-Wrapper'>
@@ -72,12 +74,22 @@ function Topbar() {
                                         <span class="material-symbols-outlined"> account_box </span>
                                         <p className='TBM-YourVideos'>Your Videos</p>
                                     </div>
+                                    <div className='TBM-YourVideos-Wrapper' >
+                                        <span class="material-symbols-outlined"> publish </span>
+                                        <OpenModalButton
+                                            className='TBM-UploadVideo'
+                                            buttonText='Upload Video'
+                                            onItemClick={((e) => openMenu())}
+                                            modalComponent={<VideoForm />}
+                                        />
+                                        {/* <p className='TBM-YourVideos'>Upload Video</p> */}
+                                    </div>
                                     <div className='TBM-LogOut-Wrapper' onClick={((e) => handleLogout())}>
                                         <span class="material-symbols-outlined"> logout </span>
                                         <p className='TBM-LogOut'>Sign out</p>
                                     </div>
                                 </div>
-                            </div>
+                            </div>):null
 
                         }
                     </div>

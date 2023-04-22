@@ -93,7 +93,7 @@ function LoginFormPage() {
           </div>
           <div className="LI-Submit-Button-Wrapper">
             <div className="LI-CreateAccount" onClick={((e) => history.push('/signup'))}>Create account</div>
-            <p onClick={() => loginDemoUser()}>Demo User</p>
+            <p className='LI-DemoUser' onClick={() => loginDemoUser()}>Demo User</p>
             <button className="LI-Submit-Button" type="submit" disabled={isDisabled()}>Log In</button>
           </div>
         </form>
