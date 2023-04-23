@@ -1,0 +1,295 @@
+.UVF-Wrapper {
+    width: 620px;
+    height: 850px;
+    border-radius: 15px;
+    background-color: rgb(35, 35, 35);
+}
+
+.UVF-TopBar {
+    position: relative;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid grey;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.UVF-Title {
+    font-size: 1.2em;
+    align-self: center;
+    padding-left: 20px;
+    font-weight: 100;
+}
+
+#UVF-X-Symbol {
+    font-size: 1.7em;
+    align-self: center;
+    padding-right: 20px;
+    font-weight: 100;
+    cursor: pointer;
+}
+
+.UVF-Video-Details-Wrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 50px;
+    left: 45px;
+    width: 537px;
+    height: 683px;
+    /* border: 1px solid grey;     */
+}
+
+.UVF-VD-Title-Wrapper {
+    display: flex;
+    height: 40px;
+    align-items: center;
+}
+
+.UVF-CD-Title {
+    font-size: 1.5em;
+}
+
+.UVF-CD-VT-Wrapper {
+
+}
+
+.UVF-CD-VT-Input-Wrapper{
+    /* border: 1px solid grey; */
+    position: relative;
+    top: 30px ;
+}
+
+.UVF-CD-VT-Input {
+    border: none;
+    outline: 1px solid grey;
+    background-color: transparent;
+    height: 70px;
+    width: 95%;
+    border-radius: 10px;
+    color: white;
+    padding-left: 10px;
+    font-size: 1em;
+    line-height: 1.9;
+    resize: none;
+}
+
+.UVF-CD-VT-Input:focus {
+    outline: 1px solid rgb(28, 115, 232);
+}
+
+.UVF-CD-VT-Count {
+    position: relative;
+    font-size: .8em;
+    color: gray;
+    width: fit-content;
+    top: -10px;
+    left: 480px;
+}
+
+
+
+
+
+
+.UVF-CD-VD-Wrapper {
+
+}
+
+.UVF-CD-VD-Input-Wrapper{
+    /* border: 1px solid grey; */
+    position: relative;
+    top: 20px ;
+    height: fit-content;
+}
+
+.UVF-CD-VD-Input {
+    border: none;
+    outline: 1px solid grey;
+    background-color: transparent;
+    height: 150px;
+    width: 95%;
+    border-radius: 10px;
+    color: white;
+    padding-left: 10px;
+    font-size: 1em;
+    position: relative;
+    line-height: 2.5;
+    resize: none;
+}
+
+.UVF-CD-VD-Input:focus {
+    outline: 1px solid rgb(28, 115, 232);
+}
+
+.UVF-CD-VD-Count {
+    position: relative;
+    font-size: .8em;
+    color: gray;
+    width: fit-content;
+    top: -20px;
+    left: 475px;
+}
+
+
+
+
+
+
+.UVF-CD-VUrl-Wrapper {
+    
+}
+
+.UVF-CD-VUrl-Input-Wrapper{
+    /* border: 1px solid grey; */
+    position: relative;
+    top: 10px ;
+}
+
+.UVF-CD-VUrl-Input {
+    border: none;
+    outline: 1px solid grey;
+    background-color: transparent;
+    height: 40px;
+    width: 95%;
+    border-radius: 10px;
+    color: white;
+    padding-left: 10px;
+    font-size: 1em;
+    line-height: 1.9;
+    resize: none;
+}
+
+.UVF-CD-VUrl-Input:focus {
+    outline: 1px solid rgb(28, 115, 232);
+}
+
+.UVF-CD-VUrl-Count {
+    position: relative;
+    font-size: .8em;
+    color: gray;
+    width: fit-content;
+    top: -10px;
+    left: 480px;
+}
+
+
+
+
+
+
+
+.UVF-CD-VThumbnail-Wrapper {
+
+}
+
+.UVF-CD-VThumbnail-Input-Wrapper{
+    /* border: 1px solid grey; */
+    position: relative;
+    top: 30px ;
+}
+
+.UVF-CD-VThumbnail-Input {
+    border: none;
+    outline: 1px solid grey;
+    background-color: transparent;
+    height: 40px;
+    width: 95%;
+    border-radius: 10px;
+    color: white;
+    padding-left: 10px;
+    font-size: 1em;
+    line-height: 1.9;
+    resize: none;
+}
+
+.UVF-CD-VThumbnail-Input:focus {
+    outline: 1px solid rgb(28, 115, 232);
+}
+
+.UVF-CD-VThumbnail-Count {
+    position: relative;
+    font-size: .8em;
+    color: gray;
+    width: fit-content;
+    top: -10px;
+    left: 480px;
+}
+
+.UVF-Errors-Wrapper{
+    position: absolute;
+    width: 500px;
+    height: 180px;
+    /* background-color: red; */
+    bottom: 70px;
+    left: 50px;
+    color: red;
+}
+
+.UVF-Errors{
+
+}
+
+
+
+
+.UVF-Right-Wrapper{
+    /* background-color: red; */
+    width: 300px;
+    height: 200px;
+    position: absolute;
+    top: 110px;
+    right: 40px;
+}
+
+.UVF-Preview-Wrapper{
+    /* background-color: green; */
+    width: 300px;
+    height: 200px;
+    position: absolute;
+}
+
+.UVF-Player-Wrapper{
+    width: 300px;
+    height: 200px;
+    background-color: black;
+}
+
+.UVF-Img-Wrapper{
+    position: absolute;
+    bottom: 150px;
+    right: 100px;
+}
+
+.UVF-Img{
+
+}
+
+
+
+.UVF-Footer{
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    bottom: 0;
+    border-top: 1px solid grey;
+}
+.UVF-Footer-Submit{
+    width: 70px;
+    height: 35px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(35, 35, 35);
+    font-size: .9em;
+    font-weight: 600;
+    background-color: rgb(28, 115, 232);
+    position: absolute;
+    top: 7px;
+    right: 15px;
+    cursor: pointer;
+}

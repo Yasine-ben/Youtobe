@@ -78,6 +78,25 @@ export const thunkDeleteVideo = (video_id) => async dispatch => {
     }
 }
 
+export const thunkEditVideo = (video_id, title, description, thumbnail) => async dispatch => {
+    const response = await fetch(`/api/videos/updateVideo/${video_id}`, {
+        method: 'PUT',
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			title, 
+            description, 
+            thumbnail, 
+		}),
+
+    })
+
+    if(response.ok){
+        dispatch(thunkSingleVideo(video_id))
+        return
+    }
+}
 
 
 

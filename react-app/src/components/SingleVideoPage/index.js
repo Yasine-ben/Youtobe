@@ -2,11 +2,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from "react";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import { thunkAllVideos, thunkDeleteVideo, thunkSingleVideo } from '../../store/video';
+import OpenModalButton from '../OpenModalButton'
 import ReactPlayer from 'react-player';
 import dayjs from 'dayjs';
 
 import './SingleVideoPage.css'
 import { thunkAllComments } from '../../store/comments';
+import UpdateVideoForm from '../Forms/UpdateVideoForm';
 
 function SingleVideoPage() {
     const dispatch = useDispatch()
@@ -117,7 +119,12 @@ function SingleVideoPage() {
                         <div className='VP-Buttons-Wrapper'>
                             {(user?.id === video?.user_id) && (
                                 <div className='VP-Buttons'>
-                                    <div className='VP-UpdateBtn'>Update</div>
+                                    {/* <div className='VP-UpdateBtn'>Update</div> */}
+                                    <OpenModalButton 
+                                        className='VP-UpdateBtn'
+                                        buttonText='Update'
+                                        modalComponent={<UpdateVideoForm video_id={video_id}/>}
+                                    />
                                     <div className='VP-DeleteBtn' onClick={(e) => handleDelete(e)}>Delete</div>
                                 </div>
                             )}

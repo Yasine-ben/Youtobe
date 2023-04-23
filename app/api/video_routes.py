@@ -64,12 +64,12 @@ def updateVideo(video_id):
     Update Video
     """
     video = Video.query.get(video_id)
-    data = request.json()
+    data = request.get_json()
     
     if (video and data):
-        video.title = data.get('title')
-        video.description = data.get('description')
-        video.thumbnail = data.get('thumbnail')
+        video.title = data['title']
+        video.description = data['description']
+        video.thumbnail = data['thumbnail']
         db.session.commit()
         return { 'message': 'Video updated successfully', 'status': 200 }
     else:
