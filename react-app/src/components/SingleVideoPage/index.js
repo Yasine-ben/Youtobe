@@ -36,6 +36,8 @@ function SingleVideoPage() {
     const [discription, setDescription] = useState('')
     const [date, setDate] = useState('')
     const [comment, setComment] = useState('')
+    const [commentCardId, setCommentCardId] = useState(null)
+    const [commentEditOpen, setCommentEditOpen] = useState(false)
     const [errors, setErrors] = useState({})
     // console.log(video)
     console.log(comment)
@@ -103,7 +105,7 @@ function SingleVideoPage() {
 
         if (!Object.values(err).length) {
             setErrors(err)
-            const data = await dispatch(thunkCreateComment(video_id,user_id,comment,user_name));
+            const data = await dispatch(thunkCreateComment(video_id, user_id, comment, user_name));
 
             if (data) {
                 console.log('SERVER ERRORS')
@@ -121,6 +123,17 @@ function SingleVideoPage() {
             // console.log('FRONT END ERROR FRONT END ERROR')
             return
         }
+    }
+
+    function openMenuFunc(id) {
+        if (!commentEditOpen) {
+            setCommentEditOpen(true)
+            setCommentCardId(id)
+        } else {
+            setCommentEditOpen(false)
+            setCommentCardId(null)
+        }
+
     }
 
     return (
@@ -190,7 +203,7 @@ function SingleVideoPage() {
                             </div>
                             <div className='VP-CommentInputButton-Wrapper' onClick={(e) => handleCommentSubmit(e)}>
                                 <div className='VP-Submit'>
-                                    <p>Comment</p>
+                                    <p className='VP-Submit-Text'>Comment</p>
                                 </div>
                             </div>
                         </div>
@@ -200,7 +213,7 @@ function SingleVideoPage() {
                     {/* USER COMMENTS */}
                     <div className='VP-UC-Main-Wrapper'>
                         {/* THIS TERNARY DOESNT WORK */}
-                        {!(comments.status === 404) ? comments.map((comment, idx) => (
+                        {!(comments.status === 404) ? comments.reverse().map((comment, idx) => (
                             <div key={`Comment_${idx}`} className='VP-UC-Card-Wrapper'>
                                 <div className='VP-UC-Icon-Wrapper'>
                                     <i id='VP-UC-Icon' className="fa-solid fa-circle-user"></i>
@@ -213,6 +226,18 @@ function SingleVideoPage() {
                                     <div className='VP-UC-Comment-Wrapper'>
                                         <p className='VP-UC-Comment'>{comment.comment}</p>
                                     </div>
+                                </div>
+                                <div>
+                                    {(user.id === comment.user_id) &&
+                                        <div className='VP-UC-OwnerEdit-Wrapper' onClick={(e) => {openMenuFunc(idx)}}>
+                                            <span id='VP-UC-Edit' className="material-symbols-outlined"> more_vert </span>
+                                            {commentEditOpen && commentCardId == idx && (
+                                            <div className='VP-EditMenu-Wrapper'>
+                                                <p>Edit</p>
+                                                <p>Delete</p>
+                                            </div>)}
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         ))

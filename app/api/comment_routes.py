@@ -20,7 +20,7 @@ comment_routes = Blueprint('comment', __name__)
 
 #     return { 'comments': [comment.to_dict() for comment in comments] }
 
-
+# WORKING
 @comment_routes.route('/allComments/<int:video_id>')
 def all_comments(video_id):
     """
@@ -43,7 +43,7 @@ def all_comments(video_id):
     # Return two separate objects
     return ({'comments': comments_dict, 'users': users_dict})
 
-# UNTESTED
+# WORKING
 @comment_routes.route('/createComment/<int:user_id>/<int:video_id>' , methods=['POST'])
 def create_comment(video_id,user_id):
     """

@@ -59,7 +59,7 @@ export const thunkAllComments = (video_id) => async dispatch => {
     }
 }
 
-export const thunkCreateComment = (video_id,user_id,comment,user_name) => async dispatch => {
+export const thunkCreateComment = (video_id, user_id, comment, user_name) => async dispatch => {
     const response = await fetch(`/api/comments/createComment/${user_id}/${video_id}`, {
         method: "POST",
         headers: {
@@ -71,12 +71,42 @@ export const thunkCreateComment = (video_id,user_id,comment,user_name) => async 
         }),
     })
 
-    if(response.ok){
+    if (response.ok) {
         dispatch(thunkAllComments(video_id))
         console.log('/////////COMMENT CREATED///////////////')
         return
     }
 
+}
+
+export const thunkUpdateComment = (video_id, comment_id, comment) => async dispatch => {
+    const response = await fetch(`/api/comments/updateComment/${comment_id}`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            comment
+        }),
+    })
+
+    if(response.ok){
+        dispatch(thunkAllComments(video_id))
+        console.log('/////////COMMENT UPDATED///////////////')
+        return
+    }
+}
+
+export const thunkDeleteComment = (video_id, comment_id) => async dispatch => {
+    const response = fetch(`/api/comments/deleteComment/${comment_id}`, {
+        method:'DELETE'
+    })
+
+    if(response.ok){
+        dispatch(thunkAllComments(video_id))
+        console.log('/////////////COMMENT DELETED///////////////')
+        return
+    }
 }
 
 // INITIAL 

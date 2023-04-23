@@ -325,3 +325,18 @@ i.fa-solid.fa-circle-user:before{
     margin: 0;
 }
 /* END */
+
+
+
+.VP-UC-OwnerEdit-Wrapper{
+    height: 40px;
+} 
+#VP-UC-Edit{
+    display: flex;
+    position: absolute;
+    right: 0px;
+    align-content: center;
+} 
+.VP-EditMenu-Wrapper{
+
+}
