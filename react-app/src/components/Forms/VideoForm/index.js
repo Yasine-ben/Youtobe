@@ -47,11 +47,11 @@ function VideoForm() {
             const data = await dispatch(thunkUploadVideo(title, description, video, length, thumbnail, uploader, user_id));
 
             if (data) {
-                console.log('SERVER ERRORS')
-                console.log(data)
+                // console.log('SERVER ERRORS')
+                // console.log(data)
             }
             else {
-                console.log("SUBMITTED")
+                // console.log("SUBMITTED")
                 closeModal()
                 history.push('/')
                 
@@ -60,8 +60,8 @@ function VideoForm() {
             return
         } else {
             setErrors(err)
-            console.log(err)
-            console.log('FRONT END ERROR FRONT END ERROR')
+            // console.log(err)
+            // console.log('FRONT END ERROR FRONT END ERROR')
             return
         }
 
@@ -92,7 +92,7 @@ function VideoForm() {
             <div className='VF-Left-Wrapper'>
                 <div className='VF-TopBar'>
                     <p className='VF-Title'>Upload Video</p>
-                    <span onClick={(e) => {closeModal()}} id='VF-X-Symbol' class="material-symbols-outlined"> close </span>
+                    <span onClick={(e) => {closeModal()}} id='VF-X-Symbol' className="material-symbols-outlined"> close </span>
                 </div>
                 <div className='VF-Video-Details-Wrapper'>
 

@@ -62,16 +62,30 @@ export const thunkUploadVideo = (title, description, video, length, thumbnail, u
 		}),
 	});
 
-
     if(response.ok){
         return dispatch(thunkAllVideos())
     }
 }
 
+export const thunkDeleteVideo = (video_id) => async dispatch => {
+    const response = await fetch(`/api/videos/deleteVideo/${video_id}`, {
+        method: 'DELETE'
+    })
+
+    if(response.ok){
+        dispatch(thunkAllVideos())
+        return (console.log('DELETED DELETED DELETED DELETED DELETED'))
+    }
+}
+
+
+
+
 // INITIAL 
 const initialState = {
     allVideos: {},
     singleVideo: {},
+
 }
 
 // Reducer
@@ -80,7 +94,7 @@ const videosReducer = (state = initialState, action) => {
         case ALL_VIDEOS:
             return { ...state, allVideos: { ...action.videos } }
         case SINGLE_VIDEO:
-            return { ...state, singleVideo: { ...action.video } }
+            return { ...state, singleVideo: { ...action.video }}
         default: return { ...state }
     }
 }

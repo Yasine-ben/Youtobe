@@ -17,15 +17,16 @@ function SingleVideoPage() {
     const dayjs = require('dayjs')
     let relativeTime = require('dayjs/plugin/relativeTime')
     dayjs().format()
-    
+
     dayjs.extend(relativeTime)
 
 
-    const video = Object.values(useSelector(state => state.videos.singleVideo))[0]
-    const allVideos = Object.values(useSelector(state => state.videos.allVideos))
-    const user = useSelector(state => state.session.user)
-    const comments = Object.values(useSelector(state => state.comments.allComments))
-    
+
+    const video = Object.values(useSelector(state => state.videos?.singleVideo))[0]
+    const allVideos = Object.values(useSelector(state => state.videos?.allVideos))
+    const user = useSelector(state => state.session?.user)
+    const comments = Object.values(useSelector(state => state.comments?.allComments))
+
 
     const [url, setUrl] = useState('')
     const [title, setTitle] = useState('')
@@ -71,16 +72,18 @@ function SingleVideoPage() {
         }
     }, [video])
 
-
-    console.log(dayjs(date).fromNow())
-
-
+    // console.log(dayjs(date).fromNow())
 
     useEffect(() => {
         dispatch(thunkSingleVideo(video_id))
         dispatch(thunkAllVideos())
         dispatch(thunkAllComments(video_id))
     }, [dispatch, user])
+
+    const handleDelete = (e) => {
+        e.preventDefault()
+
+    }
 
     return (
         <div className='VP-Wrapper'>
@@ -102,13 +105,25 @@ function SingleVideoPage() {
                     </div>
                     <div className='VP-Lower-Wrapper'>
                         <div className='VP-Creator-Wrapper'>
-
+                            <div className='VP-Creator-Img-Wrapper'>
+                                <img className='VP-Creator-Img' src={video?.cover_image} alt='creatorImg' />
+                            </div>
+                            <div className='VP-CreatorName-Wrapper'>
+                                <p className='VP-CreatorName'>{video?.uploader}</p>
+                                <p className='VP-Subscribers'>{`${randomInRange(1, 100)} subscribers`}</p>
+                            </div>
                         </div>
                         <div className='VP-Buttons-Wrapper'>
-
+                            {(user?.id === video?.user_id) && (
+                                <div className='VP-Buttons'>
+                                    <div className='VP-UpdateBtn'>Update</div>
+                                    <div className='VP-DeleteBtn'>Delete</div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
+
                 <div className='VP-DescriptionBox-Wrapper'>
                     <div className='VP-Desc-ViewsAndTime'>
                         <p className='VP-Desc-Views'>{`${randomInRange(1, 100)} views`}&nbsp;</p>
@@ -124,11 +139,11 @@ function SingleVideoPage() {
                 <div className='VP-Comments-Wrapper'>
                     <div className='VP-AddComments-Wrapper'>
                         <div className='VP-Comments-UserIcon'>
-                            <i class="fa-solid fa-circle-user"></i>
+                            <i className="fa-solid fa-circle-user"></i>
                         </div>
                         <div className='VP-InputAndButtons-Wrapper'>
                             <div className='VP-Input-Wrapper'>
-                                <input className='VP-Comment-Input' type="text" placeholder='Add a Comment...' id="Comment-Box" name="Comment-Box" required minlength="1" maxlength="10000" />
+                                <input className='VP-Comment-Input' type="text" placeholder='Add a Comment...' id="Comment-Box" name="Comment-Box" required minLength="1" maxLength="10000" />
                             </div>
                             <div className='VP-CommentInputButton-Wrapper'>
                                 <div className='VP-Submit'>
@@ -137,12 +152,12 @@ function SingleVideoPage() {
                             </div>
                         </div>
                     </div>
-                    
+
 
                     {/* USER COMMENTS */}
                     <div className='VP-UC-Main-Wrapper'>
                         {/* THIS TERNARY DOESNT WORK */}
-                        {!(comments.status === 404) ? comments.map((comment,idx) => (
+                        {!(comments.status === 404) ? comments.map((comment, idx) => (
                             <div key={`Comment_${idx}`} className='VP-UC-Card-Wrapper'>
                                 <div className='VP-UC-Icon-Wrapper'>
                                     <i id='VP-UC-Icon' className="fa-solid fa-circle-user"></i>
@@ -157,11 +172,11 @@ function SingleVideoPage() {
                                     </div>
                                 </div>
                             </div>
-                        )) 
-                        : 
-                        <div className='VP-UC-NoComments-Wrapper'>
-                            <p className='VP-UC-NoComment-Title'>No Comments Yet</p>
-                        </div>} 
+                        ))
+                            :
+                            <div className='VP-UC-NoComments-Wrapper'>
+                                <p className='VP-UC-NoComment-Title'>No Comments Yet</p>
+                            </div>}
                     </div>
                 </div>
             </div>
@@ -181,7 +196,7 @@ function SingleVideoPage() {
                                         <p className='VP-Rec-Title'>{video.title}</p>
                                     </div>
                                     <div className='VP-Rec-Uploader-Wrapper'>
-                                        <p className='VP-Rec-Uploader'>{video.uploader}</p>
+                                        <p className='VP-Rec-Uploader'>{video?.uploader}</p>
                                     </div>
                                     <div className='VP-Rec-ViewsAndTime-Wrapper'>
                                         <p className='VP-Rec-Views'>{`${randomInRange(1, 100)} views`}&nbsp;</p>

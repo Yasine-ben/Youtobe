@@ -43,6 +43,7 @@ def createVideo():
             description = data['description'],
             video = data['video'],
             length = data['length'],
+            cover_image = user.cover_image,
             thumbnail = data['thumbnail'],
             uploader = data['uploader'],
             user_id = user.id,

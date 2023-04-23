@@ -42,14 +42,14 @@ function Topbar() {
             <div className='TB-Search-Wrapper'>
                 <input className='TB-Search-Input' type='text' placeholder='Search' />
                 <div className='TB-SearchIcon-Wrapper'>
-                    <i class="fa-solid fa-magnifying-glass" id='search-icon' />
+                    <i className="fa-solid fa-magnifying-glass" id='search-icon' />
                 </div>
             </div>
             <div className='TB-RightSide-Wrapper'>
 
                 {sessionUser
                     && <div className='TB-LoggedIn-Btn'>
-                        <i id='userIcon' class="fa-solid fa-user" onClick={((e) => openMenu())} />
+                        <i id='userIcon' className="fa-solid fa-user" onClick={((e) => openMenu())} />
                         {showMenu &&
 
                             (<div className="TBM">
@@ -71,11 +71,11 @@ function Topbar() {
 
                                 <div className='TBM-Manage-Wrapper'>
                                     <div className='TBM-YourVideos-Wrapper' onClick={((e) => history.push('/'))}>
-                                        <span class="material-symbols-outlined"> account_box </span>
+                                        <span className="material-symbols-outlined"> account_box </span>
                                         <p className='TBM-YourVideos'>Your Videos</p>
                                     </div>
                                     <div className='TBM-YourVideos-Wrapper' >
-                                        <span class="material-symbols-outlined"> publish </span>
+                                        <span className="material-symbols-outlined"> publish </span>
                                         <OpenModalButton
                                             className='TBM-UploadVideo'
                                             buttonText='Upload Video'
@@ -85,7 +85,7 @@ function Topbar() {
                                         {/* <p className='TBM-YourVideos'>Upload Video</p> */}
                                     </div>
                                     <div className='TBM-LogOut-Wrapper' onClick={((e) => handleLogout())}>
-                                        <span  class="material-symbols-outlined"> logout </span>
+                                        <span  className="material-symbols-outlined"> logout </span>
                                         <p className='TBM-LogOut'>Sign out</p>
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@ function Topbar() {
                     </div>
                     || 
                     <div className='TB-NotLoggedInBtn' onClick={((e) => history.push('/login'))}>
-                        <span  class="material-symbols-outlined">account_circle</span>
+                        <span  className="material-symbols-outlined">account_circle</span>
                         <p className='TB-NLIB-Title'>Sign in</p>
                     </div>}
 

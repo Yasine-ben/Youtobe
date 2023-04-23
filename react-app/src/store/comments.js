@@ -26,13 +26,13 @@ export const thunkAllComments = (video_id) => async dispatch => {
         const comments = await response.json()
         if (comments.status === 404) {
             dispatch(actionAllComments(comments))
-            console.log('NO COMMENTS NO COMMENTS NO COMMENTS')
+            // console.log('NO COMMENTS NO COMMENTS NO COMMENTS')
             return
         }
         else {
             const normalize = normalizeAllComments(comments.comments)
             dispatch(actionAllComments(normalize))
-            console.log('COMMENTS COMMENTS COMMENTS COMMENTS')
+            // console.log('COMMENTS COMMENTS COMMENTS COMMENTS')
             return
         }
     }

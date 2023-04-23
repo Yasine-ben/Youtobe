@@ -11,11 +11,11 @@ function Sidebar() {
             <div className='SB-Body'>
                 <div className='SB-Home-Subs'>
                     <div className='SB-Home' onClick={history.push('/')}>
-                        <span id='Home-Icon' class="material-symbols-outlined"> home </span>
+                        <span id='Home-Icon' className="material-symbols-outlined"> home </span>
                         <p className='SB-Home-Title'>Home</p>
                     </div>
                     <div className='SB-Sub' onClick={''}>
-                        <span id='Sub-icon' class="material-symbols-outlined"> subscriptions </span>
+                        <span id='Sub-icon' className="material-symbols-outlined"> subscriptions </span>
                         <p className='SB-Sub-Title'>Subscriptions</p>
                     </div>
                 </div>
