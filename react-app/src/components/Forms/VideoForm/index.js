@@ -5,12 +5,14 @@ import { useHistory } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import uploadGuy from '../../../Images/Upload.svg'
 import { thunkUploadVideo } from '../../../store/video';
+import { useModal } from "../../../context/Modal";
 
 function VideoForm() {
     const history = useHistory()
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
     const playerRef = useRef(null);
+    const { closeModal } = useModal();
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
@@ -50,7 +52,9 @@ function VideoForm() {
             }
             else {
                 console.log("SUBMITTED")
+                closeModal()
                 history.push('/')
+                
             }
 
             return
@@ -88,7 +92,7 @@ function VideoForm() {
             <div className='VF-Left-Wrapper'>
                 <div className='VF-TopBar'>
                     <p className='VF-Title'>Upload Video</p>
-                    <span id='VF-X-Symbol' class="material-symbols-outlined"> close </span>
+                    <span onClick={(e) => {closeModal()}} id='VF-X-Symbol' class="material-symbols-outlined"> close </span>
                 </div>
                 <div className='VF-Video-Details-Wrapper'>
 

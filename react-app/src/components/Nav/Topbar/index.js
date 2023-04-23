@@ -18,7 +18,7 @@ function Topbar() {
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
 
-    console.log(sessionUser)
+    // console.log(sessionUser)
 
     const openMenu = () => {
         if (showMenu) setShowMenu(false)
@@ -48,9 +48,9 @@ function Topbar() {
             <div className='TB-RightSide-Wrapper'>
 
                 {sessionUser
-                    ? <div className='TB-LoggedIn-Btn'>
+                    && <div className='TB-LoggedIn-Btn'>
                         <i id='userIcon' class="fa-solid fa-user" onClick={((e) => openMenu())} />
-                        {showMenu ?
+                        {showMenu &&
 
                             (<div className="TBM">
                                 <div className='TBM-UserInfo-Wrapper'>
@@ -79,7 +79,7 @@ function Topbar() {
                                         <OpenModalButton
                                             className='TBM-UploadVideo'
                                             buttonText='Upload Video'
-                                            onItemClick={((e) => openMenu())}
+                                            // onItemClick={''}
                                             modalComponent={<VideoForm />}
                                         />
                                         {/* <p className='TBM-YourVideos'>Upload Video</p> */}
@@ -89,11 +89,11 @@ function Topbar() {
                                         <p className='TBM-LogOut'>Sign out</p>
                                     </div>
                                 </div>
-                            </div>):null
-
+                            </div>)
                         }
                     </div>
-                    : <div className='TB-NotLoggedInBtn' onClick={((e) => history.push('/login'))}>
+                    || 
+                    <div className='TB-NotLoggedInBtn' onClick={((e) => history.push('/login'))}>
                         <span class="material-symbols-outlined">account_circle</span>
                         <p className='TB-NLIB-Title'>Sign in</p>
                     </div>}
