@@ -49,7 +49,9 @@ function Topbar() {
 
                 {sessionUser
                     && <div className='TB-LoggedIn-Btn'>
-                        <i id='userIcon' className="fa-solid fa-user" onClick={((e) => openMenu())} />
+                        <div className='TB-UserImg-Wrapper'>
+                            <img src={sessionUser.cover_image} alt='user Img' className='TB-UserImg' onClick={((e) => openMenu())} />
+                        </div>
                         {showMenu &&
 
                             (<div className="TBM">
@@ -85,16 +87,16 @@ function Topbar() {
                                         {/* <p className='TBM-YourVideos'>Upload Video</p> */}
                                     </div>
                                     <div className='TBM-LogOut-Wrapper' onClick={((e) => handleLogout())}>
-                                        <span  className="material-symbols-outlined"> logout </span>
+                                        <span className="material-symbols-outlined"> logout </span>
                                         <p className='TBM-LogOut'>Sign out</p>
                                     </div>
                                 </div>
                             </div>)
                         }
                     </div>
-                    || 
+                    ||
                     <div className='TB-NotLoggedInBtn' onClick={((e) => history.push('/login'))}>
-                        <span  className="material-symbols-outlined">account_circle</span>
+                        <span className="material-symbols-outlined">account_circle</span>
                         <p className='TB-NLIB-Title'>Sign in</p>
                     </div>}
 

@@ -6,6 +6,7 @@
     width: 305px;
     height: auto;
     border-radius: 15px;
+    z-index: 1;
 }
 
 .TBM-UserInfo-Wrapper {

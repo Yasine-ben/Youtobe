@@ -10,7 +10,9 @@
     /* Width of the sidebar */
 }
 
-.HP-Video-Wrapper {}
+.HP-Video-Wrapper {
+    cursor: pointer;
+}
 
 .HP-Thumbnail-Wrapper {}
 
@@ -20,6 +22,76 @@
     border-radius: 8px;
 }
 
-.HP-Title-Wrapper {}
+.HP-Lower-Wrapper{
+    display: flex;
+    flex-direction: row;
+    height: 106px;
+}
+
+.HP-Uploader-Img-Wrapper{
+    width: 80px;
+    height: 100%;
+}
+
+.HP-Uploader-Img{
+    position: relative;
+    top: 5px;
+    left: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 40px;
+    /* adjust this to the desired width of your image */
+    height: 40px;
+    /* adjust this to the desired height of your image */
+}
+
+.HP-Text-Wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 212px;  
+    position: relative;
+    top: -10px;
+    left: -20px;
+}
+
+.HP-Title-Wrapper {
+    height: 30px;
+    font-size: .95em;
+    font-weight: 400;
+}
 
 .HP-Title {}
+
+.HP-Uploader-Name-Wrapper{
+    position: relative;
+    top: 5px;
+}
+
+.HP-Uploader-Name{
+    color: grey;
+    font-size: .9em;
+}
+
+.HP-ViewsAndTime-Wrapper{
+
+}
+
+.HP-Views-Wrapper{
+    position: relative;
+    top: -18px; 
+    display: flex;
+    flex-direction: row;
+}
+
+.HP-Views{
+    color: grey;
+    font-size: .9em;
+}
+
+.HP-Time{
+    color: grey;
+    font-size: .9em;
+}
