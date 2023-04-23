@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from "react";
 import { Redirect, useHistory, useParams } from "react-router-dom";
-import { thunkAllVideos, thunkDeleteVideo, thunkSingleVideo } from '../../store/video';
+import { thunkAllVideos, thunkAllVideosRand, thunkDeleteVideo, thunkSingleVideo } from '../../store/video';
 import OpenModalButton from '../OpenModalButton'
 import ReactPlayer from 'react-player';
 import dayjs from 'dayjs';
@@ -29,12 +29,16 @@ function SingleVideoPage() {
     const user = useSelector(state => state.session?.user)
     const comments = Object.values(useSelector(state => state.comments?.allComments))
 
-
+    
+    
     const [url, setUrl] = useState('')
     const [title, setTitle] = useState('')
     const [discription, setDescription] = useState('')
     const [date, setDate] = useState('')
+    const [comment, setComment] = useState('')
+    const [errors,setErrors] = useState({})
     // console.log(video)
+    console.log(comment)
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -52,10 +56,6 @@ function SingleVideoPage() {
         }
     }
 
-    //randomizes video order
-    allVideos.sort(() => Math.random() - 0.5);
-
-
 
     useEffect(() => {
         function handleResize() {
@@ -72,20 +72,28 @@ function SingleVideoPage() {
             setDescription(video.description)
             setDate(video.updated_at)
         }
+        
     }, [video])
 
     // console.log(dayjs(date).fromNow())
 
     useEffect(() => {
         dispatch(thunkSingleVideo(video_id))
-        dispatch(thunkAllVideos())
+        dispatch(thunkAllVideosRand())
         dispatch(thunkAllComments(video_id))
+        
     }, [dispatch, user])
 
     const handleDelete = (e) => {
         e.preventDefault()
         dispatch(thunkDeleteVideo(video_id))
         history.push('/')
+    }
+
+    const handleCommentSubmit = async(e) => {
+        e.preventDefault()
+        const user_name = user.username
+        
     }
 
     return (
@@ -151,7 +159,7 @@ function SingleVideoPage() {
                         </div>
                         <div className='VP-InputAndButtons-Wrapper'>
                             <div className='VP-Input-Wrapper'>
-                                <input className='VP-Comment-Input' type="text" placeholder='Add a Comment...' id="Comment-Box" name="Comment-Box" required minLength="1" maxLength="10000" />
+                                <textarea className='VP-Comment-Input' type="text" placeholder='Add a Comment...'  value={comment} onChange={(e)=> setComment(e.target.value)} id="Comment-Box" name="Comment-Box" required minLength="1" maxLength="1000" />
                             </div>
                             <div className='VP-CommentInputButton-Wrapper'>
                                 <div className='VP-Submit'>

@@ -22,7 +22,7 @@ const normalizeAllComments = (comments) => {
 const combineAllComments = async (data) => {
     let commentsWithCoverImage = []
 
-    console.log(data)
+    // console.log(data)
     for (let i = 0; i < data.comments.length; i++) {
         const comment = data.comments[i];
         const user = data.users.find(user => user.id === comment.user_id);
@@ -34,9 +34,7 @@ const combineAllComments = async (data) => {
             });
         }
     }
-
     return commentsWithCoverImage
-
 }
 
 export const thunkAllComments = (video_id) => async dispatch => {
@@ -52,14 +50,34 @@ export const thunkAllComments = (video_id) => async dispatch => {
         }
         else {
             // console.log('HERE')
-            let comb = await combineAllComments(comments)
-            // console.log(comb)
-            const normalize = normalizeAllComments(comb)
+            let combined = await combineAllComments(comments)
+            // console.log(combined)
+            const normalize = normalizeAllComments(combined)
             dispatch(actionAllComments(normalize))
             // console.log('COMMENTS COMMENTS COMMENTS COMMENTS')
             return
         }
     }
+}
+
+export const thunkCreateComment = (video_id,user_id,comment,user_name) => async dispatch => {
+    const response = await fetch(`/api/comments/createComment/${user_id}/${video_id}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            comment,
+            user_name
+        }),
+    })
+
+    if(response.ok){
+        dispatch(thunkAllComments(video_id))
+        console.log('/////////COMMENT CREATED///////////////')
+        return
+    }
+
 }
 
 // INITIAL 
