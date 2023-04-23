@@ -6,18 +6,42 @@ from app.forms import comment_form
 
 comment_routes = Blueprint('comment', __name__)
 
-# Working
+# # Working
+# @comment_routes.route('/allComments/<int:video_id>')
+# def all_comments(video_id):
+#     """
+#     Query for all comments belonging to a particular video
+#     """
+#     comments = Comment.query.filter_by(video_id=video_id).all()
+#     users = User.query.all()
+    
+#     if not comments:
+#         return {'message': 'There are no comments for this video' , 'status': 404}
+
+#     return { 'comments': [comment.to_dict() for comment in comments] }
+
+
 @comment_routes.route('/allComments/<int:video_id>')
 def all_comments(video_id):
     """
-    Query for all comments belonging to a particular video
+    Query for all comments belonging to a particular video,
+    and return separate objects for comments and users.
     """
     comments = Comment.query.filter_by(video_id=video_id).all()
+    user_ids = [comment.user_id for comment in comments]
+    users = User.query.filter(User.id.in_(user_ids)).all()
     
     if not comments:
-        return {'message': 'There are no comments for this video' , 'status': 404}
+        return jsonify({'message': 'There are no comments for this video', 'status': 404})
     
-    return { 'comments': [comment.to_dict() for comment in comments] }
+    # Convert comments to list of dictionaries
+    comments_dict = [comment.to_dict() for comment in comments]
+    
+    # Convert users to list of dictionaries
+    users_dict = [user.to_dict() for user in users]
+    
+    # Return two separate objects
+    return ({'comments': comments_dict, 'users': users_dict})
 
 # UNTESTED
 @comment_routes.route('/createComment/<int:user_id>/<int:video_id>' , methods=['POST'])

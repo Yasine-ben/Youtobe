@@ -19,8 +19,29 @@ const normalizeAllComments = (comments) => {
     return normalize;
 }
 
+const combineAllComments = async (data) => {
+    let commentsWithCoverImage = []
+
+    console.log(data)
+    for (let i = 0; i < data.comments.length; i++) {
+        const comment = data.comments[i];
+        const user = data.users.find(user => user.id === comment.user_id);
+
+        if (user) {
+            commentsWithCoverImage.push({
+                ...comment,
+                cover_image: user.cover_image
+            });
+        }
+    }
+
+    return commentsWithCoverImage
+
+}
+
 export const thunkAllComments = (video_id) => async dispatch => {
     const response = await fetch(`/api/comments/allComments/${video_id}`)
+
 
     if (response.ok) {
         const comments = await response.json()
@@ -30,7 +51,10 @@ export const thunkAllComments = (video_id) => async dispatch => {
             return
         }
         else {
-            const normalize = normalizeAllComments(comments.comments)
+            // console.log('HERE')
+            let comb = await combineAllComments(comments)
+            // console.log(comb)
+            const normalize = normalizeAllComments(comb)
             dispatch(actionAllComments(normalize))
             // console.log('COMMENTS COMMENTS COMMENTS COMMENTS')
             return
