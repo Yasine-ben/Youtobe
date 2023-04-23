@@ -218,6 +218,19 @@
     left: 480px;
 }
 
+.VF-Errors-Wrapper{
+    position: absolute;
+    width: 500px;
+    height: 180px;
+    /* background-color: red; */
+    bottom: 70px;
+    left: 50px;
+    color: red;
+}
+
+.VF-Errors{
+
+}
 
 
 
@@ -244,6 +257,17 @@
     background-color: black;
 }
 
+.VF-Img-Wrapper{
+    position: absolute;
+    bottom: 150px;
+    right: 100px;
+}
+
+.VF-Img{
+
+}
+
+
 
 .VF-Footer{
     width: 100%;
@@ -266,4 +290,5 @@
     position: absolute;
     top: 7px;
     right: 15px;
+    cursor: pointer;
 }

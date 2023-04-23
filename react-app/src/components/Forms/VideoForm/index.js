@@ -3,6 +3,8 @@ import './VideoForm.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import ReactPlayer from 'react-player';
+import uploadGuy from '../../../Images/Upload.svg'
+import { thunkUploadVideo } from '../../../store/video';
 
 function VideoForm() {
     const history = useHistory()
@@ -15,18 +17,67 @@ function VideoForm() {
     const [thumbnail, setThumbnail] = useState('')
     const [errors, setErrors] = useState({})
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const err = {}
+        if (title.length < 1) err.title = 'Title must be filled in'
+        if (title.length > 100) err.title = 'Title must be less than 101 character in length'
+
+        if (description.length < 1) err.description = 'Description must be filled in'
+        if (description.length > 1000) err.description = 'Description must be less than 1001 characters in length'
+
+        if (!isValidUrl(video)) err.video = 'Video Url Must be a valid Url'
+        if (!isValidUrl(thumbnail)) err.thumbnail = 'Thumbnail Url must be a valid url'
+
+        const uploader = sessionUser.username
+        const user_id = sessionUser.id
+
+        if (!uploader || !user_id) err.user = 'You Must Be Logged In'
+
+        if (!Object.values(err).length) {
+            setErrors(err)
+            const data = await dispatch(thunkUploadVideo(title, description, video, thumbnail, uploader, user_id));
+
+            if (data) {
+                console.log('SERVER ERRORS')
+                console.log(data)
+            }
+            else {
+                console.log("SUBMITTED")
+                history.push('/')
+            }
+
+            return
+        } else {
+            setErrors(err)
+            console.log(err)
+            console.log('FRONT END ERROR FRONT END ERROR')
+            return
+        }
+
+    }
+    // console.log(sessionUser)
+
+    function isValidUrl(string) {
+        try {
+            new URL(string);
+            return true;
+        } catch (_) {
+            return false;
+        }
+    }
 
     return (
-        <div className='VF-Wrapper'>
+        sessionUser && (<div className='VF-Wrapper'>
             <div className='VF-Left-Wrapper'>
                 <div className='VF-TopBar'>
-                    <p className='VF-Title'>Video Details</p>
+                    <p className='VF-Title'>Upload Video</p>
                     <span id='VF-X-Symbol' class="material-symbols-outlined"> close </span>
                 </div>
                 <div className='VF-Video-Details-Wrapper'>
 
                     <div className='VF-VD-Title-Wrapper'>
-                        <p className='VF-CD-Title'>Details</p>
+                        <p className='VF-CD-Title'>Video Details</p>
                     </div>
 
                     <div className='VF-CD-VT-Wrapper'>
@@ -70,11 +121,21 @@ function VideoForm() {
                 </div>
             </div>
 
+            <div className='VF-Errors-Wrapper'>
+                {Boolean(Object.values(errors).length) && (<p>Errors</p>)}
+                {Object.values(errors).map((error, idx) => (
+                    <p className='VF-Errors' key={idx}>{`* ${error}`}</p>
+                ))}
+            </div>
+
+            <div className='VF-Img-Wrapper'>
+                <img className='VF-Img' src={uploadGuy} alt='upload guy' />
+            </div>
 
             <div className='VF-Footer'>
-                <div className='VF-Footer-Submit' onClick={((e) => '')}>Upload</div>
+                <div className='VF-Footer-Submit' onClick={((e) => handleSubmit(e))}>Upload</div>
             </div>
-        </div>
+        </div>)
     )
 }
 

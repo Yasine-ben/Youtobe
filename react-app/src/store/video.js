@@ -45,6 +45,14 @@ export const thunkSingleVideo = (video_id) => async dispatch => {
     }
 }
 
+export const thunkUploadVideo = () => async dispatch => {
+    const response = await fetch(``)
+
+    if(response.ok){
+        return
+    }
+}
+
 // INITIAL 
 const initialState = {
     allVideos: {},
