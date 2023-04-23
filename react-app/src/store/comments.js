@@ -40,7 +40,6 @@ const combineAllComments = async (data) => {
 export const thunkAllComments = (video_id) => async dispatch => {
     const response = await fetch(`/api/comments/allComments/${video_id}`)
 
-
     if (response.ok) {
         const comments = await response.json()
         if (comments.status === 404) {
