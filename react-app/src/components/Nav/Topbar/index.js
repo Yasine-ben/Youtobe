@@ -85,7 +85,7 @@ function Topbar() {
                                         {/* <p className='TBM-YourVideos'>Upload Video</p> */}
                                     </div>
                                     <div className='TBM-LogOut-Wrapper' onClick={((e) => handleLogout())}>
-                                        <span class="material-symbols-outlined"> logout </span>
+                                        <span  class="material-symbols-outlined"> logout </span>
                                         <p className='TBM-LogOut'>Sign out</p>
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@ function Topbar() {
                     </div>
                     || 
                     <div className='TB-NotLoggedInBtn' onClick={((e) => history.push('/login'))}>
-                        <span class="material-symbols-outlined">account_circle</span>
+                        <span  class="material-symbols-outlined">account_circle</span>
                         <p className='TB-NLIB-Title'>Sign in</p>
                     </div>}
 

@@ -26,12 +26,17 @@
     color: white;
 }
 
+#TB-userIcon{
+    cursor: pointer;
+}
+
 .TB-IconName-Wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
     padding-left: 10px;
     gap: 5px;
+    cursor: pointer;
 }
 
 .TB-Youtobe-Icon {
@@ -80,7 +85,7 @@
 
 #userIcon {
     color: white;
-
+    cursor: pointer;
 }
 
 #Profile-btn-icon {
