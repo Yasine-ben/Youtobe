@@ -40,7 +40,7 @@ function SingleVideoPage() {
     const [commentEditOpen, setCommentEditOpen] = useState(false)
     const [errors, setErrors] = useState({})
     // console.log(video)
-    console.log(comment)
+    // console.log(comment)
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -233,8 +233,8 @@ function SingleVideoPage() {
                                             <span id='VP-UC-Edit' className="material-symbols-outlined"> more_vert </span>
                                             {commentEditOpen && commentCardId == idx && (
                                             <div className='VP-EditMenu-Wrapper'>
-                                                <p>Edit</p>
-                                                <p>Delete</p>
+                                                <p className='VP-EditMenu-EditBtn'>Edit</p>
+                                                <p className='VP-EditMenu-DeleteBtn'>Delete</p>
                                             </div>)}
                                         </div>
                                     }
