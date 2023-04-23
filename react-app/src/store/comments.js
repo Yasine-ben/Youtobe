@@ -3,10 +3,20 @@ const ALL_COMMENTS = 'ALL_COMMENTS'
 const CREATE_COMMENT = 'CREATE_COMMENT'
 const UPDATE_COMMENT = 'UPDATE_COMMENT'
 const DELETE_COMMENT = 'DELETE_COMMENT'
+const RESET_COMMENTS = 'RESET_COMMENT';
+
 
 // ACTION CREATORS
 export const actionAllComments = (comments) => {
     return { type: ALL_COMMENTS, comments }
+}
+
+export const actionDeleteComments = (comment_id) =>{
+    return { type: DELETE_COMMENT, comment_id}
+}
+
+export const actionResetComment = reset => {
+    return { type: RESET_COMMENTS, reset }
 }
 
 // THUNKIES
@@ -90,7 +100,7 @@ export const thunkUpdateComment = (video_id, comment_id, comment) => async dispa
         }),
     })
 
-    if(response.ok){
+    if (response.ok) {
         dispatch(thunkAllComments(video_id))
         console.log('/////////COMMENT UPDATED///////////////')
         return
@@ -98,15 +108,22 @@ export const thunkUpdateComment = (video_id, comment_id, comment) => async dispa
 }
 
 export const thunkDeleteComment = (video_id, comment_id) => async dispatch => {
-    const response = fetch(`/api/comments/deleteComment/${comment_id}`, {
-        method:'DELETE'
+    const response = await fetch(`/api/comments/deleteComment/${comment_id}`, {
+        method: 'DELETE'
     })
 
-    if(response.ok){
-        dispatch(thunkAllComments(video_id))
+    if (response.ok) {
+        // dispatch(thunkResetComments())
+        // dispatch(thunkAllComments(video_id))
+        dispatch(actionDeleteComments(comment_id))
         console.log('/////////////COMMENT DELETED///////////////')
         return
     }
+}
+
+export const thunkResetComments = () => async dispatch => {
+    dispatch(actionResetComment({ allComments: {} }));
+    return { message: 'Successfully cleared state' }
 }
 
 // INITIAL 
@@ -119,6 +136,12 @@ const commentReducer = (state = initialState, action) => {
     switch (action.type) {
         case ALL_COMMENTS:
             return { ...state, allComments: { ...action.comments } }
+        case DELETE_COMMENT:
+            let newState = {...state, allComments: {...state.allComments}}
+            delete newState.allComments[action.comment_id]
+            return newState
+        case RESET_COMMENTS:
+            return { ...action.reset, allComments: { ...action.comments } }
         default: return { ...state }
     }
 }

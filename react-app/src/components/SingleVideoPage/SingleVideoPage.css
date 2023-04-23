@@ -336,6 +336,7 @@ i.fa-solid.fa-circle-user:before{
     position: absolute;
     right: 0px;
     align-content: center;
+    cursor: pointer;
 } 
 .VP-EditMenu-Wrapper{
     display: flex;
@@ -347,8 +348,8 @@ i.fa-solid.fa-circle-user:before{
     border-radius: 10px;
     gap: 0;
     position: absolute;
-    right: 0;
-    bottom: -80;
+    right: 25px;
+    /* bottom: -34px; */
     justify-content: space-around;
 }
 

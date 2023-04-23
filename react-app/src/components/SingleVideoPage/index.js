@@ -7,7 +7,7 @@ import ReactPlayer from 'react-player';
 import dayjs from 'dayjs';
 
 import './SingleVideoPage.css'
-import { thunkAllComments, thunkCreateComment } from '../../store/comments';
+import { thunkAllComments, thunkCreateComment, thunkDeleteComment } from '../../store/comments';
 import UpdateVideoForm from '../Forms/UpdateVideoForm';
 
 function SingleVideoPage() {
@@ -136,6 +136,13 @@ function SingleVideoPage() {
 
     }
 
+    function handleCommentDelete(e,comment_id){
+        e.preventDefault()
+        const video_id = video.id
+        dispatch(thunkDeleteComment(video_id, comment_id))
+        return
+    }
+
     return (
         <div className='VP-Wrapper'>
             <div className='VP-Left-Wrapper'>
@@ -233,8 +240,8 @@ function SingleVideoPage() {
                                             <span id='VP-UC-Edit' className="material-symbols-outlined"> more_vert </span>
                                             {commentEditOpen && commentCardId == idx && (
                                             <div className='VP-EditMenu-Wrapper'>
-                                                <p className='VP-EditMenu-EditBtn'>Edit</p>
-                                                <p className='VP-EditMenu-DeleteBtn'>Delete</p>
+                                                <p className='VP-EditMenu-EditBtn' onClick={(e) => {openMenuFunc(idx)}}>Edit</p>
+                                                <p className='VP-EditMenu-DeleteBtn' onClick={((e) => handleCommentDelete(e,comment.id))}>Delete</p>
                                             </div>)}
                                         </div>
                                     }
