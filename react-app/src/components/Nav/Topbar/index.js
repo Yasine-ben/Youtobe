@@ -18,7 +18,7 @@ function Topbar() {
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
 
-    console.log(sessionUser)
+    // console.log(sessionUser)
 
     const openMenu = () => {
         if (showMenu) setShowMenu(false)
@@ -42,15 +42,17 @@ function Topbar() {
             <div className='TB-Search-Wrapper'>
                 <input className='TB-Search-Input' type='text' placeholder='Search' />
                 <div className='TB-SearchIcon-Wrapper'>
-                    <i class="fa-solid fa-magnifying-glass" id='search-icon' />
+                    <i className="fa-solid fa-magnifying-glass" id='search-icon' />
                 </div>
             </div>
             <div className='TB-RightSide-Wrapper'>
 
                 {sessionUser
-                    ? <div className='TB-LoggedIn-Btn'>
-                        <i id='userIcon' class="fa-solid fa-user" onClick={((e) => openMenu())} />
-                        {showMenu ?
+                    && <div className='TB-LoggedIn-Btn'>
+                        <div className='TB-UserImg-Wrapper'>
+                            <img src={sessionUser.cover_image} alt='user Img' className='TB-UserImg' onClick={((e) => openMenu())} />
+                        </div>
+                        {showMenu &&
 
                             (<div className="TBM">
                                 <div className='TBM-UserInfo-Wrapper'>
@@ -71,30 +73,30 @@ function Topbar() {
 
                                 <div className='TBM-Manage-Wrapper'>
                                     <div className='TBM-YourVideos-Wrapper' onClick={((e) => history.push('/'))}>
-                                        <span class="material-symbols-outlined"> account_box </span>
+                                        <span className="material-symbols-outlined"> account_box </span>
                                         <p className='TBM-YourVideos'>Your Videos</p>
                                     </div>
                                     <div className='TBM-YourVideos-Wrapper' >
-                                        <span class="material-symbols-outlined"> publish </span>
+                                        <span className="material-symbols-outlined"> publish </span>
                                         <OpenModalButton
                                             className='TBM-UploadVideo'
                                             buttonText='Upload Video'
-                                            onItemClick={((e) => openMenu())}
+                                            // onItemClick={''}
                                             modalComponent={<VideoForm />}
                                         />
                                         {/* <p className='TBM-YourVideos'>Upload Video</p> */}
                                     </div>
                                     <div className='TBM-LogOut-Wrapper' onClick={((e) => handleLogout())}>
-                                        <span class="material-symbols-outlined"> logout </span>
+                                        <span className="material-symbols-outlined"> logout </span>
                                         <p className='TBM-LogOut'>Sign out</p>
                                     </div>
                                 </div>
-                            </div>):null
-
+                            </div>)
                         }
                     </div>
-                    : <div className='TB-NotLoggedInBtn' onClick={((e) => history.push('/login'))}>
-                        <span class="material-symbols-outlined">account_circle</span>
+                    ||
+                    <div className='TB-NotLoggedInBtn' onClick={((e) => history.push('/login'))}>
+                        <span className="material-symbols-outlined">account_circle</span>
                         <p className='TB-NLIB-Title'>Sign in</p>
                     </div>}
 

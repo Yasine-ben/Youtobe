@@ -26,12 +26,17 @@
     color: white;
 }
 
+#TB-userIcon{
+    cursor: pointer;
+}
+
 .TB-IconName-Wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
     padding-left: 10px;
     gap: 5px;
+    cursor: pointer;
 }
 
 .TB-Youtobe-Icon {
@@ -80,11 +85,33 @@
 
 #userIcon {
     color: white;
-
+    cursor: pointer;
 }
 
 #Profile-btn-icon {
     font-size: 1.4em;
+}
+
+
+.TB-UserImg-Wrapper{
+    width: 80px;
+    height: 100%;
+    cursor: pointer;
+}
+
+.TB-UserImg{
+    position: relative;
+    top: 0px;
+    right: -35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 40px;
+    /* adjust this to the desired width of your image */
+    height: 40px;
+    /* adjust this to the desired height of your image */
 }
 
 /* NOT LOGGED IN BUTTON */

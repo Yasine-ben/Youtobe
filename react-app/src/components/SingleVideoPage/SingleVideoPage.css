@@ -24,7 +24,85 @@
 .VP-Title {
     font-size: 1.35em;
 }
-.VP-Lower-Wrapper {}
+.VP-Lower-Wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.VP-Creator-Wrapper{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    height: 50px;
+}
+.VP-Creator-Img-Wrapper{
+    width: 80px;
+    height: 100%;
+}
+.VP-Creator-Img{
+    position: relative;
+    top: -10px;
+    left: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 45px;
+    /* adjust this to the desired width of your image */
+    height: 45px;
+}
+.VP-CreatorName-Wrapper{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: -15px;
+    top: -45px;
+}
+.VP-CreatorName{
+    position: relative;
+    top: 20px;
+}
+.VP-Subscribers{
+    font-weight: 500;
+    font-size: .8em;
+    color: grey;
+}
+
+.VP-Buttons{
+    display: flex;
+    gap: 20px;
+}
+
+.VP-UpdateBtn{
+    display: flex;
+    width: 80px;
+    height: 30px;
+    background-color: rgb(28, 115, 232);
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    position: relative;
+    right: 10px;
+    bottom: 10px;
+    cursor: pointer;
+}
+
+.VP-DeleteBtn{
+    display: flex;
+    width: 80px;
+    height: 30px;
+    background-color: red;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    position: relative;
+    right: 10px;
+    bottom: 10px;
+    cursor: pointer;
+}
 /* END */
 
 /* Description Box */

@@ -1,11 +1,11 @@
-.VF-Left-Wrapper {
-    width: 960px;
+.UVF-Wrapper {
+    width: 620px;
     height: 850px;
     border-radius: 15px;
     background-color: rgb(35, 35, 35);
 }
 
-.VF-TopBar {
+.UVF-TopBar {
     position: relative;
     top: 0;
     width: 100%;
@@ -17,14 +17,14 @@
     align-items: center;
 }
 
-.VF-Title {
+.UVF-Title {
     font-size: 1.2em;
     align-self: center;
     padding-left: 20px;
     font-weight: 100;
 }
 
-#VF-X-Symbol {
+#UVF-X-Symbol {
     font-size: 1.7em;
     align-self: center;
     padding-right: 20px;
@@ -32,7 +32,7 @@
     cursor: pointer;
 }
 
-.VF-Video-Details-Wrapper {
+.UVF-Video-Details-Wrapper {
     display: flex;
     flex-direction: column;
     position: relative;
@@ -43,27 +43,27 @@
     /* border: 1px solid grey;     */
 }
 
-.VF-VD-Title-Wrapper {
+.UVF-VD-Title-Wrapper {
     display: flex;
     height: 40px;
     align-items: center;
 }
 
-.VF-CD-Title {
+.UVF-CD-Title {
     font-size: 1.5em;
 }
 
-.VF-CD-VT-Wrapper {
+.UVF-CD-VT-Wrapper {
 
 }
 
-.VF-CD-VT-Input-Wrapper{
+.UVF-CD-VT-Input-Wrapper{
     /* border: 1px solid grey; */
     position: relative;
     top: 30px ;
 }
 
-.VF-CD-VT-Input {
+.UVF-CD-VT-Input {
     border: none;
     outline: 1px solid grey;
     background-color: transparent;
@@ -77,11 +77,11 @@
     resize: none;
 }
 
-.VF-CD-VT-Input:focus {
+.UVF-CD-VT-Input:focus {
     outline: 1px solid rgb(28, 115, 232);
 }
 
-.VF-CD-VT-Count {
+.UVF-CD-VT-Count {
     position: relative;
     font-size: .8em;
     color: gray;
@@ -95,18 +95,18 @@
 
 
 
-.VF-CD-VD-Wrapper {
+.UVF-CD-VD-Wrapper {
 
 }
 
-.VF-CD-VD-Input-Wrapper{
+.UVF-CD-VD-Input-Wrapper{
     /* border: 1px solid grey; */
     position: relative;
     top: 20px ;
     height: fit-content;
 }
 
-.VF-CD-VD-Input {
+.UVF-CD-VD-Input {
     border: none;
     outline: 1px solid grey;
     background-color: transparent;
@@ -121,11 +121,11 @@
     resize: none;
 }
 
-.VF-CD-VD-Input:focus {
+.UVF-CD-VD-Input:focus {
     outline: 1px solid rgb(28, 115, 232);
 }
 
-.VF-CD-VD-Count {
+.UVF-CD-VD-Count {
     position: relative;
     font-size: .8em;
     color: gray;
@@ -139,17 +139,17 @@
 
 
 
-.VF-CD-VUrl-Wrapper {
+.UVF-CD-VUrl-Wrapper {
     
 }
 
-.VF-CD-VUrl-Input-Wrapper{
+.UVF-CD-VUrl-Input-Wrapper{
     /* border: 1px solid grey; */
     position: relative;
     top: 10px ;
 }
 
-.VF-CD-VUrl-Input {
+.UVF-CD-VUrl-Input {
     border: none;
     outline: 1px solid grey;
     background-color: transparent;
@@ -163,11 +163,11 @@
     resize: none;
 }
 
-.VF-CD-VUrl-Input:focus {
+.UVF-CD-VUrl-Input:focus {
     outline: 1px solid rgb(28, 115, 232);
 }
 
-.VF-CD-VUrl-Count {
+.UVF-CD-VUrl-Count {
     position: relative;
     font-size: .8em;
     color: gray;
@@ -182,17 +182,17 @@
 
 
 
-.VF-CD-VThumbnail-Wrapper {
+.UVF-CD-VThumbnail-Wrapper {
 
 }
 
-.VF-CD-VThumbnail-Input-Wrapper{
+.UVF-CD-VThumbnail-Input-Wrapper{
     /* border: 1px solid grey; */
     position: relative;
     top: 30px ;
 }
 
-.VF-CD-VThumbnail-Input {
+.UVF-CD-VThumbnail-Input {
     border: none;
     outline: 1px solid grey;
     background-color: transparent;
@@ -206,11 +206,11 @@
     resize: none;
 }
 
-.VF-CD-VThumbnail-Input:focus {
+.UVF-CD-VThumbnail-Input:focus {
     outline: 1px solid rgb(28, 115, 232);
 }
 
-.VF-CD-VThumbnail-Count {
+.UVF-CD-VThumbnail-Count {
     position: relative;
     font-size: .8em;
     color: gray;
@@ -219,7 +219,7 @@
     left: 480px;
 }
 
-.VF-Errors-Wrapper{
+.UVF-Errors-Wrapper{
     position: absolute;
     width: 500px;
     height: 180px;
@@ -229,14 +229,14 @@
     color: red;
 }
 
-.VF-Errors{
+.UVF-Errors{
 
 }
 
 
 
 
-.VF-Right-Wrapper{
+.UVF-Right-Wrapper{
     /* background-color: red; */
     width: 300px;
     height: 200px;
@@ -245,39 +245,39 @@
     right: 40px;
 }
 
-.VF-Preview-Wrapper{
+.UVF-Preview-Wrapper{
     /* background-color: green; */
     width: 300px;
     height: 200px;
     position: absolute;
 }
 
-.VF-Player-Wrapper{
+.UVF-Player-Wrapper{
     width: 300px;
     height: 200px;
     background-color: black;
 }
 
-.VF-Img-Wrapper{
+.UVF-Img-Wrapper{
     position: absolute;
     bottom: 150px;
     right: 100px;
 }
 
-.VF-Img{
+.UVF-Img{
 
 }
 
 
 
-.VF-Footer{
+.UVF-Footer{
     width: 100%;
     height: 50px;
     position: absolute;
     bottom: 0;
     border-top: 1px solid grey;
 }
-.VF-Footer-Submit{
+.UVF-Footer-Submit{
     width: 70px;
     height: 35px;
     border-radius: 7px;

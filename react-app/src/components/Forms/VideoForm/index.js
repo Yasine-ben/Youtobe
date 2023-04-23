@@ -5,12 +5,14 @@ import { useHistory } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import uploadGuy from '../../../Images/Upload.svg'
 import { thunkUploadVideo } from '../../../store/video';
+import { useModal } from "../../../context/Modal";
 
 function VideoForm() {
     const history = useHistory()
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
     const playerRef = useRef(null);
+    const { closeModal } = useModal();
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
@@ -45,19 +47,21 @@ function VideoForm() {
             const data = await dispatch(thunkUploadVideo(title, description, video, length, thumbnail, uploader, user_id));
 
             if (data) {
-                console.log('SERVER ERRORS')
-                console.log(data)
+                // console.log('SERVER ERRORS')
+                // console.log(data)
             }
             else {
-                console.log("SUBMITTED")
+                // console.log("SUBMITTED")
+                closeModal()
                 history.push('/')
+                
             }
 
             return
         } else {
             setErrors(err)
-            console.log(err)
-            console.log('FRONT END ERROR FRONT END ERROR')
+            // console.log(err)
+            // console.log('FRONT END ERROR FRONT END ERROR')
             return
         }
 
@@ -88,7 +92,7 @@ function VideoForm() {
             <div className='VF-Left-Wrapper'>
                 <div className='VF-TopBar'>
                     <p className='VF-Title'>Upload Video</p>
-                    <span id='VF-X-Symbol' class="material-symbols-outlined"> close </span>
+                    <span onClick={(e) => {closeModal()}} id='VF-X-Symbol' className="material-symbols-outlined"> close </span>
                 </div>
                 <div className='VF-Video-Details-Wrapper'>
 

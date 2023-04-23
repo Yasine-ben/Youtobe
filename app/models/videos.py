@@ -16,6 +16,7 @@ class Video(db.Model):
     thumbnail = db.Column(db.String(255), nullable=False)
     length = db.Column(db.Float, nullable=False)
     uploader = db.Column(db.String, nullable=False)
+    cover_image = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
@@ -33,6 +34,7 @@ class Video(db.Model):
             'thumbnail': self.thumbnail,
             'length': self.length,
             'uploader': self.uploader,
+            'cover_image': self.cover_image,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
             'user_id': self.user_id,
