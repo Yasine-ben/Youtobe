@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
-import { thunkAllVideos, thunkSingleVideo } from '../../store/video';
+import { Redirect, useHistory, useParams } from "react-router-dom";
+import { thunkAllVideos, thunkDeleteVideo, thunkSingleVideo } from '../../store/video';
 import ReactPlayer from 'react-player';
 import dayjs from 'dayjs';
 
@@ -82,7 +82,8 @@ function SingleVideoPage() {
 
     const handleDelete = (e) => {
         e.preventDefault()
-
+        dispatch(thunkDeleteVideo(video_id))
+        history.push('/')
     }
 
     return (
@@ -117,7 +118,7 @@ function SingleVideoPage() {
                             {(user?.id === video?.user_id) && (
                                 <div className='VP-Buttons'>
                                     <div className='VP-UpdateBtn'>Update</div>
-                                    <div className='VP-DeleteBtn'>Delete</div>
+                                    <div className='VP-DeleteBtn' onClick={(e) => handleDelete(e)}>Delete</div>
                                 </div>
                             )}
                         </div>
