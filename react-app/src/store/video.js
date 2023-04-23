@@ -45,11 +45,26 @@ export const thunkSingleVideo = (video_id) => async dispatch => {
     }
 }
 
-export const thunkUploadVideo = () => async dispatch => {
-    const response = await fetch(``)
+export const thunkUploadVideo = (title, description, video, length, thumbnail, uploader, user_id) => async dispatch => {
+    const response = await fetch(`/api/videos/createVideo`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			title, 
+            description, 
+            video, 
+            length,
+            thumbnail, 
+            uploader, 
+            user_id
+		}),
+	});
+
 
     if(response.ok){
-        return
+        return dispatch(thunkAllVideos())
     }
 }
 

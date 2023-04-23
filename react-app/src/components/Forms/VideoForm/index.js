@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import './VideoForm.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -10,11 +10,13 @@ function VideoForm() {
     const history = useHistory()
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
+    const playerRef = useRef(null);
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [video, setVideo] = useState('')
     const [thumbnail, setThumbnail] = useState('')
+    const [length, setLength] = useState(1.50)
     const [errors, setErrors] = useState({})
 
     const handleSubmit = async (e) => {
@@ -34,9 +36,13 @@ function VideoForm() {
 
         if (!uploader || !user_id) err.user = 'You Must Be Logged In'
 
+        if (!length) err.length = 'Video url is invalid'
+
+        if (!isImageUrl(thumbnail)) err.thumbnail = 'Thumbnail url must lead to an image'
+        
         if (!Object.values(err).length) {
             setErrors(err)
-            const data = await dispatch(thunkUploadVideo(title, description, video, thumbnail, uploader, user_id));
+            const data = await dispatch(thunkUploadVideo(title, description, video, length, thumbnail, uploader, user_id));
 
             if (data) {
                 console.log('SERVER ERRORS')
@@ -56,7 +62,12 @@ function VideoForm() {
         }
 
     }
-    // console.log(sessionUser)
+
+    function handleReady() {
+        let len = (playerRef.current.getDuration());
+        len = (len / 60).toFixed(2)
+        setLength(Number(len))
+    }
 
     function isValidUrl(string) {
         try {
@@ -65,6 +76,11 @@ function VideoForm() {
         } catch (_) {
             return false;
         }
+    }
+
+    function isImageUrl(url) {
+        const imageExtensions = /\.(jpg|jpeg|png|gif)$/i;
+        return imageExtensions.test(url);
     }
 
     return (
@@ -112,10 +128,12 @@ function VideoForm() {
                 <div className='VF-Preview-Wrapper'>
                     <div className='VF-Player-Wrapper'>
                         <ReactPlayer
+                            ref={playerRef}
                             url={video}
                             controls={true}
                             width={300}
                             height={200}
+                            onReady={handleReady}
                         />
                     </div>
                 </div>
