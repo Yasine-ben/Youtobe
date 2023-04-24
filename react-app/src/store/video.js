@@ -35,6 +35,19 @@ export const thunkAllVideos = () => async dispatch => {
     }
 }
 
+export const thunkAllVideosRand = () => async dispatch => {
+    const response = await fetch('/api/videos/allVideos')
+
+    if (response.ok) {
+        const videos = await response.json()
+        const normalized = normalizeAllVideos(videos.videos)
+        //randomizes video order
+        const rand = Object.values(normalized).sort((e) => Math.random() - 0.5);
+        dispatch(actionAllVideos(rand))
+        return
+    }
+}
+
 export const thunkSingleVideo = (video_id) => async dispatch => {
     const response = await fetch(`/api/videos/${video_id}`)
 

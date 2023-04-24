@@ -325,3 +325,51 @@ i.fa-solid.fa-circle-user:before{
     margin: 0;
 }
 /* END */
+
+
+
+.VP-UC-OwnerEdit-Wrapper{
+    height: 40px;
+} 
+#VP-UC-Edit{
+    display: flex;
+    position: absolute;
+    right: 0px;
+    align-content: center;
+    cursor: pointer;
+} 
+.VP-EditMenu-Wrapper{
+    display: flex;
+    flex-direction: row;
+    width: 100px;
+    height: 30px;
+    background-color: rgb(39, 39, 39);
+    align-items: center;
+    border-radius: 10px;
+    gap: 0;
+    position: absolute;
+    right: 25px;
+    /* bottom: -34px; */
+    justify-content: space-around;
+}
+
+.VP-EditMenu-EditBtn{
+    padding-right: 6px;
+    border-right: 2px solid black;
+    cursor: pointer;
+    color: black;
+    margin-left: 5px;
+}
+.VP-EditMenu-EditBtn:hover{
+    color: rgb(28, 115, 232);
+}
+
+.VP-EditMenu-DeleteBtn{
+    cursor: pointer;
+    color: black;
+    margin-right: 3px;
+}
+
+.VP-EditMenu-DeleteBtn:hover{
+    color: rgb(28, 115, 232);
+}

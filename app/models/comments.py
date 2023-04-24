@@ -11,7 +11,7 @@ class Comment(db.Model, UserMixin):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    comment = db.Column(db.String(10000), nullable=False)
+    comment = db.Column(db.String(1000), nullable=False)
     user_name = db.Column(db.String(255), nullable=False)
     user_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('users.id'))) # maybe add on delete cascade
     video_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('videos.id'), ondelete='CASCADE'))

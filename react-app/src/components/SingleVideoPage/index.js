@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from "react";
 import { Redirect, useHistory, useParams } from "react-router-dom";
-import { thunkAllVideos, thunkDeleteVideo, thunkSingleVideo } from '../../store/video';
+import { thunkAllVideos, thunkAllVideosRand, thunkDeleteVideo, thunkSingleVideo } from '../../store/video';
 import OpenModalButton from '../OpenModalButton'
 import ReactPlayer from 'react-player';
 import dayjs from 'dayjs';
 
 import './SingleVideoPage.css'
-import { thunkAllComments } from '../../store/comments';
+import { thunkAllComments, thunkCreateComment, thunkDeleteComment } from '../../store/comments';
 import UpdateVideoForm from '../Forms/UpdateVideoForm';
 
 function SingleVideoPage() {
@@ -30,11 +30,17 @@ function SingleVideoPage() {
     const comments = Object.values(useSelector(state => state.comments?.allComments))
 
 
+
     const [url, setUrl] = useState('')
     const [title, setTitle] = useState('')
     const [discription, setDescription] = useState('')
     const [date, setDate] = useState('')
+    const [comment, setComment] = useState('')
+    const [commentCardId, setCommentCardId] = useState(null)
+    const [commentEditOpen, setCommentEditOpen] = useState(false)
+    const [errors, setErrors] = useState({})
     // console.log(video)
+    // console.log(comment)
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -52,10 +58,6 @@ function SingleVideoPage() {
         }
     }
 
-    //randomizes video order
-    allVideos.sort(() => Math.random() - 0.5);
-
-
 
     useEffect(() => {
         function handleResize() {
@@ -72,20 +74,73 @@ function SingleVideoPage() {
             setDescription(video.description)
             setDate(video.updated_at)
         }
+
     }, [video])
 
     // console.log(dayjs(date).fromNow())
 
     useEffect(() => {
         dispatch(thunkSingleVideo(video_id))
-        dispatch(thunkAllVideos())
+        dispatch(thunkAllVideosRand())
         dispatch(thunkAllComments(video_id))
+
     }, [dispatch, user])
 
     const handleDelete = (e) => {
         e.preventDefault()
         dispatch(thunkDeleteVideo(video_id))
         history.push('/')
+    }
+
+    const handleCommentSubmit = async (e) => {
+        e.preventDefault()
+        const err = {}
+
+        const user_name = user.username
+        const video_id = video.id
+        const user_id = user.id
+
+        if (comment.length < 1) err.comment = 'Comment must be filled in with at least one character'
+        if (comment.length > 1000) err.comment = 'Comment must be 1000 characters or less'
+
+        if (!Object.values(err).length) {
+            setErrors(err)
+            const data = await dispatch(thunkCreateComment(video_id, user_id, comment, user_name));
+
+            if (data) {
+                console.log('SERVER ERRORS')
+                console.log(data)
+            }
+            else {
+                console.log("SUBMITTED")
+                return
+            }
+
+            return
+        } else {
+            setErrors(err)
+            // console.log(err)
+            // console.log('FRONT END ERROR FRONT END ERROR')
+            return
+        }
+    }
+
+    function openMenuFunc(id) {
+        if (!commentEditOpen) {
+            setCommentEditOpen(true)
+            setCommentCardId(id)
+        } else {
+            setCommentEditOpen(false)
+            setCommentCardId(null)
+        }
+
+    }
+
+    function handleCommentDelete(e,comment_id){
+        e.preventDefault()
+        const video_id = video.id
+        dispatch(thunkDeleteComment(video_id, comment_id))
+        return
     }
 
     return (
@@ -120,10 +175,10 @@ function SingleVideoPage() {
                             {(user?.id === video?.user_id) && (
                                 <div className='VP-Buttons'>
                                     {/* <div className='VP-UpdateBtn'>Update</div> */}
-                                    <OpenModalButton 
+                                    <OpenModalButton
                                         className='VP-UpdateBtn'
                                         buttonText='Update'
-                                        modalComponent={<UpdateVideoForm video_id={video_id}/>}
+                                        modalComponent={<UpdateVideoForm video_id={video_id} />}
                                     />
                                     <div className='VP-DeleteBtn' onClick={(e) => handleDelete(e)}>Delete</div>
                                 </div>
@@ -151,11 +206,11 @@ function SingleVideoPage() {
                         </div>
                         <div className='VP-InputAndButtons-Wrapper'>
                             <div className='VP-Input-Wrapper'>
-                                <input className='VP-Comment-Input' type="text" placeholder='Add a Comment...' id="Comment-Box" name="Comment-Box" required minLength="1" maxLength="10000" />
+                                <textarea className='VP-Comment-Input' type="text" placeholder='Add a Comment...' value={comment} onChange={(e) => setComment(e.target.value)} id="Comment-Box" name="Comment-Box" required minLength="1" maxLength="1000" />
                             </div>
-                            <div className='VP-CommentInputButton-Wrapper'>
+                            <div className='VP-CommentInputButton-Wrapper' onClick={(e) => handleCommentSubmit(e)}>
                                 <div className='VP-Submit'>
-                                    <p>Comment</p>
+                                    <p className='VP-Submit-Text'>Comment</p>
                                 </div>
                             </div>
                         </div>
@@ -165,7 +220,7 @@ function SingleVideoPage() {
                     {/* USER COMMENTS */}
                     <div className='VP-UC-Main-Wrapper'>
                         {/* THIS TERNARY DOESNT WORK */}
-                        {!(comments.status === 404) ? comments.map((comment, idx) => (
+                        {!(comments.status === 404) ? comments.reverse().map((comment, idx) => (
                             <div key={`Comment_${idx}`} className='VP-UC-Card-Wrapper'>
                                 <div className='VP-UC-Icon-Wrapper'>
                                     <i id='VP-UC-Icon' className="fa-solid fa-circle-user"></i>
@@ -178,6 +233,18 @@ function SingleVideoPage() {
                                     <div className='VP-UC-Comment-Wrapper'>
                                         <p className='VP-UC-Comment'>{comment.comment}</p>
                                     </div>
+                                </div>
+                                <div>
+                                    {(user.id === comment.user_id) &&
+                                        <div className='VP-UC-OwnerEdit-Wrapper' onClick={(e) => {openMenuFunc(idx)}}>
+                                            <span id='VP-UC-Edit' className="material-symbols-outlined"> more_vert </span>
+                                            {commentEditOpen && commentCardId == idx && (
+                                            <div className='VP-EditMenu-Wrapper'>
+                                                <p className='VP-EditMenu-EditBtn' onClick={(e) => {openMenuFunc(idx)}}>Edit</p>
+                                                <p className='VP-EditMenu-DeleteBtn' onClick={((e) => handleCommentDelete(e,comment.id))}>Delete</p>
+                                            </div>)}
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         ))
