@@ -96,9 +96,9 @@ function SingleVideoPage() {
         e.preventDefault()
         const err = {}
 
-        const user_name = user.username
-        const video_id = video.id
-        const user_id = user.id
+        const user_name = user?.username
+        const video_id = video?.id
+        const user_id = user?.id
 
         if (comment.length < 1) err.comment = 'Comment must be filled in with at least one character'
         if (comment.length > 1000) err.comment = 'Comment must be 1000 characters or less'
@@ -138,7 +138,7 @@ function SingleVideoPage() {
 
     function handleCommentDelete(e,comment_id){
         e.preventDefault()
-        const video_id = video.id
+        const video_id = video?.id
         dispatch(thunkDeleteComment(video_id, comment_id))
         return
     }
@@ -220,22 +220,22 @@ function SingleVideoPage() {
                     {/* USER COMMENTS */}
                     <div className='VP-UC-Main-Wrapper'>
                         {/* THIS TERNARY DOESNT WORK */}
-                        {!(comments.status === 404) ? comments.reverse().map((comment, idx) => (
+                        {!(comments?.status === 404) ? comments?.reverse().map((comment, idx) => (
                             <div key={`Comment_${idx}`} className='VP-UC-Card-Wrapper'>
                                 <div className='VP-UC-Icon-Wrapper'>
                                     <i id='VP-UC-Icon' className="fa-solid fa-circle-user"></i>
                                 </div>
                                 <div className='VP-UC-RightBox-Wrapper'>
                                     <div className='VP-UC-Commenter-Wrapper'>
-                                        <p className='VP-UC-Commenter'>{comment.user_name}</p>
-                                        <p className='VP-UC-Time'>{dayjs(comment.updated_at).fromNow()}</p>
+                                        <p className='VP-UC-Commenter'>{comment?.user_name}</p>
+                                        <p className='VP-UC-Time'>{dayjs(comment?.updated_at).fromNow()}</p>
                                     </div>
                                     <div className='VP-UC-Comment-Wrapper'>
-                                        <p className='VP-UC-Comment'>{comment.comment}</p>
+                                        <p className='VP-UC-Comment'>{comment?.comment}</p>
                                     </div>
                                 </div>
                                 <div>
-                                    {(user.id === comment.user_id) &&
+                                    {(user?.id === comment?.user_id) &&
                                         <div className='VP-UC-OwnerEdit-Wrapper' onClick={(e) => {openMenuFunc(idx)}}>
                                             <span id='VP-UC-Edit' className="material-symbols-outlined"> more_vert </span>
                                             {commentEditOpen && commentCardId == idx && (
@@ -260,7 +260,7 @@ function SingleVideoPage() {
             {/* RECOMENDED VIDEOS RIGHT SIDE */}
             <div className='VP-Right-Wrapper'>
                 <div className='VP-Recomended-Wrapper'>
-                    {allVideos.map((video, idx) => (
+                    {allVideos?.map((video, idx) => (
                         <div key={`Recomended_${idx}`} className='VP-Rec-Card-Wrapper'>
                             <div className='VP-Rec-Container'>
                                 <div className='VP-Rec-Img-Wrapper'>
