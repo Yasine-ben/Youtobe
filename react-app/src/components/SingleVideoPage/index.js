@@ -90,13 +90,15 @@ function SingleVideoPage() {
         dispatch(thunkAllVideosRand())
         dispatch(thunkAllComments(video_id))
 
-    }, [dispatch, user])
+    }, [dispatch, user,history.location])
 
     const handleDelete = (e) => {
         e.preventDefault()
         dispatch(thunkDeleteVideo(video_id))
         history.push('/')
     }
+
+    console.log(history.location)
 
     const handleCommentSubmit = async (e) => {
         e.preventDefault()
@@ -337,7 +339,7 @@ function SingleVideoPage() {
             <div className='VP-Right-Wrapper'>
                 <div className='VP-Recomended-Wrapper'>
                     {allVideos?.map((video, idx) => (
-                        <div key={`Recomended_${idx}`} className='VP-Rec-Card-Wrapper'>
+                        <div key={`Recomended_${idx}`} className='VP-Rec-Card-Wrapper' onClick={(e) => {history.push(`/Videos/${video.title}/${video.id}`)}}>
                             <div className='VP-Rec-Container'>
                                 <div className='VP-Rec-Img-Wrapper'>
                                     <img src={video.thumbnail} alt='recomeneded thumbnail' className='VP-Recomended-Img' />

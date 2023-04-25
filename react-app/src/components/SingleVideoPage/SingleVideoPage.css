@@ -283,6 +283,7 @@ i.fa-solid.fa-circle-user:before{
 .VP-Rec-Card-Wrapper {
     width: 380px;
     height: 106px;
+    cursor: pointer;
 }
 .VP-Rec-Container {
     display: flex;
