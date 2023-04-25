@@ -89,18 +89,20 @@ export const thunkCreateComment = (video_id, user_id, comment, user_name) => asy
 
 }
 
-export const thunkUpdateComment = (video_id, comment_id, comment) => async dispatch => {
+export const thunkUpdateComment = (video_id, comment_id, editComment) => async dispatch => {
     const response = await fetch(`/api/comments/updateComment/${comment_id}`, {
         method: 'PUT',
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            comment
+            comment:editComment
         }),
     })
 
     if (response.ok) {
+        const resData = await response.json()
+        console.log(resData)
         dispatch(thunkAllComments(video_id))
         console.log('/////////COMMENT UPDATED///////////////')
         return

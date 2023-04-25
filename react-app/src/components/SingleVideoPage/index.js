@@ -7,7 +7,7 @@ import ReactPlayer from 'react-player';
 import dayjs from 'dayjs';
 
 import './SingleVideoPage.css'
-import { thunkAllComments, thunkCreateComment, thunkDeleteComment } from '../../store/comments';
+import { thunkAllComments, thunkCreateComment, thunkDeleteComment, thunkUpdateComment } from '../../store/comments';
 import UpdateVideoForm from '../Forms/UpdateVideoForm';
 
 function SingleVideoPage() {
@@ -35,12 +35,18 @@ function SingleVideoPage() {
     const [title, setTitle] = useState('')
     const [discription, setDescription] = useState('')
     const [date, setDate] = useState('')
+
     const [comment, setComment] = useState('')
     const [commentCardId, setCommentCardId] = useState(null)
+
+    const [editComment, setEditComment] = useState('')
     const [commentEditOpen, setCommentEditOpen] = useState(false)
+    const [editEnabled, setEditEnabled] = useState(false)
+    const [editCommentId, setEditCommentId] = useState(null)
+
     const [errors, setErrors] = useState({})
     // console.log(video)
-    // console.log(comment)
+    console.log(commentEditOpen)
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -113,6 +119,7 @@ function SingleVideoPage() {
             }
             else {
                 console.log("SUBMITTED")
+                setComment('')
                 return
             }
 
@@ -136,7 +143,46 @@ function SingleVideoPage() {
 
     }
 
-    function handleCommentDelete(e,comment_id){
+    function editHelper(id,comment) {
+        setEditComment(comment)
+        setEditCommentId(id)
+        setEditEnabled(true)
+    }
+
+    const handleEditComment = async (e, comment_id) => {
+        e.preventDefault()
+        const err = {}
+        if (editComment.length < 1) err.comment = 'Comment must be greater than 1 character in length'
+        if (editComment.length > 1000) err.comment = 'Comment must be 1000 or less characters in length'
+
+        const video_id = video.id
+        console.log('ERRORS => ', err)
+        console.log('NEW COMMENT DATA => ', editComment)
+        if (!Object.values(err).length) {
+            setErrors(err)
+            const data = await dispatch(thunkUpdateComment(video_id, comment_id, editComment));
+
+            if (data) {
+                console.log('SERVER ERROR')
+                console.log(data)
+            }
+            else {
+                console.log('COMMENT UPDATED')
+                setEditCommentId(null)
+                setEditEnabled(false)
+                setEditComment('')
+                return
+            }
+        }
+        else {
+            setErrors(err)
+            console.log('ELSE ELSE')
+            return
+        }
+
+    }
+
+    function handleCommentDelete(e, comment_id) {
         e.preventDefault()
         const video_id = video?.id
         dispatch(thunkDeleteComment(video_id, comment_id))
@@ -219,39 +265,69 @@ function SingleVideoPage() {
 
                     {/* USER COMMENTS */}
                     <div className='VP-UC-Main-Wrapper'>
-                        {/* THIS TERNARY DOESNT WORK */}
-                        {!(comments?.status === 404) ? comments?.reverse().map((comment, idx) => (
-                            <div key={`Comment_${idx}`} className='VP-UC-Card-Wrapper'>
-                                <div className='VP-UC-Icon-Wrapper'>
-                                    <i id='VP-UC-Icon' className="fa-solid fa-circle-user"></i>
-                                </div>
-                                <div className='VP-UC-RightBox-Wrapper'>
-                                    <div className='VP-UC-Commenter-Wrapper'>
-                                        <p className='VP-UC-Commenter'>{comment?.user_name}</p>
-                                        <p className='VP-UC-Time'>{dayjs(comment?.updated_at).fromNow()}</p>
-                                    </div>
-                                    <div className='VP-UC-Comment-Wrapper'>
-                                        <p className='VP-UC-Comment'>{comment?.comment}</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    {(user?.id === comment?.user_id) &&
-                                        <div className='VP-UC-OwnerEdit-Wrapper' onClick={(e) => {openMenuFunc(idx)}}>
-                                            <span id='VP-UC-Edit' className="material-symbols-outlined"> more_vert </span>
-                                            {commentEditOpen && commentCardId == idx && (
-                                            <div className='VP-EditMenu-Wrapper'>
-                                                <p className='VP-EditMenu-EditBtn' onClick={(e) => {openMenuFunc(idx)}}>Edit</p>
-                                                <p className='VP-EditMenu-DeleteBtn' onClick={((e) => handleCommentDelete(e,comment.id))}>Delete</p>
-                                            </div>)}
+
+                        {!(comments?.status === 404) ? (
+
+                            comments?.slice().reverse().map((comment, idx) => (
+
+                                editEnabled && comment.id === editCommentId ? (
+
+
+                                    <div className='VP-UC-EditComment-Wrapper' key={`Comment_${idx}`}>
+                                        <div className='VP-UC-Icon-Wrapper'>
+                                            <i id='VP-UC-Icon' className="fa-solid fa-circle-user"></i>
                                         </div>
-                                    }
-                                </div>
-                            </div>
-                        ))
-                            :
+                                        <div className='VP-InputAndButtons-Wrapper'>
+                                            <div className='VP-Input-Wrapper'>
+                                                <textarea className='VP-Comment-Input' type="text" placeholder='Add a Comment...' value={editComment} onChange={(e) => setEditComment(e.target.value)} id="Edit-Comment-Box" name="Edit-Comment-Box" required minLength="1" maxLength="1000" />
+                                            </div>
+                                            <div className='VP-Edit-CommentInputButton-Wrapper' >
+                                                <div className='VP-Cancel' onClick={(e) => setEditEnabled(false)}>
+                                                    <p className='VP-Cancel-Text'>Cancel</p>
+                                                </div>
+                                                <div className='VP-Submit' onClick={(e) => handleEditComment(e,comment.id)}>
+                                                    <p className='VP-Submit-Text'>Comment</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                ) : (
+
+
+                                    <div key={`Comment_${idx}`} className='VP-UC-Card-Wrapper'>
+                                        <div className='VP-UC-Icon-Wrapper'>
+                                            <i id='VP-UC-Icon' className="fa-solid fa-circle-user"></i>
+                                        </div>
+                                        <div className='VP-UC-RightBox-Wrapper'>
+                                            <div className='VP-UC-Commenter-Wrapper'>
+                                                <p className='VP-UC-Commenter'>{comment?.user_name}</p>
+                                                <p className='VP-UC-Time'>{dayjs(comment?.updated_at).fromNow()}</p>
+                                            </div>
+                                            <div className='VP-UC-Comment-Wrapper'>
+                                                <p className='VP-UC-Comment'>{comment?.comment}</p>
+                                            </div>
+                                        </div>
+                                        {user?.id === comment?.user_id && (
+                                            <div className='VP-UC-OwnerEdit-Wrapper' onClick={(e) => { openMenuFunc(idx) }}>
+                                                <span id='VP-UC-Edit' className="material-symbols-outlined"> more_vert </span>
+                                                {commentEditOpen && commentCardId == idx && (
+                                                    <div className='VP-EditMenu-Wrapper'>
+                                                        <p className='VP-EditMenu-EditBtn' onClick={(e) => { editHelper(comment.id,comment.comment) }}>Edit</p>
+                                                        <p className='VP-EditMenu-DeleteBtn' onClick={((e) => handleCommentDelete(e, comment.id))}>Delete</p>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+                                )
+                            ))
+                        ) : (
                             <div className='VP-UC-NoComments-Wrapper'>
                                 <p className='VP-UC-NoComment-Title'>No Comments Yet</p>
-                            </div>}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
