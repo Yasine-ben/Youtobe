@@ -59,7 +59,7 @@ function LoginFormPage() {
     <div className="LI-Wrapper">
       <div className="LI-Inner-Wrapper">
         <div className="LI-Title-Wrapper">
-          <img className='LI-Goo' src={gooo} alt='goo icon' />
+          <img className='LI-Goo' src={gooo} alt='goo icon' onClick={(e) => history.push('/')}/>
           <h1 className="LI-SignIn">Sign in</h1>
           <h3 className="LI-SignIn-Cont">to continue to YouTobe</h3>
         </div>

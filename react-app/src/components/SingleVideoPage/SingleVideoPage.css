@@ -241,6 +241,37 @@ i.fa-solid.fa-circle-user:before{
 /* END */
 
 
+/* EDIT COMMENT CSS */
+.VP-Edit-CommentInputButton-Wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    height: 40px;
+    align-items: center;
+    gap: 10px;
+}
+.VP-UC-EditComment-Wrapper{
+    display: flex;
+}
+.VP-Cancel{
+    display: flex;
+    width: 90px;
+    height: 34px;
+    background-color: rgb(39, 39, 39);
+    color: rgb(163, 163, 163);
+    border-radius: 25px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    font-size: .9em;
+    cursor: pointer;
+    
+}
+
+
+
+/* END */
+
 
 /* RECOMENDED */
 .VP-Right-Wrapper {
@@ -252,6 +283,7 @@ i.fa-solid.fa-circle-user:before{
 .VP-Rec-Card-Wrapper {
     width: 380px;
     height: 106px;
+    cursor: pointer;
 }
 .VP-Rec-Container {
     display: flex;

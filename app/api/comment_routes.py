@@ -85,7 +85,7 @@ def update_comment(comment_id):
     data = request.get_json()
     comment = Comment.query.get(comment_id)
     if(data and comment):
-        comment.comment == data['comment']
+        comment.comment = data['comment']
         db.session.commit()
         return { 'message': 'Comment Updated Successfully', 'status': 201 }
     else:

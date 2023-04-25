@@ -59,7 +59,7 @@ function SignupFormPage() {
     <div className="SU-Wrapper">
       <div className="SU-Left-Wrapper">
         <div className="SU-Title-Wrapper">
-          <img className='SU-Goo' src={gooo} alt='gooo' />
+          <img className='SU-Goo' src={gooo} alt='gooo' onClick={(e) => history.push('/')}/>
           <h1 className="SU-SignIn">Create your Gooo Account</h1>
           <h3 className="SU-SignIn-Cont">to continue to YouTobe</h3>
         </div>

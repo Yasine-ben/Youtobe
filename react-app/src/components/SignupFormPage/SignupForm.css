@@ -39,6 +39,7 @@
 .SU-Goo {
     width: 75px;
     height: auto;
+    cursor: pointer;
 }
 
 .SU-SignIn {
