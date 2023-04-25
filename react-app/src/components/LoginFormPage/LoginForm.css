@@ -29,6 +29,7 @@
 .LI-Goo {
     width: 75px;
     height: auto;
+    cursor: pointer;
 }
 
 .LI-SignIn {
