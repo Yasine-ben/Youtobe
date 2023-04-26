@@ -1,21 +1,24 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useDebugValue, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useModal } from "../../../context/Modal";
 import './UpdateVideoForm.css'
-import { thunkEditVideo } from '../../../store/video';
+import { thunkEditVideo, thunkSingleVideo } from '../../../store/video';
 
 
 function UpdateVideoForm({ video_id }) {
     const history = useHistory()
     const sessionUser = useSelector(state => state.session.user);
+    const video = Object.values(useSelector(state => state.videos?.singleVideo))[0]
     const dispatch = useDispatch();
     const { closeModal } = useModal();
 
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
-    const [thumbnail, setThumbnail] = useState('')
+    const [title, setTitle] = useState(video.video || '')
+    const [description, setDescription] = useState(video.description || '')
+    const [thumbnail, setThumbnail] = useState(video.thumbnail || '')
     const [errors, setErrors] = useState({})
+
+    console.log(video)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -50,7 +53,7 @@ function UpdateVideoForm({ video_id }) {
             // console.log('FRONT END ERROR FRONT END ERROR')
             return
         }
-    }   
+    }       
 
     function isValidUrl(string) {
         try {

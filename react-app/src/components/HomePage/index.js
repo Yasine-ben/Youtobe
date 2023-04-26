@@ -10,6 +10,8 @@ function HomePage() {
     const history = useHistory()
     const videos = Object.values(useSelector(state => state.videos.allVideos))
 
+    const [isLoaded, setIsLoaded] = useState(false)
+
     //import dayjs from 'dayjs' // ES 2015
     const dayjs = require('dayjs')
     let relativeTime = require('dayjs/plugin/relativeTime')
@@ -35,11 +37,17 @@ function HomePage() {
 
     // maybe add clean up in useEffect
     useEffect(() => {
-        dispatch(thunkAllVideos())
+        const fetchData = async () => {
+            setIsLoaded(false)
+            dispatch(thunkAllVideos())
+            setIsLoaded(true)
+        }
+        fetchData();
     }, [dispatch])
 
     return (
-        <div className='HP-Wrapper'>
+        (!isLoaded) ? <div className='LOADING-SCREEN'></div> :
+        (<div className='HP-Wrapper'>
             {videos.map((video, idx) => (
                 <div key={`Video_${idx}`} className='HP-Video-Wrapper' onClick={((e) => history.push(`/Videos/${video.title}/${video.id}`))}>
                     <div className='HP-Thumbnail-Wrapper'>
@@ -66,7 +74,7 @@ function HomePage() {
                     </div>
                 </div>
             ))}
-        </div>
+        </div>)
     )
 }
 
