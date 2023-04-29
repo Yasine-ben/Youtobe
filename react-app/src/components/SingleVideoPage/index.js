@@ -38,6 +38,7 @@ function SingleVideoPage() {
     const [isLoaded, setIsLoaded] = useState(false)
     const [comment, setComment] = useState('')
     const [commentCardId, setCommentCardId] = useState(null)
+    const [disabled,setDisabled] = useState(Boolean(user))
 
     const [editComment, setEditComment] = useState('')
     const [commentEditOpen, setCommentEditOpen] = useState(false)
@@ -83,7 +84,7 @@ function SingleVideoPage() {
         }
 
     }, [video])
-
+    console.log(disabled)
     // console.log(dayjs(date).fromNow())
 
     useEffect(() => {
@@ -133,6 +134,7 @@ function SingleVideoPage() {
             return
         } else {
             setErrors(err)
+            alert(err.comment)
             // console.log(err)
             // console.log('FRONT END ERROR FRONT END ERROR')
             return
@@ -208,7 +210,7 @@ function SingleVideoPage() {
                             className='VP-Player'
                             width={1180}
                             height={720}
-                        // onEnded={((e) => '')}
+                        // onEnded={((e) => '')
                         />
                     </div>
                     <div className='VP-UnderPlayer-Wrapper'>
@@ -260,9 +262,9 @@ function SingleVideoPage() {
                             </div>
                             <div className='VP-InputAndButtons-Wrapper'>
                                 <div className='VP-Input-Wrapper'>
-                                    <textarea className='VP-Comment-Input' type="text" placeholder='Add a Comment...' value={comment} onChange={(e) => setComment(e.target.value)} id="Comment-Box" name="Comment-Box" required minLength="1" maxLength="1000" />
+                                    <textarea className='VP-Comment-Input' type="text" placeholder='Add a Comment...' value={comment} onChange={(e) => setComment(e.target.value)} disabled={!disabled} id="Comment-Box" name="Comment-Box" required minLength="1" maxLength="1000" />
                                 </div>
-                                <div className='VP-CommentInputButton-Wrapper' onClick={(e) => handleCommentSubmit(e)}>
+                                <div className='VP-CommentInputButton-Wrapper' onClick={(e) => !disabled ? alert('Please Login or Create a gooo account to comment on this video :)') :handleCommentSubmit(e)}>
                                     <div className='VP-Submit'>
                                         <p className='VP-Submit-Text'>Comment</p>
                                     </div>
@@ -345,7 +347,7 @@ function SingleVideoPage() {
                 <div className='VP-Right-Wrapper'>
                     <div className='VP-Recomended-Wrapper'>
                         {allVideos?.map((video, idx) => (
-                            <div key={`Recomended_${idx}`} className='VP-Rec-Card-Wrapper' onClick={(e) => { history.push(`/Videos/${video.title}/${video.id}`) }}>
+                            <div key={`Recomended_${idx}`} className='VP-Rec-Card-Wrapper' onClick={(e) => { history.push(`/Videos/${video.id}`) }}>
                                 <div className='VP-Rec-Container'>
                                     <div className='VP-Rec-Img-Wrapper'>
                                         <img src={video.thumbnail} alt='recomeneded thumbnail' className='VP-Recomended-Img' />

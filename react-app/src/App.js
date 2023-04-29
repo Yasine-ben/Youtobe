@@ -37,7 +37,7 @@ function App() {
             <Sidebar isLoaded={isLoaded} />
             <HomePage />
           </Route>
-          <Route path='/Videos/:title/:video_id'>
+          <Route path='/Videos/:video_id'>
             <Topbar isLoaded={isLoaded} />
             <SingleVideoPage />
           </Route>

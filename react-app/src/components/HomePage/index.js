@@ -49,7 +49,7 @@ function HomePage() {
         (!isLoaded) ? <div className='LOADING-SCREEN'></div> :
         (<div className='HP-Wrapper'>
             {videos.map((video, idx) => (
-                <div key={`Video_${idx}`} className='HP-Video-Wrapper' onClick={((e) => history.push(`/Videos/${video.title}/${video.id}`))}>
+                <div key={`Video_${idx}`} className='HP-Video-Wrapper' onClick={((e) => history.push(`/Videos/${video.id}`))}>
                     <div className='HP-Thumbnail-Wrapper'>
                         <img src={video.thumbnail} alt='thumbnail alt' className='HP-Thumbnail' />
                     </div>

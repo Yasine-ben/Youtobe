@@ -23,6 +23,9 @@
 .VP-Title-Wrapper {}
 .VP-Title {
     font-size: 1.35em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .VP-Lower-Wrapper {
     display: flex;
@@ -116,10 +119,17 @@
     border-radius: 13px;
     overflow: hidden;
     padding-left: 10px;
+    
 }
 .VP-Desc-ViewsAndTime{
     display: flex;
     flex-direction: row;
+}
+.VP-Description{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 80%;
 }
 /* END */
 
@@ -192,12 +202,15 @@ i.fa-solid.fa-circle-user:before{
 
 
 /* USER COMMENTS */
-.VP-UC-Main-Wrapper{}
+.VP-UC-Main-Wrapper{
+    /* width: 1000px; */
+}
 .VP-UC-Card-Wrapper{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    
 }
 .VP-UC-Icon-Wrapper{
     width: 57px;
@@ -209,6 +222,9 @@ i.fa-solid.fa-circle-user:before{
 .VP-UC-RightBox-Wrapper{
     display: flex;
     flex-direction: column;
+    max-width: 1070px;
+
+    
 }
 .VP-UC-Commenter-Wrapper{
     display: flex;
@@ -220,6 +236,8 @@ i.fa-solid.fa-circle-user:before{
     font-size: .95em;
     font-weight: 400;
     text-align: center;
+
+    
 }
 .VP-UC-Time{
     color: rgb(163, 163, 163);
@@ -232,11 +250,15 @@ i.fa-solid.fa-circle-user:before{
     justify-content: flex-start;
 }
 .VP-UC-Comment{
-    display: flex;
     position: relative;
     top: -15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-.VP-UC-NoComments-Wrapper{}
+.VP-UC-NoComments-Wrapper{
+
+}
 .VP-UC-NoComment-Title{}
 /* END */
 
@@ -291,6 +313,10 @@ i.fa-solid.fa-circle-user:before{
 }
 .VP-Rec-Img-Wrapper {
     margin-right: 10px;
+    width: 169px;
+    height: 96px;
+    border-radius: 10px;background-color: 
+    rgba(35, 35, 35, .9)
 }
 .VP-Recomended-Img {
     width: 169px;
@@ -305,6 +331,7 @@ i.fa-solid.fa-circle-user:before{
     height: 96px;
     width: 200px;
     gap: 5px;
+    
 }
 .VP-Rec-Title-Wrapper {
     /* background-color: green; */

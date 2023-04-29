@@ -14,7 +14,12 @@
     cursor: pointer;
 }
 
-.HP-Thumbnail-Wrapper {}
+.HP-Thumbnail-Wrapper {
+    width: 334px;
+    height: 186px;
+    border-radius: 8px;
+    background-color: rgba(35, 35, 35, .9)
+}
 
 .HP-Thumbnail {
     width: 334px;
@@ -63,7 +68,11 @@
     font-weight: 400;
 }
 
-.HP-Title {}
+.HP-Title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 .HP-Uploader-Name-Wrapper{
     position: relative;
