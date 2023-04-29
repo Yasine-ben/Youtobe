@@ -348,11 +348,30 @@ i.fa-solid.fa-circle-user:before{
     overflow: hidden;
 }
 .VP-Rec-Uploader-Wrapper{
-
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    align-items: center;
+    position: relative;
+    top: 3px;
+}
+.VP-Rec-Uploader-Img{
+    
+    top: 13px;
+    left: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 16px;
+    /* adjust this to the desired width of your image */
+    height: 16px;
+    /* adjust this to the desired height of your image */
 }
 .VP-Rec-Uploader{
     position: relative;
-    top: 0;
+    top: 2px;
     height: 40px;
     margin: 0;
     /* background-color: green; */
@@ -360,6 +379,7 @@ i.fa-solid.fa-circle-user:before{
     color: rgb(163, 163, 163);
     font-size: .9em;
     font-weight: 400;
+    align-self: center;
 }
 .VP-Rec-ViewsAndTime-Wrapper{
     display: flex;

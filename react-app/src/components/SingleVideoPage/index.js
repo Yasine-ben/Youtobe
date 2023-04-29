@@ -48,7 +48,7 @@ function SingleVideoPage() {
 
     const [errors, setErrors] = useState({})
     // console.log(video)
-    console.log(commentEditOpen)
+    console.log(comments)
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -285,7 +285,7 @@ function SingleVideoPage() {
                         {/* USER COMMENTS */}
                         <div className='VP-UC-Main-Wrapper'>
 
-                            {!(comments?.status === 404) ? (
+                            {!(comments[1] === 404) ? (
 
                                 comments?.slice().reverse().map((comment, idx) => (
 
@@ -359,18 +359,19 @@ function SingleVideoPage() {
                             <div key={`Recomended_${idx}`} className='VP-Rec-Card-Wrapper' onClick={(e) => { history.push(`/Videos/${video.id}`) }}>
                                 <div className='VP-Rec-Container'>
                                     <div className='VP-Rec-Img-Wrapper'>
-                                        <img src={video.thumbnail} alt='recomeneded thumbnail' className='VP-Recomended-Img' />
+                                        <img src={video?.thumbnail} alt='recomeneded thumbnail' className='VP-Recomended-Img' />
                                     </div>
                                     <div className='VP-Rec-Text-Wrapper'>
                                         <div className='VP-Rec-Title-Wrapper'>
-                                            <p className='VP-Rec-Title'>{video.title}</p>
+                                            <p className='VP-Rec-Title'>{video?.title}</p>
                                         </div>
                                         <div className='VP-Rec-Uploader-Wrapper'>
+                                            <img className='VP-Rec-Uploader-Img' src={video?.cover_image} alt=''/>
                                             <p className='VP-Rec-Uploader'>{video?.uploader}</p>
                                         </div>
                                         <div className='VP-Rec-ViewsAndTime-Wrapper'>
                                             <p className='VP-Rec-Views'>{`${randomInRange(1, 100)} views`}&nbsp;</p>
-                                            <p className='VP-Rec-Time'>•&nbsp;{dayjs(video.updated_at).fromNow()}</p>
+                                            <p className='VP-Rec-Time'>•&nbsp;{dayjs(video?.updated_at).fromNow()}</p>
                                         </div>
                                     </div>
                                 </div>

@@ -62,6 +62,7 @@ function HomePage() {
                                 <p className='HP-Title'>{video.title}</p>
                             </div>
                             <div className='HP-Uploader-Name-Wrapper'>
+                                <img />
                                 <p className='HP-Uploader-Name'>{video.uploader}</p>
                             </div>
                             <div className='HP-ViewsAndTime-Wrapper'>
