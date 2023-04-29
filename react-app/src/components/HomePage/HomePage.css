@@ -57,6 +57,14 @@
 
 
 /*///////////////////////////////////////////////////////////////////////////////////////////*/
+#ad-External{
+    position: relative;
+    left: 300px;
+    bottom: 30px;
+    /* background-color: black;
+    border-radius: 5px; */
+    color:white;
+}
 
 .HP-Video-Wrapper-Ad{
     text-decoration: none;
