@@ -46,7 +46,14 @@ function Topbar() {
                 </div>
             </div>
             <div className='TB-RightSide-Wrapper'>
-
+                <div className='TB-RightSide-MyLinks-Wrapper'>
+                    <a href='https://www.linkedin.com/in/yasine-benzekri-389457271'>
+                        <i id='LinkedInIcon' class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href='https://github.com/Yasine-ben'>
+                        <i id='GithubIcon' class="fa-brands fa-square-github"></i>
+                    </a>
+                </div>
                 {sessionUser
                     && <div className='TB-LoggedIn-Btn'>
                         <div className='TB-UserImg-Wrapper'>

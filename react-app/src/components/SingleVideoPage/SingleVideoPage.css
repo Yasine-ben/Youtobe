@@ -23,6 +23,9 @@
 .VP-Title-Wrapper {}
 .VP-Title {
     font-size: 1.35em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .VP-Lower-Wrapper {
     display: flex;
@@ -106,22 +109,71 @@
 /* END */
 
 /* Description Box */
-/* in the future add a button to open the description box to see all the text */
-.VP-DescriptionBox-Wrapper{
+/* in the future add a button to open the description box to see all the text./////////////////////////////////////////////////////////// */
+/*/////////////////////////// DESC CLOSED //////////////////////////////////////////////////////////////////////////////*/
+.VP-DescriptionBox-Wrapper-Sm{
     background-color: rgb(39, 39, 39);
     width: 1180px;
-    height: 105px;
+    height: 125px;
     position: relative;
     display: block;
     border-radius: 13px;
     overflow: hidden;
     padding-left: 10px;
+    cursor: pointer;
 }
-.VP-Desc-ViewsAndTime{
+.VP-DescriptionBox-Wrapper-Sm:hover{
+    background-color: rgb(63, 63, 63);
+}
+.VP-Desc-ViewsAndTime-Sm{
     display: flex;
     flex-direction: row;
 }
-/* END */
+.VP-Description-Wrapper-Sm{
+    display: flex;
+    flex-direction: column;
+}
+.VP-Description-Sm{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 80%;
+}
+.VP-Desc-ShowMore{
+    position: relative;
+    bottom: 20px;
+    font-size: .9em;
+    padding-left: 5px;
+    color: grey;
+}
+
+/* /////////////////////////////////DESC OPEN /////////////////////////////////////////////////////////////////////////*/
+
+.VP-DescriptionBox-Wrapper-Sl{
+    background-color: rgb(39, 39, 39);
+    width: 1180px;
+    height: fit-content;
+    position: relative;
+    display: block;
+    border-radius: 13px;
+    overflow: hidden;
+    padding-left: 10px;
+    
+}
+.VP-Desc-ViewsAndTime-Sl{
+    display: flex;
+    flex-direction: row;
+}
+.VP-Description-Sl{
+    white-space: wrap;
+    width: 80%;
+}
+.VP-Desc-ShowLess{
+    color: grey;
+    cursor: pointer;
+}
+
+/* END ///////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
 
 /* ADD COMMENTS */
@@ -131,8 +183,6 @@
     /* height 100 for now remove asap */
     height: 100px;
     position: relative;
-    /* background-color: grey; */
-    
 }
 .VP-AddComments-Wrapper{
     display: flex;
@@ -192,23 +242,45 @@ i.fa-solid.fa-circle-user:before{
 
 
 /* USER COMMENTS */
-.VP-UC-Main-Wrapper{}
+.VP-UC-Main-Wrapper{
+    /* width: 1000px; */
+}
 .VP-UC-Card-Wrapper{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    gap: 10px;
 }
 .VP-UC-Icon-Wrapper{
-    width: 57px;
-    height: 68px;
+    /* width: 57px;
+    height: 68px; */
+    position: relative;
+    top: -10px;
+    left: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 45px;
+    /* adjust this to the desired width of your image */
+    height: 45px;
+    /* adjust this to the desired height of your image */
+
 }
 #VP-UC-Icon{
-    font-size: 1.3em;
+    /* font-size: 1.3em; */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .VP-UC-RightBox-Wrapper{
     display: flex;
     flex-direction: column;
+    max-width: 1070px;
+
+    
 }
 .VP-UC-Commenter-Wrapper{
     display: flex;
@@ -220,6 +292,8 @@ i.fa-solid.fa-circle-user:before{
     font-size: .95em;
     font-weight: 400;
     text-align: center;
+
+    
 }
 .VP-UC-Time{
     color: rgb(163, 163, 163);
@@ -232,11 +306,15 @@ i.fa-solid.fa-circle-user:before{
     justify-content: flex-start;
 }
 .VP-UC-Comment{
-    display: flex;
     position: relative;
     top: -15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-.VP-UC-NoComments-Wrapper{}
+.VP-UC-NoComments-Wrapper{
+
+}
 .VP-UC-NoComment-Title{}
 /* END */
 
@@ -291,6 +369,10 @@ i.fa-solid.fa-circle-user:before{
 }
 .VP-Rec-Img-Wrapper {
     margin-right: 10px;
+    width: 169px;
+    height: 96px;
+    border-radius: 10px;background-color: 
+    rgba(35, 35, 35, .9)
 }
 .VP-Recomended-Img {
     width: 169px;
@@ -305,6 +387,7 @@ i.fa-solid.fa-circle-user:before{
     height: 96px;
     width: 200px;
     gap: 5px;
+    
 }
 .VP-Rec-Title-Wrapper {
     /* background-color: green; */
@@ -321,11 +404,30 @@ i.fa-solid.fa-circle-user:before{
     overflow: hidden;
 }
 .VP-Rec-Uploader-Wrapper{
-
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    align-items: center;
+    position: relative;
+    top: 3px;
+}
+.VP-Rec-Uploader-Img{
+    
+    top: 13px;
+    left: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 16px;
+    /* adjust this to the desired width of your image */
+    height: 16px;
+    /* adjust this to the desired height of your image */
 }
 .VP-Rec-Uploader{
     position: relative;
-    top: 0;
+    top: 2px;
     height: 40px;
     margin: 0;
     /* background-color: green; */
@@ -333,6 +435,7 @@ i.fa-solid.fa-circle-user:before{
     color: rgb(163, 163, 163);
     font-size: .9em;
     font-weight: 400;
+    align-self: center;
 }
 .VP-Rec-ViewsAndTime-Wrapper{
     display: flex;

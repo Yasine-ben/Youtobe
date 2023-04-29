@@ -41,10 +41,6 @@ def login():
         # Add the user to the session, we are logged in!
         userE = User.query.filter(User.email == form.data['email']).first()
         userN = User.query.filter(User.username == form.data['email']).first()
-        # print('----------------------------------------')
-        # print('----------------------------------------')
-        # print('----------------------------------------')
-        # print('----------------------------------------')
         if(userE):
             login_user(userE)
             return userE.to_dict()

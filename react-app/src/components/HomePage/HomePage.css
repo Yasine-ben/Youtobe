@@ -14,7 +14,12 @@
     cursor: pointer;
 }
 
-.HP-Thumbnail-Wrapper {}
+.HP-Thumbnail-Wrapper {
+    width: 334px;
+    height: 186px;
+    border-radius: 8px;
+    background-color: rgba(35, 35, 35, .9)
+}
 
 .HP-Thumbnail {
     width: 334px;
@@ -26,6 +31,8 @@
     display: flex;
     flex-direction: row;
     height: 106px;
+    position: relative;
+    top: 6px;
 }
 
 .HP-Uploader-Img-Wrapper{
@@ -48,12 +55,57 @@
     /* adjust this to the desired height of your image */
 }
 
-.HP-Text-Wrapper{
+
+/*///////////////////////////////////////////////////////////////////////////////////////////*/
+#ad-External{
+    position: relative;
+    left: 300px;
+    bottom: 30px;
+    /* background-color: black;
+    border-radius: 5px; */
+    color:white;
+}
+
+.HP-Video-Wrapper-Ad{
+    text-decoration: none;
+}
+
+.HP-Text-Wrapper-Ad{
     display: flex;
     flex-direction: column;
     width: 212px;  
     position: relative;
-    top: -10px;
+    top: 0px;
+    left: 0px;
+    gap: 5px;
+}
+
+.HP-Title-Wrapper-Ad {
+    height: 30px;
+    font-size: .95em;
+    font-weight: 400;
+}
+
+.HP-Title-Ad {
+    color:white;
+}
+
+.HP-Views-Wrapper-Ad{
+    position: relative;
+    top: -35px; 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+/*///////////////////////////////////////////////////////////////////////////////////////////*/
+
+.HP-Text-Wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 212px;  
+    height: fit-content;
+    position: relative;
+    top: -5px;
     left: -20px;
 }
 
@@ -63,11 +115,15 @@
     font-weight: 400;
 }
 
-.HP-Title {}
+.HP-Title {
+    white-space: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 .HP-Uploader-Name-Wrapper{
     position: relative;
-    top: 5px;
+    top: -10px;
 }
 
 .HP-Uploader-Name{
@@ -81,7 +137,7 @@
 
 .HP-Views-Wrapper{
     position: relative;
-    top: -18px; 
+    top: -35px; 
     display: flex;
     flex-direction: row;
 }
