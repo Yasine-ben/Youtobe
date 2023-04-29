@@ -59,11 +59,13 @@ function HomePage() {
                                 <p className='HP-Title-Ad'>{'Try Pear Music Today'}</p>
                             </div>
                             <div className='HP-Uploader-Name-Wrapper'>
-                                <p className='HP-Uploader-Name'>{'Pear Music'}</p>
+                                <p className='HP-Uploader-Name'>Start streaming today with a free one-month trail of Pear Music and cnacel anytime.*</p>
                             </div>
                             <div className='HP-ViewsAndTime-Wrapper'>
-                                <div className='HP-Views-Wrapper'>
-                                    <p className='HP-Views'>{`Ad`}</p>
+                                <div className='HP-Views-Wrapper-Ad'>
+                                    <p style={{color:'white'}}className='HP-Views'>{`Ad`}</p>
+                                    <p style={{color:'grey'}}>&nbsp;•&nbsp;</p>
+                                    <p style={{color:'grey'}}>Pear Music</p>
                                 </div>
                             </div>
                         </div>
