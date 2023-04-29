@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { thunkAllVideos } from '../../store/video';
+import ad from '../../Images/PMAd.png'
 
 import './HomePage.css'
 
@@ -48,6 +49,26 @@ function HomePage() {
     return (
         (!isLoaded) ? <div className='LOADING-SCREEN'></div> :
         (<div className='HP-Wrapper'>
+            <a className='HP-Video-Wrapper-Ad' href='https://pearmusic.onrender.com/'>
+                    <div className='HP-Thumbnail-Wrapper'>
+                        <img src={ad} alt='thumbnail alt' className='HP-Thumbnail' />
+                    </div>
+                    <div className='HP-Lower-Wrapper-Ad'>
+                        <div className='HP-Text-Wrapper-Ad'>
+                            <div className='HP-Title-Wrapper-Ad'>
+                                <p className='HP-Title-Ad'>{'Try Pear Music Today'}</p>
+                            </div>
+                            <div className='HP-Uploader-Name-Wrapper'>
+                                <p className='HP-Uploader-Name'>{'Pear Music'}</p>
+                            </div>
+                            <div className='HP-ViewsAndTime-Wrapper'>
+                                <div className='HP-Views-Wrapper'>
+                                    <p className='HP-Views'>{`Ad`}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
             {videos.map((video, idx) => (
                 <div key={`Video_${idx}`} className='HP-Video-Wrapper' onClick={((e) => history.push(`/Videos/${video.id}`))}>
                     <div className='HP-Thumbnail-Wrapper'>

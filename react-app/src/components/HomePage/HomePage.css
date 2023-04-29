@@ -52,13 +52,41 @@
     height: 40px;
     /* adjust this to the desired height of your image */
 }
+/*///////////////////////////////////////////////////////////////////////////////////////////*/
+
+.HP-Video-Wrapper-Ad{
+    text-decoration: none;
+}
+
+.HP-Text-Wrapper-Ad{
+    display: flex;
+    flex-direction: column;
+    width: 212px;  
+    position: relative;
+    top: 0px;
+    left: 0px;
+    
+}
+
+.HP-Title-Wrapper-Ad {
+    height: 30px;
+    font-size: .95em;
+    font-weight: 400;
+}
+
+.HP-Title-Ad {
+    color:white;
+}
+
+/*///////////////////////////////////////////////////////////////////////////////////////////*/
 
 .HP-Text-Wrapper{
     display: flex;
     flex-direction: column;
     width: 212px;  
+    height: fit-content;
     position: relative;
-    top: -10px;
+    top: -5px;
     left: -20px;
 }
 
@@ -69,7 +97,7 @@
 }
 
 .HP-Title {
-    white-space: nowrap;
+    white-space: wrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
