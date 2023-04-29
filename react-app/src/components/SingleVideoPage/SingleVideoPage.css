@@ -122,6 +122,9 @@
     padding-left: 10px;
     cursor: pointer;
 }
+.VP-DescriptionBox-Wrapper-Sm:hover{
+    background-color: rgb(63, 63, 63);
+}
 .VP-Desc-ViewsAndTime-Sm{
     display: flex;
     flex-direction: row;
