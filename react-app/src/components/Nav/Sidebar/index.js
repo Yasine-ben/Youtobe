@@ -14,7 +14,7 @@ function Sidebar() {
                         <span id='Home-Icon' className="material-symbols-outlined"> home </span>
                         <p className='SB-Home-Title'>Home</p>
                     </div>
-                    <div className='SB-Sub' onClick={''}>
+                    <div className='SB-Sub' onClick={(e)=> alert('Feature coming soon')}>
                         <span id='Sub-icon' className="material-symbols-outlined"> subscriptions </span>
                         <p className='SB-Sub-Title'>Subscriptions</p>
                     </div>

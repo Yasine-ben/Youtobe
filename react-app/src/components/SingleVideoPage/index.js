@@ -39,6 +39,7 @@ function SingleVideoPage() {
     const [comment, setComment] = useState('')
     const [commentCardId, setCommentCardId] = useState(null)
     const [disabled,setDisabled] = useState(Boolean(user))
+    const [videoErr,setVideoErr] = useState(false)
 
     const [editComment, setEditComment] = useState('')
     const [commentEditOpen, setCommentEditOpen] = useState(false)
@@ -84,7 +85,7 @@ function SingleVideoPage() {
         }
 
     }, [video])
-    console.log(disabled)
+    // console.log(disabled)
     // console.log(dayjs(date).fromNow())
 
     useEffect(() => {
@@ -152,6 +153,12 @@ function SingleVideoPage() {
 
     }
 
+    function videoError(){
+        setUrl('https://www.youtube.com/watch?v=YnP94m5pwls')
+        setVideoErr(true)
+        return
+    }
+
     function editHelper(id, comment) {
         setEditComment(comment)
         setEditCommentId(id)
@@ -210,6 +217,8 @@ function SingleVideoPage() {
                             className='VP-Player'
                             width={1180}
                             height={720}
+                            onError={(e)=> videoError()}
+                            playing={videoErr}
                         // onEnded={((e) => '')
                         />
                     </div>
