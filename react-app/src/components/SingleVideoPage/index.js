@@ -335,7 +335,8 @@ function SingleVideoPage() {
 
                                         <div key={`Comment_${idx}`} className='VP-UC-Card-Wrapper'>
                                             <div className='VP-UC-Icon-Wrapper'>
-                                                <i id='VP-UC-Icon' className="fa-solid fa-circle-user"></i>
+                                                {/* <i id='VP-UC-Icon' className="fa-solid fa-circle-user"></i> */}
+                                                <img id='VP-UC-Icon' src={comment?.cover_image} alt='userImg'/>
                                             </div>
                                             <div className='VP-UC-RightBox-Wrapper'>
                                                 <div className='VP-UC-Commenter-Wrapper'>

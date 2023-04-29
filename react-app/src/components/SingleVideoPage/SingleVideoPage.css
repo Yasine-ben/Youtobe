@@ -120,7 +120,7 @@
     border-radius: 13px;
     overflow: hidden;
     padding-left: 10px;
-    
+    cursor: pointer;
 }
 .VP-Desc-ViewsAndTime-Sm{
     display: flex;
@@ -167,6 +167,7 @@
 }
 .VP-Desc-ShowLess{
     color: grey;
+    cursor: pointer;
 }
 
 /* END ///////////////////////////////////////////////////////////////////////////////////////////////////////////*/
@@ -179,8 +180,6 @@
     /* height 100 for now remove asap */
     height: 100px;
     position: relative;
-    /* background-color: grey; */
-    
 }
 .VP-AddComments-Wrapper{
     display: flex;
@@ -248,14 +247,30 @@ i.fa-solid.fa-circle-user:before{
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    
+    gap: 10px;
 }
 .VP-UC-Icon-Wrapper{
-    width: 57px;
-    height: 68px;
+    /* width: 57px;
+    height: 68px; */
+    position: relative;
+    top: -10px;
+    left: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 45px;
+    /* adjust this to the desired width of your image */
+    height: 45px;
+    /* adjust this to the desired height of your image */
+
 }
 #VP-UC-Icon{
-    font-size: 1.3em;
+    /* font-size: 1.3em; */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .VP-UC-RightBox-Wrapper{
     display: flex;
