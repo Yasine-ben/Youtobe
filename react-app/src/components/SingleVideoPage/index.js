@@ -38,8 +38,10 @@ function SingleVideoPage() {
     const [isLoaded, setIsLoaded] = useState(false)
     const [comment, setComment] = useState('')
     const [commentCardId, setCommentCardId] = useState(null)
-    const [disabled,setDisabled] = useState(Boolean(user))
-    const [videoErr,setVideoErr] = useState(false)
+    const [disabled, setDisabled] = useState(Boolean(user))
+    const [videoErr, setVideoErr] = useState(false)
+
+    const [showMore, setShowMore] = useState(false)
 
     const [editComment, setEditComment] = useState('')
     const [commentEditOpen, setCommentEditOpen] = useState(false)
@@ -153,7 +155,7 @@ function SingleVideoPage() {
 
     }
 
-    function videoError(){
+    function videoError() {
         setUrl('https://www.youtube.com/watch?v=YnP94m5pwls')
         setVideoErr(true)
         return
@@ -217,7 +219,7 @@ function SingleVideoPage() {
                             className='VP-Player'
                             width={1180}
                             height={720}
-                            onError={(e)=> videoError()}
+                            onError={(e) => videoError()}
                             playing={videoErr}
                         // onEnded={((e) => '')
                         />
@@ -252,16 +254,32 @@ function SingleVideoPage() {
                         </div>
                     </div>
 
-                    <div className='VP-DescriptionBox-Wrapper'>
-                        <div className='VP-Desc-ViewsAndTime'>
-                            <p className='VP-Desc-Views'>{`${randomInRange(1, 100)} views`}&nbsp;</p>
-                            <p className='VP-Desc-Time'>{dayjs(date).fromNow()}</p>
-                        </div>
-                        <div className='VP-Description-Wrapper'>
-                            <p className='VP-Description'>{discription}</p>
-                        </div>
-                    </div>
+                    {showMore ?
 
+                        (<div className='VP-DescriptionBox-Wrapper-Sl'>
+                            <div className='VP-Desc-ViewsAndTime-Sl'>
+                                <p className='VP-Desc-Views-Sl'>{`${randomInRange(1, 100)} views`}&nbsp;</p>
+                                <p className='VP-Desc-Time-Sl'>{dayjs(date).fromNow()}</p>
+                            </div>
+                            <div className='VP-Description-Wrapper-Sl'>
+                                <p className='VP-Description-Sl'>{discription}</p>
+                            </div>
+                            <p className='VP-Desc-ShowLess' onClick={(e) => setShowMore(false)}>Show less</p>
+                        </div>
+                        )
+                        :
+                        (<div className='VP-DescriptionBox-Wrapper-Sm' onClick={(e) => setShowMore(true)}>
+                            <div className='VP-Desc-ViewsAndTime-Sm'>
+                                <p className='VP-Desc-Views-Sm'>{`${randomInRange(1, 100)} views`}&nbsp;</p>
+                                <p className='VP-Desc-Time-Sm'>{dayjs(date).fromNow()}</p>
+                            </div>
+                            <div className='VP-Description-Wrapper-Sm'>
+                                <p className='VP-Description-Sm'>{discription}</p>
+                                <p className='VP-Desc-ShowMore'>Show more</p>
+                            </div>
+                            
+                        </div>)
+                    }
 
                     {/* CREATE COMMENT */}
                     <div className='VP-Comments-Wrapper'>
@@ -273,7 +291,7 @@ function SingleVideoPage() {
                                 <div className='VP-Input-Wrapper'>
                                     <textarea className='VP-Comment-Input' type="text" placeholder='Add a Comment...' value={comment} onChange={(e) => setComment(e.target.value)} disabled={!disabled} id="Comment-Box" name="Comment-Box" required minLength="1" maxLength="1000" />
                                 </div>
-                                <div className='VP-CommentInputButton-Wrapper' onClick={(e) => !disabled ? alert('Please Login or Create a gooo account to comment on this video :)') :handleCommentSubmit(e)}>
+                                <div className='VP-CommentInputButton-Wrapper' onClick={(e) => !disabled ? alert('Please Login or Create a gooo account to comment on this video :)') : handleCommentSubmit(e)}>
                                     <div className='VP-Submit'>
                                         <p className='VP-Submit-Text'>Comment</p>
                                     </div>
@@ -366,7 +384,7 @@ function SingleVideoPage() {
                                             <p className='VP-Rec-Title'>{video?.title}</p>
                                         </div>
                                         <div className='VP-Rec-Uploader-Wrapper'>
-                                            <img className='VP-Rec-Uploader-Img' src={video?.cover_image} alt=''/>
+                                            <img className='VP-Rec-Uploader-Img' src={video?.cover_image} alt='' />
                                             <p className='VP-Rec-Uploader'>{video?.uploader}</p>
                                         </div>
                                         <div className='VP-Rec-ViewsAndTime-Wrapper'>

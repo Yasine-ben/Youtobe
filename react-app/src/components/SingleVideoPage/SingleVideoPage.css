@@ -109,11 +109,12 @@
 /* END */
 
 /* Description Box */
-/* in the future add a button to open the description box to see all the text */
-.VP-DescriptionBox-Wrapper{
+/* in the future add a button to open the description box to see all the text./////////////////////////////////////////////////////////// */
+/*/////////////////////////// DESC CLOSED //////////////////////////////////////////////////////////////////////////////*/
+.VP-DescriptionBox-Wrapper-Sm{
     background-color: rgb(39, 39, 39);
     width: 1180px;
-    height: 105px;
+    height: 125px;
     position: relative;
     display: block;
     border-radius: 13px;
@@ -121,17 +122,54 @@
     padding-left: 10px;
     
 }
-.VP-Desc-ViewsAndTime{
+.VP-Desc-ViewsAndTime-Sm{
     display: flex;
     flex-direction: row;
 }
-.VP-Description{
+.VP-Description-Wrapper-Sm{
+    display: flex;
+    flex-direction: column;
+}
+.VP-Description-Sm{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     width: 80%;
 }
-/* END */
+.VP-Desc-ShowMore{
+    position: relative;
+    bottom: 20px;
+    font-size: .9em;
+    padding-left: 5px;
+    color: grey;
+}
+
+/* /////////////////////////////////DESC OPEN /////////////////////////////////////////////////////////////////////////*/
+
+.VP-DescriptionBox-Wrapper-Sl{
+    background-color: rgb(39, 39, 39);
+    width: 1180px;
+    height: fit-content;
+    position: relative;
+    display: block;
+    border-radius: 13px;
+    overflow: hidden;
+    padding-left: 10px;
+    
+}
+.VP-Desc-ViewsAndTime-Sl{
+    display: flex;
+    flex-direction: row;
+}
+.VP-Description-Sl{
+    white-space: wrap;
+    width: 80%;
+}
+.VP-Desc-ShowLess{
+    color: grey;
+}
+
+/* END ///////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
 
 /* ADD COMMENTS */
