@@ -18,7 +18,7 @@ function UpdateVideoForm({ video_id }) {
     const [thumbnail, setThumbnail] = useState(video.thumbnail || '')
     const [errors, setErrors] = useState({})
 
-    console.log(video)
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault()

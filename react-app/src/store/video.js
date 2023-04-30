@@ -1,6 +1,7 @@
 // CONSTANTS
 const ALL_VIDEOS = 'ALL_VIDEOS'
 const SINGLE_VIDEO = 'SINGLE_VIDEO'
+const USER_VIDEOS = 'USER_VIDEOS'
 const CREATE_VIDEO = 'CREATE_VIDEO '
 const UPDATE_VIDEO = 'UPDATE_VIDEO'
 const DELETE_VIDEO = 'DELETE_VIDEO'
@@ -15,6 +16,10 @@ export const actionSingleVideo = (video) => {
     return { type: SINGLE_VIDEO, video }
 }
 
+export const actionUserVideos = (videos) => {
+    return { type: USER_VIDEOS, videos}
+}
+
 const normalizeAllVideos = (videos) => {
     let normalize = {};
     videos.forEach(video => {
@@ -24,6 +29,17 @@ const normalizeAllVideos = (videos) => {
 }
 
 // THUNKS
+export const thunkAllUserVideos = (user_id) => async dispatch => {
+    const response = await fetch(`/api/videos/userVideos/${user_id}`)
+
+    if(response.ok){
+        const videos = await response.json()
+        const normalized = normalizeAllVideos(videos.videos)
+        dispatch(actionUserVideos(normalized))
+        return
+    }
+}
+
 export const thunkAllVideos = () => async dispatch => {
     const response = await fetch('/api/videos/allVideos')
 
@@ -87,7 +103,7 @@ export const thunkDeleteVideo = (video_id) => async dispatch => {
 
     if(response.ok){
         dispatch(thunkAllVideos())
-        return (console.log('DELETED DELETED DELETED DELETED DELETED'))
+        return
     }
 }
 
@@ -117,7 +133,7 @@ export const thunkEditVideo = (video_id, title, description, thumbnail) => async
 const initialState = {
     allVideos: {},
     singleVideo: {},
-
+    userVideos:{},
 }
 
 // Reducer
@@ -127,6 +143,8 @@ const videosReducer = (state = initialState, action) => {
             return { ...state, allVideos: { ...action.videos } }
         case SINGLE_VIDEO:
             return { ...state, singleVideo: { ...action.video }}
+        case USER_VIDEOS:
+            return { ...state, userVideos: { ...action.videos }}
         default: return { ...state }
     }
 }

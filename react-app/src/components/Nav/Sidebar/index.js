@@ -14,9 +14,9 @@ function Sidebar() {
                         <span id='Home-Icon' className="material-symbols-outlined"> home </span>
                         <p className='SB-Home-Title'>Home</p>
                     </div>
-                    <div className='SB-Sub' onClick={(e)=> alert('Feature coming soon')}>
+                    <div className='SB-Sub' onClick={(e)=> history.push('/MyVideos')}>
                         <span id='Sub-icon' className="material-symbols-outlined"> subscriptions </span>
-                        <p className='SB-Sub-Title'>Subscriptions</p>
+                        <p className='SB-Sub-Title'>My Videos</p>
                     </div>
                 </div>
             </div>

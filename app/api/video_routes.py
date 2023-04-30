@@ -6,7 +6,7 @@ from app.forms import comment_form
 
 video_routes = Blueprint('video', __name__)
 
-# Working
+# WORKING
 @video_routes.route('/allVideos')
 def allVideos():
     """
@@ -14,6 +14,20 @@ def allVideos():
     """
     videos = Video.query.all()
     return { 'videos': [video.to_dict() for video in videos] }
+
+@video_routes.route('/userVideos/<int:user_id>')
+@login_required
+def userVideos(user_id):
+    '''
+    Query for all of the current users videos
+    '''
+    user = User.query.get(user_id)
+    if not user:
+        return{'error': 'User not found'}
+    
+    videos = Video.query.filter_by(user_id=user_id).all()
+    
+    return {'videos': [video.to_dict() for video in videos]}
 
 # Working
 @video_routes.route('/<int:video_id>')
@@ -28,7 +42,7 @@ def singleVideo(video_id):
     else:
         return { 'video': video.to_dict() }
 
-# UNTESTED    
+# WORKING    
 @video_routes.route('/createVideo', methods=['POST'])
 @login_required
 def createVideo():
@@ -57,7 +71,7 @@ def createVideo():
         return { 'error': 'error with data or user is not logged in' }
     
 
-# UNTESTED
+# WORKING    
 @video_routes.route('/updateVideo/<int:video_id>', methods=['PUT'])
 def updateVideo(video_id):
     """
@@ -75,7 +89,7 @@ def updateVideo(video_id):
     else:
         return { 'error': 'Video not found or no data sent', 'status' : 404 }
 
-# UNTESTED
+# WORKING    
 @video_routes.route('/deleteVideo/<int:video_id>', methods=['DELETE'])
 def deleteVideo(video_id):
     """
