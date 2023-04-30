@@ -1,0 +1,160 @@
+.MV-Wrapper {
+
+}
+
+
+.MV-Left-Wrapper {
+    width: 250px;
+    height: calc(100% - 57px);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-right: 1px solid rgb(61, 61, 61);
+}
+
+.MV-Right-Wrapper {
+    width: calc(100% - 250px);
+    height: calc(100% - 57px);
+    position: absolute;
+    /* background-color: red; */
+    right: 0px;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.MV-R-Title-Wrapper {
+    border-bottom: 1px solid rgb(61, 61, 61);
+    height: 70px;
+    padding-bottom: 50px;
+}
+
+.MV-R-Title {
+    display: flex;
+    height: fit-content;
+    font-size: 1.5em;
+    font-weight: 400;
+    padding-left: 10px;
+    position: relative;
+    
+}
+
+
+.MV-Bottom-Title-Header {
+    display: grid;
+    grid-template-columns: 140px 25% 1fr 2fr;
+}
+
+.MV-Bottom-text {
+    color: rgb(160, 155, 153);
+}
+
+.MV-Video-Header {
+    height: 50px;
+    width: 40%;
+}
+
+.MV-Title-Header {
+    height: 50px;
+    width: 20%;
+}
+
+
+.MV-Videos-Wrapper {
+    /* display: grid;
+    grid-template-rows: 50px 100px */
+    /* display: grid;
+    grid-template-columns: 120px 25% 1fr 2fr; */
+}
+
+.MV-Video-Block-Wrapper {
+    display: grid;
+    grid-template-columns: 140px 25% 1fr 2fr;
+    border-top: .1px solid rgb(61, 61, 61);
+    min-height: 85px;
+    max-height: 85px;
+}
+
+.MV-Video-Block-Wrapper:hover {
+    background-color: rgb(24, 24, 24);
+}
+
+.MV-Video-Thumbnail-Wrapper {
+    align-self: center;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+.MV-Video-Thumbnail {
+    width: 120px;
+    height: 65px;
+    justify-self: center;
+}
+
+.MV-Video-TitleAndDescription-Wrapper {
+    align-self: center;
+}
+
+.MV-Video-Title-Wrapper {}
+
+.MV-Video-Title {}
+
+.MV-Video-Description-Wrapper {}
+
+.MV-Video-Description {}
+
+.MV-Videos-Wrapper {}
+
+.MV-Videos {}
+
+
+
+
+
+
+
+
+.MV-Left-Wrapper {
+    display: flex;
+    width: 250px;
+    max-width: 250px;
+}
+
+.MV-Left-Top {
+    display: flex;
+    flex-direction: column;
+    /* gap: 35px; */
+    align-items: center;
+    width: 250px;
+}
+
+.MV-Left-Img-Wrapper {
+    position: relative;
+    top: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 115px;
+    /* adjust this to the desired width of your image */
+    height: 115px;
+    /* adjust this to the desired height of your image */
+    margin-bottom: 35px;
+}
+
+.MV-Left-Img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+}
+
+.MV-YourChannel{
+
+}
+
+.MV-ChannelName{
+    font-size: .9em;
+    color: grey;
+}

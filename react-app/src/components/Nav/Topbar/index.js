@@ -48,10 +48,10 @@ function Topbar() {
             <div className='TB-RightSide-Wrapper'>
                 <div className='TB-RightSide-MyLinks-Wrapper'>
                     <a href='https://www.linkedin.com/in/yasine-benzekri-389457271'>
-                        <i id='LinkedInIcon' class="fa-brands fa-linkedin"></i>
+                        <i id='LinkedInIcon' className="fa-brands fa-linkedin"></i>
                     </a>
                     <a href='https://github.com/Yasine-ben'>
-                        <i id='GithubIcon' class="fa-brands fa-square-github"></i>
+                        <i id='GithubIcon' className="fa-brands fa-square-github"></i>
                     </a>
                 </div>
                 {sessionUser
@@ -73,13 +73,13 @@ function Topbar() {
                                     <div className='TBM-NU-Wrapper'>
                                         <div className='TBM-Name'>{sessionUser.first_name}</div>
                                         <div className='TBM-Username'>{`@${sessionUser.username}`}</div>
-                                        <p className='TBM-ManageAccount'>Manage your Gooo Account</p>
+                                        <p className='TBM-ManageAccount' onClick={(e) => alert('feature coming soon')}>Manage your Gooo Account</p>
                                     </div>
 
                                 </div>
 
                                 <div className='TBM-Manage-Wrapper'>
-                                    <div className='TBM-YourVideos-Wrapper' onClick={((e) => history.push('/'))}>
+                                    <div className='TBM-YourVideos-Wrapper' onClick={((e) => history.push('/MyVideos'))}>
                                         <span className="material-symbols-outlined"> account_box </span>
                                         <p className='TBM-YourVideos'>Your Videos</p>
                                     </div>

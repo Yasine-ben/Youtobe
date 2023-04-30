@@ -9,6 +9,7 @@ import Topbar from "./components/Nav/Topbar";
 import Sidebar from "./components/Nav/Sidebar";
 import HomePage from "./components/HomePage";
 import SingleVideoPage from "./components/SingleVideoPage";
+import MyVideos from "./components/MyVideos";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,12 +32,18 @@ function App() {
             {/* <Topbar isLoaded={isLoaded} />
             <Sidebar isLoaded={isLoaded} /> */}
             <SignupFormPage />
-          </Route>
+            </Route>
           <Route exact path='/'>
             <Topbar isLoaded={isLoaded} />
             <Sidebar isLoaded={isLoaded} />
             <HomePage />
           </Route>
+
+          <Route exact path='/MyVideos'>
+            <Topbar isLoaded={isLoaded} />
+            <MyVideos />
+          </Route>
+          
           <Route path='/Videos/:video_id'>
             <Topbar isLoaded={isLoaded} />
             <SingleVideoPage />

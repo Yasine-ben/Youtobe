@@ -22,7 +22,7 @@ function SingleVideoPage() {
 
     dayjs.extend(relativeTime)
 
-
+    
 
     const video = Object.values(useSelector(state => state.videos?.singleVideo))[0]
     const allVideos = Object.values(useSelector(state => state.videos?.allVideos))
@@ -49,8 +49,6 @@ function SingleVideoPage() {
     const [editCommentId, setEditCommentId] = useState(null)
 
     const [errors, setErrors] = useState({})
-    // console.log(video)
-    console.log(comments)
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -107,7 +105,7 @@ function SingleVideoPage() {
         history.push('/')
     }
 
-    console.log(history.location)
+    
 
     const handleCommentSubmit = async (e) => {
         e.preventDefault()
@@ -125,11 +123,11 @@ function SingleVideoPage() {
             const data = await dispatch(thunkCreateComment(video_id, user_id, comment, user_name));
 
             if (data) {
-                console.log('SERVER ERRORS')
-                console.log(data)
+                // console.log('SERVER ERRORS')
+                // console.log(data)
             }
             else {
-                console.log("SUBMITTED")
+                // console.log("SUBMITTED")
                 setComment('')
                 return
             }
@@ -174,18 +172,18 @@ function SingleVideoPage() {
         if (editComment.length > 1000) err.comment = 'Comment must be 1000 or less characters in length'
 
         const video_id = video.id
-        console.log('ERRORS => ', err)
-        console.log('NEW COMMENT DATA => ', editComment)
+        // console.log('ERRORS => ', err)
+        // console.log('NEW COMMENT DATA => ', editComment)
         if (!Object.values(err).length) {
             setErrors(err)
             const data = await dispatch(thunkUpdateComment(video_id, comment_id, editComment));
 
             if (data) {
-                console.log('SERVER ERROR')
-                console.log(data)
+                // console.log('SERVER ERROR')
+                // console.log(data)
             }
             else {
-                console.log('COMMENT UPDATED')
+                // console.log('COMMENT UPDATED')
                 setEditCommentId(null)
                 setEditEnabled(false)
                 setEditComment('')
@@ -194,7 +192,7 @@ function SingleVideoPage() {
         }
         else {
             setErrors(err)
-            console.log('ELSE ELSE')
+            // console.log('ELSE ELSE')
             return
         }
 

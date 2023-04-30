@@ -83,7 +83,7 @@ export const thunkCreateComment = (video_id, user_id, comment, user_name) => asy
 
     if (response.ok) {
         dispatch(thunkAllComments(video_id))
-        console.log('/////////COMMENT CREATED///////////////')
+        // console.log('/////////COMMENT CREATED///////////////')
         return
     }
 
@@ -102,9 +102,9 @@ export const thunkUpdateComment = (video_id, comment_id, editComment) => async d
 
     if (response.ok) {
         const resData = await response.json()
-        console.log(resData)
+        // console.log(resData)
         dispatch(thunkAllComments(video_id))
-        console.log('/////////COMMENT UPDATED///////////////')
+        // console.log('/////////COMMENT UPDATED///////////////')
         return
     }
 }
@@ -118,7 +118,7 @@ export const thunkDeleteComment = (video_id, comment_id) => async dispatch => {
         // dispatch(thunkResetComments())
         // dispatch(thunkAllComments(video_id))
         dispatch(actionDeleteComments(comment_id))
-        console.log('/////////////COMMENT DELETED///////////////')
+        // console.log('/////////////COMMENT DELETED///////////////')
         return
     }
 }
