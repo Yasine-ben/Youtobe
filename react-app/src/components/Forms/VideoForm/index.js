@@ -7,6 +7,7 @@ import uploadGuy from '../../../Images/Upload.svg'
 import { thunkAllVideos, thunkUploadVideo } from '../../../store/video';
 import { useModal } from "../../../context/Modal";
 import { useDropzone } from 'react-dropzone';
+import loading from '../../../Images/loading.gif'
 
 function VideoForm() {
     const history = useHistory()
@@ -16,11 +17,13 @@ function VideoForm() {
     const { closeModal } = useModal();
 
     const [title, setTitle] = useState('')
+    const [slide, setSlide] = useState(0)
     const [description, setDescription] = useState('')
     const [video, setVideo] = useState('')
     const [thumbnail, setThumbnail] = useState('')
     const [thumbnailPreview, setThumbnailPreview] = useState(null);
     const [videoPreview, setVideoPreview] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState({})
 
     const imageFormat = [
@@ -118,7 +121,7 @@ function VideoForm() {
         accept: 'video/mp4, video/mov', // Update the accept property to accept video files
         onDrop: handleVideoFileChange
     });
-    
+
     //SUBMIT LOGIC///////////////////////////////////////////////////////////////////////////////////////////////
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -177,100 +180,94 @@ function VideoForm() {
 
 
     return (
-        sessionUser && (<div className='VF-Wrapper'>
-            <div className='VF-Left-Wrapper'>
-                {/* <div className='VF-TopBar'>
-                    <p className='VF-Title'>Upload Video</p>
-                    <span onClick={(e) => {closeModal()}} id='VF-X-Symbol' className="material-symbols-outlined"> close </span>
+        sessionUser && (
+            <div className='VF-Wrapper'>
+                <div className='VF-Left-Wrapper'>
+                    <div className='VF-TopBar'>
+                        <p className='VF-Title'>Upload Video</p>
+                        <span onClick={(e) => { closeModal() }} id='VF-X-Symbol' className="material-symbols-outlined"> close </span>
+                    </div>
+                    <form className='VF-Video-Details-Wrapper' onSubmit={handleSubmit} method="POST" encType="multipart/form-data">
+                        {errors.titleLength ? <div className="">* {errors.titleLength}</div> : null}
+
+                        <div className='VF-VD-Title-Wrapper'>
+                            <p className='VF-CD-Title'>Video Details</p>
+                        </div>
+
+                        <div className='VF-CD-VT-Wrapper'>
+                            <div className='VF-CD-VT-Input-Wrapper'>
+                                Video Title
+                                <textarea
+                                    type="text"
+                                    name="videoTitle"
+                                    onChange={(e) => setTitle(e.target.value)}
+                                    value={title}
+                                    placeholder="Title"
+                                    className="VF-CD-VT-Input"
+                                    minLength={1}
+                                    maxLength={100}
+                                />
+                            </div>
+                            <p className='VF-CD-VT-Count'>{`${title.length}/100`}</p>
+                            {errors.title && <p className="">{errors.title}</p>}
+                        </div>
+
+                        <div className='VF-CD-VD-Wrapper'>
+                            <div className='VF-CD-VD-Input-Wrapper'>
+                                Video Description
+                                <textarea
+                                    type="text"
+                                    name="videoDescription"
+                                    onChange={(e) => setDescription(e.target.value)}
+                                    value={description}
+                                    placeholder="Description"
+                                    className="VF-CD-VD-Input"
+                                    minLength={1}
+                                    maxLength={1000}
+                                />
+                            </div>
+                            <p className='VF-CD-VD-Count'>{`${description.length}/1000`}</p>
+                            {errors.description && <p className="">{errors.description}</p>}
+                        </div>
+                        <div className='VF-CD-Dropzone-Wrapper'>
+                            <div className="VF-CD-VTI-Wrapper">
+                                <div {...getThumbnailRootProps({ className: `dropzone ${isThumbnailDragActive ? "active" : ""} ${isThumbnailDragAccept ? "accept" : ""} ${isThumbnailDragReject ? "reject" : ""}` })}>
+                                    <input {...getThumbnailInputProps()} />
+                                    {!isThumbnailDragActive && !thumbnailPreview && (<i class="fa-solid fa-image" id='CI-Cloud'></i>)}
+                                    {!isThumbnailDragActive && !thumbnailPreview && !errors.thumbnail && (<p>Tap or drop an image here</p>)}
+                                    {errors.thumbnail && <p className="" style={{ color: 'red' }}>Invalid file format for thumbnail image. Please upload a JPEG or PNG file.</p>}
+                                    {thumbnailPreview && <div className=""><img src={thumbnailPreview} alt="Thumbnail Preview" className="" style={{ width: '200px' }} /></div>}
+                                </div>
+                            </div>
+
+                            {!videoPreview && <div className={"VF-CD-VVI-Wrapper"}>
+                                <div {...getVideoRootProps({ className: `dropzone ${isVideoDragActive ? "active" : ""} ${isVideoDragAccept ? "accept" : ""} ${isVideoDragReject ? "reject" : ""}` })}>
+                                    <input {...getVideoInputProps()} />
+                                    {!isVideoDragActive && !videoPreview && (<i class="fa-solid fa-video" id='CI-Cloud'></i>)}
+                                    {!isVideoDragActive && !videoPreview && !errors.video && (<p>Tap or drop your video here</p>)}
+                                    {errors.video && <p className="" style={{ color: 'red' }}>Invalid file format for Video file. Please upload an mp4 file.</p>}
+                                </div>
+                            </div>}
+                        </div>
+                    </form>
                 </div>
-                <div className='VF-Video-Details-Wrapper'>
 
-                    <div className='VF-VD-Title-Wrapper'>
-                        <p className='VF-CD-Title'>Video Details</p>
-                    </div>
+                <div className='VF-Right-Wrapper'>
+                    <div className='VF-Preview-Wrapper'>
+                        {videoPreview && <div className='VF-Player-Wrapper'>
+                            <ReactPlayer
+                                ref={playerRef}
+                                url={videoPreview}
+                                controls={true}
+                                width={300}
+                                height={200}
+                            />
+                        </div>}
 
-                    <div className='VF-CD-VT-Wrapper'>
-                        <div className='VF-CD-VT-Input-Wrapper'>
-                            <textarea className='VF-CD-VT-Input' type='text' value={title} placeholder='Title(required)' onChange={(e) => setTitle(e.target.value)} maxLength={100} />
-                        </div>
-                        <p className='VF-CD-VT-Count'>{`${title.length}/100`}</p>
-                    </div>
-
-                    <div className='VF-CD-VD-Wrapper'>
-                        <div className='VF-CD-VD-Input-Wrapper'>
-                            <textarea className='VF-CD-VD-Input' type='text' value={description} placeholder='Description' onChange={(e) => setDescription(e.target.value)} maxLength={1000} />
-                        </div>
-                        <p className='VF-CD-VD-Count'>{`${description.length}/1000`}</p>
-                    </div>
-
-                    <div className='VF-CD-VUrl-Wrapper'>
-                        <div className='VF-CD-VUrl-Input-Wrapper'>
-                            <input className='VF-CD-VUrl-Input' type='text' value={video} placeholder='Video Url' onChange={(e) => setVideo(e.target.value)} maxLength={1000} />
-                        </div>
-                    </div>
-
-                    <div className='VF-CD-VThumbnail-Wrapper'>
-                        <div className='VF-CD-VThumbnail-Input-Wrapper'>
-                            <input className='VF-CD-VThumbnail-Input' type='text' value={thumbnail} placeholder='Thumbnail Url' onChange={(e) => setThumbnail(e.target.value)} maxLength={1000} />
-                        </div>
                     </div>
                 </div>
-            </div> */}
 
-                <form className='' onSubmit={handleSubmit} method="POST" encType="multipart/form-data">
-                    {errors.titleLength ? <div className="">* {errors.titleLength}</div> : null}
-                    <div className=''>
-                        Video Title
-                        <input
-                            type="text"
-                            name="videoTitle"
-                            onChange={(e) => setTitle(e.target.value)}
-                            value={title}
-                            placeholder="Title"
-                            className=""
-                        />
-                        {errors.title && <p className="">{errors.title}</p>}
-                    </div>
-
-                    <div className=''>
-                        Video Description
-                        <input
-                            type="text"
-                            name="videoDescription"
-                            onChange={(e) => setDescription(e.target.value)}
-                            value={description}
-                            placeholder="Description"
-                            className=""
-                        />
-                        {errors.description && <p className="">{errors.description}</p>}
-                    </div>
-
-                    <div className="">
-                        <div {...getThumbnailRootProps({ className: `dropzone ${isThumbnailDragActive ? "active" : ""} ${isThumbnailDragAccept ? "accept" : ""} ${isThumbnailDragReject ? "reject" : ""}` })}>
-                            <input {...getThumbnailInputProps()} />
-                            {!isThumbnailDragActive && !thumbnailPreview && (<i class="fa-solid fa-image" id='CI-Cloud'></i>)}
-                            {!isThumbnailDragActive && !thumbnailPreview && !errors.thumbnail && (<p>Tap or drop an image here</p>)}
-                            {errors.thumbnail && <p className="" style={{ color: 'red' }}>Invalid file format for thumbnail image. Please upload a JPEG or PNG file.</p>}
-                            {thumbnailPreview && <div className=""><img src={thumbnailPreview} alt="Thumbnail Preview" className="" /></div>}
-                        </div>
-                    </div>
-
-                    <div className=""></div>
-                    <div {...getVideoRootProps({ className: `dropzone ${isVideoDragActive ? "active" : ""} ${isVideoDragAccept ? "accept" : ""} ${isVideoDragReject ? "reject" : ""}` })}>
-                        <input {...getVideoInputProps()} />
-                        {!isVideoDragActive && !videoPreview && (<i class="fa-solid fa-music" id='CI-Cloud'></i>)}
-                        {!isVideoDragActive && !videoPreview && !errors.video && (<p>Tap or drop your video here</p>)}
-                        {errors.video && <p className="" style={{ color: 'red' }}>Invalid file format for Video file. Please upload an mp4 file.</p>}
-                        {videoPreview && <div className=""><video src={videoPreview} controls className="" /></div>}
-                    </div>
-
-                    <button className='' type="submit" disabled={!isFormValid()}>Submit</button>
-                    <div className="">
-                        {/* <img src={loadingGif} alt='loading-gif' className={loading}></img> */}
-                    </div>
-                </form>
-
-                {/* <div className='VF-Errors-Wrapper'>
+                <div className='VF-Errors-Wrapper'>
                     {Boolean(Object.values(errors).length) && (<p>Errors</p>)}
                     {Object.values(errors).map((error, idx) => (
                         <p className='VF-Errors' key={idx}>{`* ${error}`}</p>
@@ -282,10 +279,11 @@ function VideoForm() {
                 </div>
 
                 <div className='VF-Footer'>
-                    <div className='VF-Footer-Submit' onClick={((e) => handleSubmit(e))}>Upload</div>
-                </div> */}
+                    <button className='VF-Footer-Submit' type="submit" disabled={!isFormValid()}>Upload</button>
+                    {isLoading && <img src={loading} alt='loading-gif' className={'loading'} />}
+                </div>
+
             </div>
-        </div>
         )
     )
 }
