@@ -33,7 +33,6 @@ function Topbar() {
     return (
         <div className='TB-wrapper'>
             <div className='TB-LeftSide-Wrapper'>
-                <i id='TB-Menu' className="fa-solid fa-bars" />
                 <div className='TB-IconName-Wrapper' onClick={((e) => history.push('/'))}>
                     <img className='TB-Youtobe-Icon' src={icon} alt='Main Icon' />
                     <p className='TB-Title'>Youtobe</p>
