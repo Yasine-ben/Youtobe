@@ -4,6 +4,7 @@
     height: 850px;
     border-radius: 15px;
     background-color: rgb(35, 35, 35);
+    overflow-y: scroll;
 }
 
 .VF-TopBar {
@@ -39,8 +40,8 @@
     position: relative;
     top: 50px;
     left: 45px;
-    width: 537px;
-    height: 683px;
+    width: 90%;
+    height: 90%;
     /* border: 1px solid grey;     */
 }
 
@@ -54,14 +55,12 @@
     font-size: 1.5em;
 }
 
-.VF-CD-VT-Wrapper {
+.VF-CD-VT-Wrapper {}
 
-}
-
-.VF-CD-VT-Input-Wrapper{
+.VF-CD-VT-Input-Wrapper {
     /* border: 1px solid grey; */
     position: relative;
-    top: 30px ;
+    top: 30px;
 }
 
 .VF-CD-VT-Input {
@@ -90,20 +89,15 @@
     top: -10px;
     left: 480px;
 }
-/*/////////////////////////////////////////////////////////*/
-
-
-
 
 /*/////////////////////////////////////////////////////////*/
-.VF-CD-VD-Wrapper {
+/*/////////////////////////////////////////////////////////*/
+.VF-CD-VD-Wrapper {}
 
-}
-
-.VF-CD-VD-Input-Wrapper{
+.VF-CD-VD-Input-Wrapper {
     /* border: 1px solid grey; */
     position: relative;
-    top: 20px ;
+    top: 20px;
     height: fit-content;
 }
 
@@ -134,70 +128,72 @@
     top: -20px;
     left: 475px;
 }
-/*/////////////////////////////////////////////////////////*/
-
 
 /*/////////////////////////////////////////////////////////*/
-.VF-CD-Dropzone-Wrapper{
+/*/////////////////////////////////////////////////////////*/
+.VF-CD-Dropzone-Wrapper {
     display: flex;
-    gap: 5px;
+    gap: 15px;
     justify-content: center;
 }
-.VF-CD-VTI-Wrapper{
+
+.VF-CD-VTI-Wrapper {
     /* background-color: red; */
     border-radius: 5px;
     width: 49%;
     border: 1px dashed white;
     width: 49%;
-    height: 180px;
+    height: 280px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     text-align: center;
 }
-.VF-CD-VTI-Wrapper > *{
+
+.VF-CD-VTI-Wrapper>* {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.VF-CD-VTI-Wrapper:hover{
+
+.VF-CD-VTI-Wrapper:hover {
     border: 1px dashed rgb(28, 115, 232);
 }
 
-.VF-CD-VVI-Wrapper{
+.VF-CD-VVI-Wrapper {
     /* background-color: yellow; */
     border-radius: 5px;
     border: 1px dashed white;
     width: 49%;
-    height: 180px;
+    height: 280px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     text-align: center;
+    overflow: hidden;
 }
-.VF-CD-VVI-Wrapper > *{
+
+.VF-CD-VVI-Wrapper>* {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.VF-CD-VVI-Wrapper:hover{
+
+.VF-CD-VVI-Wrapper:hover {
     border: 1px dashed rgb(28, 115, 232);
 }
 
-#CI-Cloud{
+#CI-Cloud {
     font-size: 2em;
 }
-/*/////////////////////////////////////////////////////////*/
-
-
-
 
 /*/////////////////////////////////////////////////////////*/
-.VF-Errors-Wrapper{
+/*/////////////////////////////////////////////////////////*/
+.VF-Errors-Wrapper {
     position: absolute;
     width: 530px;
     height: 120px;
@@ -210,63 +206,56 @@
     white-space: nowrap;
 }
 
-.VF-Errors-Wrapper::-webkit-scrollbar{
+.VF-Errors-Wrapper::-webkit-scrollbar {
     /* width: 0; */
     /* height: 0; */
     background-color: transparent;
 }
 
-.VF-Errors{
-
-}
-/*/////////////////////////////////////////////////////////*/
-
+.VF-Errors {}
 
 /*/////////////////////////////////////////////////////////*/
-.VF-Right-Wrapper{
-    /* background-color: red; */
-    width: 300px;
-    height: 200px;
-    position: absolute;
-    top: 110px;
-    right: 40px;
-}
-
-.VF-Preview-Wrapper{
+/*/////////////////////////////////////////////////////////*/
+.VF-Preview-Wrapper {
     /* background-color: green; */
     width: 300px;
     height: 200px;
     position: absolute;
 }
 
-.VF-Player-Wrapper{
-    width: 300px;
-    height: 200px;
-    background-color: black;
+.VF-Player-Wrapper {
+    background-color: transparent;
+    width: fit-content;
+
+    padding-bottom: 50px;
 }
 
-.VF-Img-Wrapper{
+.VF-Player-Wrapper video {
+    max-width: 50%;
+    z-index: -1;
+}
+
+
+.VF-Img-Wrapper {
     position: absolute;
     bottom: 150px;
     right: 100px;
 }
 
-.VF-Img{
-
-}
-/*/////////////////////////////////////////////////////////*/
-
-
+.VF-Img {}
 
 /*/////////////////////////////////////////////////////////*/
-.VF-Footer{
+/*/////////////////////////////////////////////////////////*/
+.VF-Footer {
     width: 100%;
     height: 50px;
     position: absolute;
     bottom: 0;
     border-top: 1px solid grey;
+    background-color:rgb(40,40,40);
 }
-.VF-Footer-Submit{
+
+.VF-Footer-Submit {
     width: 70px;
     height: 35px;
     border-radius: 7px;
@@ -282,4 +271,74 @@
     right: 15px;
     cursor: pointer;
 }
+
 /*/////////////////////////////////////////////////////////*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*/------------------------------------------------------------------------------/-----------------------------------------------------------------*/
+@media only screen and (max-width: 1050px) {
+
+    /* .VF-Wrapper{
+    display: 100vw;
+    height: 100vh;
+} */
+    .VF-Left-Wrapper {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 15px;
+        background-color: rgb(35, 35, 35);
+    }
+    .VF-CD-Dropzone-Wrapper {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+    }
+    
+    .VF-CD-VTI-Wrapper {
+        /* background-color: red; */
+        border-radius: 5px;
+        border: 1px dashed white;
+        width: 90%;
+        height: 280px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        text-align: center;
+    }
+    .VF-CD-VVI-Wrapper {
+        /* background-color: red; */
+        border-radius: 5px;
+        border: 1px dashed white;
+        width: 90%;
+        height: 280px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        text-align: center;
+    }
+}
+/*/------------------------------------------------------------------------------/-----------------------------------------------------------------*/
+@media only screen and (max-width: 750px) {
+    .VF-CD-Dropzone-Wrapper{
+        flex-direction: column;
+        align-items: center;
+    }
+    .VF-Video-Details-Wrapper {
+        margin-bottom: 300px;
+    }
+}
