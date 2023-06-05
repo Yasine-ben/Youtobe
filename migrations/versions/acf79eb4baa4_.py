@@ -1,19 +1,16 @@
 """empty message
 
-Revision ID: 95adba650a2a
+Revision ID: acf79eb4baa4
 Revises: 
-Create Date: 2023-04-23 00:55:23.320392
+Create Date: 2023-06-04 12:00:38.426355
 
 """
 from alembic import op
 import sqlalchemy as sa
 
-import os
-environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '95adba650a2a'
+revision = 'acf79eb4baa4'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -50,7 +47,7 @@ def upgrade():
     )
     op.create_table('comments',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('comment', sa.String(length=10000), nullable=False),
+    sa.Column('comment', sa.String(length=1000), nullable=False),
     sa.Column('user_name', sa.String(length=255), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('video_id', sa.Integer(), nullable=True),
@@ -60,11 +57,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['video_id'], ['videos.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
-    
-    if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE videos SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
