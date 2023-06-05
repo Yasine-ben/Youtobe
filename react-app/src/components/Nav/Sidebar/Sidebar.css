@@ -59,11 +59,12 @@
 }
 
 #SB-Menu {
-    position: absolute;
+    position: fixed;
     top: 18px;
     left: 24px;
     font-size: 1.2em;
     cursor: pointer;
+    z-index: 2;
 }
 
 

@@ -21,6 +21,7 @@
 
 .HP-Video-Wrapper {
     cursor: pointer;
+    height: 320px;
 }
 
 .HP-Thumbnail-Wrapper {
@@ -42,9 +43,10 @@
 .HP-Lower-Wrapper {
     display: flex;
     flex-direction: row;
-    height: 106px;
+    height: 100px;
     position: relative;
     top: 6px;
+    overflow: hidden;
 }
 
 .HP-Uploader-Img-Wrapper {
@@ -87,9 +89,9 @@
     height: 30px;
     font-size: 0.95em;
     font-weight: 400;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+    /* white-space: nowrap; */
 }
 
 .HP-Title-Ad {
@@ -105,40 +107,53 @@
 .HP-Text-Wrapper {
     display: flex;
     flex-direction: column;
-    width: 212px;
+    width: 70%;
     height: fit-content;
-    position: relative;
-    top: -5px;
-    left: -20px;
+
+    margin: 0;
 }
 
 .HP-Title-Wrapper {
-    height: 30px;
+    margin-top: 5px;
     font-size: 0.95em;
     font-weight: 400;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    display: flex;
+    align-items:center;
 }
 
 .HP-Title {
-    color: #030303;
+    color: white;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
 }
 
 .HP-Uploader-Name-Wrapper {
-    position: relative;
-    top: -10px;
+    margin: 0;
+    margin-top: 7px;
+    display: flex;
 }
 
 .HP-Uploader-Name {
     color: grey;
     font-size: 0.9em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    margin: 0;
+    height: 10px;
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+    /* white-space: nowrap; */
 }
 
-.HP-ViewsAndTime-Wrapper {}
+.HP-ViewsAndTime-Wrapper {
+    display: flex;
+    margin: 0;
+    height: 20px;
+    margin-top:15px;
+}
 
 .HP-Views-Wrapper {
     display: flex;
