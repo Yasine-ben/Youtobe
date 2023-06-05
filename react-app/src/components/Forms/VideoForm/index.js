@@ -240,31 +240,23 @@ function VideoForm() {
                                 </div>
                             </div>
 
-                            {!videoPreview && <div className={"VF-CD-VVI-Wrapper"}>
+                            {<div className={"VF-CD-VVI-Wrapper"}>
                                 <div {...getVideoRootProps({ className: `dropzone ${isVideoDragActive ? "active" : ""} ${isVideoDragAccept ? "accept" : ""} ${isVideoDragReject ? "reject" : ""}` })}>
                                     <input {...getVideoInputProps()} />
                                     {!isVideoDragActive && !videoPreview && (<i class="fa-solid fa-video" id='CI-Cloud'></i>)}
                                     {!isVideoDragActive && !videoPreview && !errors.video && (<p>Tap or drop your video here</p>)}
                                     {errors.video && <p className="" style={{ color: 'red' }}>Invalid file format for Video file. Please upload an mp4 file.</p>}
-                                </div>
+                                    
+                                </div>{videoPreview && <div className='VF-Player-Wrapper'>
+                                        <ReactPlayer
+                                            ref={playerRef}
+                                            url={videoPreview}
+                                            controls={true}
+                                        />
+                                    </div>}
                             </div>}
                         </div>
                     </form>
-                </div>
-
-                <div className='VF-Right-Wrapper'>
-                    <div className='VF-Preview-Wrapper'>
-                        {videoPreview && <div className='VF-Player-Wrapper'>
-                            <ReactPlayer
-                                ref={playerRef}
-                                url={videoPreview}
-                                controls={true}
-                                width={300}
-                                height={200}
-                            />
-                        </div>}
-
-                    </div>
                 </div>
 
                 <div className='VF-Errors-Wrapper'>
@@ -274,9 +266,9 @@ function VideoForm() {
                     ))}
                 </div>
 
-                <div className='VF-Img-Wrapper'>
+                {/* <div className='VF-Img-Wrapper'>
                     <img className='VF-Img' src={uploadGuy} alt='upload guy' />
-                </div>
+                </div> */}
 
                 <div className='VF-Footer'>
                     <button className='VF-Footer-Submit' type="submit" disabled={!isFormValid()}>Upload</button>

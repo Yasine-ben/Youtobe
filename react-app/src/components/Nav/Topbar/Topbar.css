@@ -1,15 +1,14 @@
 .TB-wrapper {
     height: 55px;
     width: 100%;
-
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     /* border-bottom: 1px solid rgb(red, green, blue); */
-    /* background-color: red; */
+    background-color: rgba(19, 19, 19,.9);
     box-shadow: 0px 4px 4px -2px rgba(0, 0, 0, 0.2);
 
 }
@@ -19,14 +18,7 @@
     flex-direction: row;
     align-items: center;
     text-align: center;
-    gap: 10px;
-}
-
-#TB-Menu {
-    display: flex;
-    flex-direction: row;
-    padding-left: 15px;
-    color: white;
+    margin-left: 50px;
 }
 
 #TB-userIcon{
@@ -40,6 +32,7 @@
     padding-left: 10px;
     gap: 5px;
     cursor: pointer;
+    padding-top: 2px;
 }
 
 .TB-Youtobe-Icon {
