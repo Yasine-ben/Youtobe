@@ -22,6 +22,19 @@ def allVideos():
     videos = Video.query.all()
     return { 'videos': [video.to_dict() for video in videos] }
 
+@video_routes.route('/addView/<int:video_id>')
+def addView(video_id):
+    if video_id:
+        video = Video.query.get(video_id)
+        if(video):
+            video.views += 1
+            db.session.commit()
+            return jsonify({"message": "Video views successfully updated"}), 201
+        else:
+            return jsonify({"message": "Video does not exist"}), 404
+    else:
+        return jsonify({"message": "Error with video_id provided"}), 403
+
 @video_routes.route('/userVideos/<int:user_id>')
 @login_required
 def userVideos(user_id):

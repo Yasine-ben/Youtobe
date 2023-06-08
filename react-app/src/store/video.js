@@ -28,6 +28,15 @@ const normalizeAllVideos = (videos) => {
     return normalize;
 }
 
+export const thunkUpdateViews = (video_id) => async dispatch => {
+    const response = await fetch(`/api/videos/addView/${video_id}`)
+
+    if(response.ok){
+        console.log(response.message)
+        return  
+    }
+}
+
 // THUNKS
 export const thunkAllUserVideos = (user_id) => async dispatch => {
     const response = await fetch(`/api/videos/userVideos/${user_id}`)

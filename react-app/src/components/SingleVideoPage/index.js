@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from "react";
 import { Redirect, useHistory, useParams } from "react-router-dom";
-import { thunkAllVideos, thunkAllVideosRand, thunkDeleteVideo, thunkSingleVideo } from '../../store/video';
+import { thunkAllVideos, thunkAllVideosRand, thunkDeleteVideo, thunkSingleVideo, thunkUpdateViews} from '../../store/video';
 import OpenModalButton from '../OpenModalButton'
 import ReactPlayer from 'react-player';
 import dayjs from 'dayjs';
@@ -205,6 +205,10 @@ function SingleVideoPage() {
         return
     }
 
+    function handleVideoStart(){
+        dispatch(thunkUpdateViews(video.id))
+    }
+
     return (
         (!isLoaded) ? <div className='LOADING-SCREEN'></div> :
             (<div className='VP-Wrapper'>
@@ -219,6 +223,7 @@ function SingleVideoPage() {
                             height={720}
                             onError={(e) => videoError()}
                             playing={videoErr}
+                            onStart={() => handleVideoStart()}
                         // onEnded={((e) => '')
                         />
                     </div>
