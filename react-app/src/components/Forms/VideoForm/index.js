@@ -271,7 +271,7 @@ function VideoForm() {
                 </div> */}
 
                 <div className='VF-Footer'>
-                    <button className='VF-Footer-Submit' type="submit" disabled={!isFormValid()}>Upload</button>
+                    <button className='VF-Footer-Submit' type="submit" disabled={!isFormValid()} onClick={((e) => handleSubmit(e))}>Upload</button>
                     {isLoading && <img src={loading} alt='loading-gif' className={'loading'} />}
                 </div>
 
