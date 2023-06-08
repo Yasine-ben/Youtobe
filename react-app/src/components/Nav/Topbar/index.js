@@ -67,12 +67,12 @@ function Topbar() {
                         <i id='GithubIcon' className="fa-brands fa-square-github"></i>
                     </a>
                 </div>
-                {sessionUser
-                    && <div className='TB-LoggedIn-Btn'>
-                        <div className='TB-UserImg-Wrapper'>
-                            <img src={sessionUser.cover_image} alt='user Img' className='TB-UserImg' onClick={((e) => openMenu())} />
-                        </div>
-                        <div ref={ulRef}>
+                <div ref={ulRef}>
+                    {sessionUser
+                        ? <div className='TB-LoggedIn-Btn'>
+                            <div className='TB-UserImg-Wrapper'>
+                                <img src={sessionUser.cover_image} alt='user Img' className='TB-UserImg' onClick={((e) => openMenu())} />
+                            </div>
                             {showMenu &&
 
                                 (<div className="TBM">
@@ -115,13 +115,13 @@ function Topbar() {
                                 </div>)
                             }
                         </div>
-                    </div>
 
-                    ||
-                    <div className='TB-NotLoggedInBtn' onClick={((e) => history.push('/login'))}>
-                        <span className="material-symbols-outlined">account_circle</span>
-                        <p className='TB-NLIB-Title'>Sign in</p>
-                    </div>}
+                        :
+                        <div className='TB-NotLoggedInBtn' onClick={((e) => history.push('/login'))}>
+                            <span className="material-symbols-outlined">account_circle</span>
+                            <p className='TB-NLIB-Title'>Sign in</p>
+                        </div>}
+                </div>
 
                 {/* <ProfileButton user={sessionUser}/> */}
             </div>
