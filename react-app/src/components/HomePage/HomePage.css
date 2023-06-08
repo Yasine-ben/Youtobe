@@ -12,15 +12,16 @@
     transition: width 0.3s ease;
 }
 
-.HP-Wrapper.full-width{
+.HP-Wrapper.full-width {
     width: 95%;
-    margin-right:20px;
-    margin: 0 auto; /* Center horizontally */
-
+    margin-right: 20px;
+    margin: 0 auto;
+    /* Center horizontally */
 }
 
 .HP-Video-Wrapper {
     cursor: pointer;
+    height: 320px;
 }
 
 .HP-Thumbnail-Wrapper {
@@ -42,13 +43,14 @@
 .HP-Lower-Wrapper {
     display: flex;
     flex-direction: row;
-    height: 106px;
+    height: 100px;
     position: relative;
     top: 6px;
+    overflow: hidden;
 }
 
 .HP-Uploader-Img-Wrapper {
-    width: 80px;
+    width: 50px;
     height: 100%;
 }
 
@@ -65,80 +67,60 @@
     height: 40px;
 }
 
-#ad-External {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    color: white;
-}
-
-.HP-Video-Wrapper-Ad {
-    text-decoration: none;
-}
-
-.HP-Text-Wrapper-Ad {
-    display: flex;
-    flex-direction: column;
-    width: 212px;
-    gap: 5px;
-}
-
-.HP-Title-Wrapper-Ad {
-    height: 30px;
-    font-size: 0.95em;
-    font-weight: 400;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
 .HP-Title-Ad {
     color: white;
-}
-
-.HP-Views-Wrapper-Ad {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
 }
 
 .HP-Text-Wrapper {
     display: flex;
     flex-direction: column;
-    width: 212px;
+    width: 70%;
     height: fit-content;
-    position: relative;
-    top: -5px;
-    left: -20px;
+
+    margin: 0;
 }
 
 .HP-Title-Wrapper {
-    height: 30px;
+    margin-top: 5px;
     font-size: 0.95em;
     font-weight: 400;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    display: flex;
+    align-items: center;
 }
 
 .HP-Title {
-    color: #030303;
+    color: white;
+    margin: 0 0 0 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
 }
 
 .HP-Uploader-Name-Wrapper {
-    position: relative;
-    top: -10px;
+    margin: 0;
+    margin-top: 7px;
+    display: flex;
 }
 
 .HP-Uploader-Name {
     color: grey;
     font-size: 0.9em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    margin: 5px 0 0 0;
+    height: 10px;
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+    /* white-space: nowrap; */
 }
 
-.HP-ViewsAndTime-Wrapper {}
+.HP-ViewsAndTime-Wrapper {
+    display: flex;
+    margin: 0;
+    height: 20px;
+    margin-top: 8px;
+}
 
 .HP-Views-Wrapper {
     display: flex;
@@ -155,3 +137,139 @@
     color: grey;
     font-size: 0.9em;
 }
+
+
+.HP-Video-Wrapper-Ad{
+    text-decoration: none;
+}
+
+#ad-External {
+    /* CSS styles for the ad-External id */
+    position: relative;
+    bottom: 30px;
+    left: 90%;
+    color: white;
+}
+
+.HP-Lower-Wrapper-Ad {
+    /* CSS styles for the HP-Lower-Wrapper class */
+    display: flex;
+    flex-direction: row;
+    height: 120px;
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.HP-Text-Wrapper-Ad {
+    /* CSS styles for the HP-Text-Wrapper class */
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: fit-content;
+
+    margin: 0;
+}
+
+.HP-Title-Wrapper-Ad {
+    /* CSS styles for the HP-Title-Wrapper class */
+    margin-top: 5px;
+    font-size: 0.95em;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+}
+
+.HP-Title-Ad {
+    /* CSS styles for the HP-Title class */
+    color: white;
+    margin: 0 0 0 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    
+}
+
+.HP-Uploader-Name-Wrapper-Ad {
+    /* CSS styles for the HP-Uploader-Name-Wrapper class */
+    margin: 0;
+    margin-top: 7px;
+    display: flex;
+    width: 300px;
+}
+
+.HP-Uploader-Name-Ad {
+    /* CSS styles for the HP-Uploader-Name class */
+    color: grey;
+    font-size: 0.9em;
+    margin: 5px 0 0 0;
+    height: 10px;
+   
+}
+
+.HP-ViewsAndTime-Wrapper-Ad {
+    /* CSS styles for the HP-ViewsAndTime-Wrapper class */
+    display: flex;
+    margin: 0 0 0 0;
+    height: 20px;
+    margin-top: 30px;
+}
+
+.HP-Views-Wrapper-Ad {
+    /* CSS styles for the HP-Views-Wrapper class */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.HP-Views-Ad {
+    /* CSS styles for the HP-Views class */
+    color: grey;
+    font-size: 0.9em;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* #ad-External {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: white;
+}
+
+.HP-Video-Wrapper-Ad {
+    text-decoration: none;
+    display: flex;
+    margin: 0;
+    flex-direction: column;
+}
+
+.HP-Title-Wrapper-Ad {
+    height: 20px;
+    margin-bottom: 10px;
+}
+
+.HP-Text-Wrapper-Ad {
+    display: flex;
+    flex-direction: column;
+    width: 212px;
+    margin:0;
+}
+
+.HP-Lower-Wrapper-Ad {
+    height: 100px;
+    font-size: 0.95em;
+    font-weight: 400;
+    overflow: hidden;
+    margin: 0;
+}*/

@@ -21,6 +21,22 @@ function Sidebar() {
     //         </div>
     //     </div>
     // )
+    useEffect(() => {
+        const checkScreenSize = () => {
+            if (window.innerWidth <= 750) {
+                setMenuOpen(false)
+            } else {
+                setMenuOpen(true)
+            }
+        };
+
+        checkScreenSize();
+
+        window.addEventListener('resize', checkScreenSize);
+        return () => {
+            window.removeEventListener('resize', checkScreenSize);
+        };
+    }, []);
 
     useEffect(() => {
         const hpWrapper = document.querySelector('.HP-Wrapper');
@@ -41,32 +57,33 @@ function Sidebar() {
     return (
         <>
             <div className={menuOpen ? 'sidebar' : 'sidebar--closed'}>
-                <a href="#" className="sidebar__link">
+                <div className="sidebar__link" onClick={history.push('/')}>
+                    <span id='Home-Icon' className="material-symbols-outlined"> home </span>
                     <span className="sidebar__icon">Home</span>
-                </a>
-                <a href="#" className="sidebar__link">
+                </div>
+
+                <div  className="sidebar__link">
+                    <span class="material-symbols-outlined"> subscriptions </span>
+                    <span className="sidebar__icon">Subscriptions</span>
+                </div>
+                <hr className="sidebar__separator" />                
+                {/* <div href="#" className="sidebar__link">
                     <span className="sidebar__icon">Trending</span>
-                </a>
-                <a href="#" className="sidebar__link">
-                    <span className="sidebar__icon">Subscriptions</span>
-                </a>
-                <hr className="sidebar__separator" />
-                {/* <a href="#" className="sidebar__link">
+                 </div> */}
+                {/* <div href="#" className="sidebar__link">
                 <span className="sidebar__icon">Library</span>
-            </a> */}
-                {/* <a href="#" className="sidebar__link">
+                </div> */}
+                {/* <div href="#" className="sidebar__link">
                 <span className="sidebar__icon">History</span>
-            </a> */}
-                <a href="#" className="sidebar__link">
+                </div> */}
+                <div className="sidebar__link" onClick={(e)=> history.push('/MyVideos')}>
+                    <span id='Sub-icon' className="material-symbols-outlined"> video_camera_front </span>
                     <span className="sidebar__icon">Your videos</span>
-                </a>
-                <a href="#" className="sidebar__link">
+                </div>
+                <div className="sidebar__link">
+                    <span class="material-symbols-outlined"> favorite </span>
                     <span className="sidebar__icon">Liked videos</span>
-                </a>
-                <hr className="sidebar__separator" />
-                <a href="#" className="sidebar__link">
-                    <span className="sidebar__icon">Subscriptions</span>
-                </a>
+                </div>
             </div>
             <i id='SB-Menu' className="fa-solid fa-bars" onClick={(() => handleMenu())} />
         </>
