@@ -17,6 +17,7 @@ class Video(db.Model):
     length = db.Column(db.Float, nullable=False)
     uploader = db.Column(db.String, nullable=False)
     cover_image = db.Column(db.String, nullable=False)
+    views = db.Column(db.Integer, default=0, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
