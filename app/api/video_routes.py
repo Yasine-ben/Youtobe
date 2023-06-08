@@ -71,9 +71,7 @@ def createVideo():
     data = request.files
     dataStrings = request.form
     user = current_user
-    
-    print(data)
-    
+        
     form = VideoForm(
         title=dataStrings['title'],
         description=dataStrings['description'],

@@ -32,7 +32,6 @@ export const thunkUpdateViews = (video_id) => async dispatch => {
     const response = await fetch(`/api/videos/addView/${video_id}`)
 
     if(response.ok){
-        console.log(response.message)
         return  
     }
 }
