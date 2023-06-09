@@ -22,18 +22,26 @@ function HomePage() {
 
     // console.log(videos)
 
-    function randomInRange(min, max) {
-        const SUFFIXES = 'KM'
-        let randNum = Math.floor(Math.random() * (max - min + 1) + min);
-        let randPicker = Math.floor(Math.random() * (3 - 1 + 1) + 1)
-        switch (randPicker) {
-            case 1:
-                return (randNum + SUFFIXES[0])
-            case 2:
-                return (randNum + SUFFIXES[1])
-            case 3:
-                return (randNum.toString())
+    function normalizeViews(views) {
+        const abbreviations = {
+            K: 1000,
+            M: 1000000,
+            B: 1000000000
+        };
+
+        // Loop through the abbreviations in descending order
+        const sortedKeys = Object.keys(abbreviations).sort((a, b) => abbreviations[b] - abbreviations[a]);
+
+        for (let key of sortedKeys) {
+            const value = abbreviations[key];
+
+            if (views >= value) {
+                const normalizedViews = parseFloat((views / value).toFixed(1));
+                return normalizedViews + key;
+            }
         }
+
+        return views.toString();
     }
 
     // maybe add clean up in useEffect
@@ -91,7 +99,7 @@ function HomePage() {
                                 </div>
                                 <div className='HP-ViewsAndTime-Wrapper'>
                                     <div className='HP-Views-Wrapper'>
-                                        <p className='HP-Views'>{`${randomInRange(1, 100)} views`}</p>
+                                        <p className='HP-Views'>{`${normalizeViews(video.views)} views`}</p>
                                         <p className='HP-Time'>&nbsp;•&nbsp;{dayjs(video.updated_at).fromNow()}</p>
                                     </div>
                                 </div>

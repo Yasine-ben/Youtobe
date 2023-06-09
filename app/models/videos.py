@@ -34,6 +34,7 @@ class Video(db.Model):
             'video': self.video,
             'thumbnail': self.thumbnail,
             'length': self.length,
+            'views': self.views,
             'uploader': self.uploader,
             'cover_image': self.cover_image,
             'created_at': self.created_at,

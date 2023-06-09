@@ -16,7 +16,7 @@ def seed_videos():
         user_id = 2,
         created_at = datetime.strptime('Fri, 21 Apr 2013 02:08:34 GMT', date_format),
         updated_at = datetime.strptime('Fri, 21 Apr 2013 02:08:34 GMT', date_format),
-        views = 0,
+        views = 90000000,
     )
     video2 = Video( 
         title = 'Charlie The Unicorn',
@@ -29,7 +29,7 @@ def seed_videos():
         user_id = 4,
         created_at = datetime.strptime('Fri, 21 Apr 2009 02:08:34 GMT', date_format),
         updated_at = datetime.strptime('Fri, 21 Apr 2009 02:08:34 GMT', date_format),
-        views = 0,
+        views = 68000000,
     )
     video3 = Video( 
         title = 'Charlie the Unicorn 2',
@@ -42,7 +42,7 @@ def seed_videos():
         user_id = 4,
         created_at = datetime.strptime('Fri, 21 Apr 2010 02:08:34 GMT', date_format),
         updated_at = datetime.strptime('Fri, 21 Apr 2010 02:08:34 GMT', date_format),
-        views = 0,
+        views = 50000000,
     )
     video4 = Video( 
         title = 'Charlie the Unicorn 3',
@@ -55,7 +55,7 @@ def seed_videos():
         user_id = 4,
         created_at = datetime.strptime('Fri, 21 Apr 2011 02:08:34 GMT', date_format),
         updated_at = datetime.strptime('Fri, 21 Apr 2011 02:08:34 GMT', date_format),
-        views = 0,
+        views = 30000000,
     )
     video5 = Video( 
         title = 'Charlie the Unicorn 4',
@@ -68,7 +68,7 @@ def seed_videos():
         user_id = 4,
         created_at = datetime.strptime('Fri, 21 Apr 2012 02:08:34 GMT', date_format),
         updated_at = datetime.strptime('Fri, 21 Apr 2012 02:08:34 GMT', date_format),
-        views = 0,
+        views = 11000000,
     )
     video6 = Video( 
         title = 'Nyan Cat [original]',
@@ -81,7 +81,7 @@ def seed_videos():
         user_id = 5,
         created_at = datetime.strptime('Fri, 1 Apr 2008 02:08:34 GMT', date_format),
         updated_at =datetime.strptime( 'Fri, 1 Apr 2008 02:08:34 GMT', date_format),
-        views = 0,
+        views = 206000000,
     )
     video7 = Video( 
         title = 'BEST CROISSANT IN PARIS',
@@ -94,7 +94,7 @@ def seed_videos():
         user_id = 6,
         created_at = datetime.strptime('Sun, 2 Apr 2023 02:08:34 GMT', date_format),
         updated_at =datetime.strptime( 'Sun, 2 Apr 2023 02:08:34 GMT', date_format),
-        views = 0,
+        views = 1000000,
     )
     video8 = Video( 
         title = "It's Peanut Butter Jelly Time!!!",
@@ -107,7 +107,7 @@ def seed_videos():
         user_id = 7,
         created_at = datetime.strptime('Fri, 21 Apr 2008 02:08:34 GMT', date_format),
         updated_at = datetime.strptime('Fri, 21 Apr 2008 02:08:34 GMT', date_format),
-        views = 0,
+        views = 51000000,
     )
     video9 = Video( 
         title = '"GOLD BOND LIQUI-SHAQ" - TV SHERIFF VIDEO REMIX',
@@ -120,7 +120,7 @@ def seed_videos():
         user_id = 8,
         created_at = datetime.strptime('Fri, 21 Apr 2019 02:08:34 GMT', date_format),
         updated_at = datetime.strptime('Fri, 21 Apr 2019 02:08:34 GMT', date_format),
-        views = 0,
+        views = 9800000,
     )
     # video10 = Video( 
     #     title = 
