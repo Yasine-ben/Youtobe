@@ -52,9 +52,7 @@ function SingleVideoPage() {
     const [likes, setLikes] = useState(0);
     const [dislikes, setDislikes] = useState(0);
     const [userReaction, setUserReaction] = useState(null);
-
-    const [isLiked, setIsLiked] = useState(false);
-    const [isDisliked, setIsDisliked] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(false)
 
     const [errors, setErrors] = useState({})
 
@@ -87,39 +85,39 @@ function SingleVideoPage() {
         }
     }, [video?.reactions]);
 
-    const handleLike = () => {
+    const handleLike = async () => {
         // Check if the user has already liked the video
-        if (isLiked) {
-            // User already liked the video, handle unlike logic here
-            // ...
-            setIsLiked(false);
-        } else {
-            // User has not liked the video, handle like logic here
-            // ...
-            setIsLiked(true);
+        if(user){
+            if (userReaction == 'like') {
+                //delete reaction
+                await setIsDisabled(true)
 
-            // If the user had previously disliked the video, update the dislike state
-            if (isDisliked) {
-                setIsDisliked(false);
+                await setUserReaction(null)
+                await setIsDisabled(false)
+            } else {
+                //set video reaction to like
+                await setIsDisabled(true)
+
+                await setUserReaction('like');
+                await setIsDisabled(false)
             }
         }
     };
 
-    const handleDislike = () => {
+    const handleDislike = async () => {
         // Check if the user has already disliked the video
-        if (isDisliked) {
-            // User already disliked the video, handle undislike logic here
-            // ...
-            setIsDisliked(false);
-        } else {
-            // User has not disliked the video, handle dislike logic here
-            // ...
-            setIsDisliked(true);
+        if (userReaction == 'dislike') {
+            // Delete reaction
+            await setIsDisabled(true)
 
-            // If the user had previously liked the video, update the like state
-            if (isLiked) {
-                setIsLiked(false);
-            }
+            await setUserReaction(null)
+            await setIsDisabled(false)
+        } else {
+            // set video reaction to dislike
+            await setIsDisabled(true)
+
+            await setUserReaction('dislike');
+            await setIsDisabled(false)
         }
     };
 
@@ -299,17 +297,17 @@ function SingleVideoPage() {
                                 <div className='VP-UserInteration-Wrapper'>
                                     <div className='VP-Reactions-Wrapper' style={{ width: '160px', height: '36px' }}>
                                         <div className='VP-Reactions'>
-                                            <div className='VP-Like-Container' onClick={() => { }}>
+                                            <div className='VP-Like-Container' onClick={!isDisabled ? handleLike : null}>
                                                 {userReaction == 'like' ?
-                                                    <i class="fa-solid fa-thumbs-up" id='like'></i>
-                                                    : <i class="fa-regular fa-thumbs-up" id='like'></i>
+                                                    <i className="fa-solid fa-thumbs-up" id='like'></i>
+                                                    : <i className="fa-regular fa-thumbs-up" id='like'></i>
                                                 }
                                                 <p className='VP-Like-Count'>{likes}</p>
                                             </div>
-                                            <div className='VP-Dislike-Container' onClick={() => {}}>
+                                            <div className='VP-Dislike-Container' onClick={!isDisabled ? handleDislike : null}>
                                                 {userReaction == 'dislike' ?
-                                                    <i class="fa-solid fa-thumbs-down" id='dislike'></i>
-                                                    : <i class="fa-regular fa-thumbs-down" id='dislike'></i>
+                                                    <i className="fa-solid fa-thumbs-down" id='dislike'></i>
+                                                    : <i className="fa-regular fa-thumbs-down" id='dislike'></i>
                                                 }
                                                 <p className='VP-Dislike-Count'>{dislikes}</p>
                                             </div>
