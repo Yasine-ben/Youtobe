@@ -8,25 +8,32 @@
     top: 50px;
     left: 50px;
     height: 100vw;
+    width: 70vw;
 }
+
 .VP-Wrapper {
     display: flex;
     flex-direction: row;
 }
-.VP-Player-Wrapper {
-    width: 1180px;
-    /* glow radius (as high as possible for now) */
-    box-shadow: 0 0 6000px rgba(255, 255, 255, 0.13);
+
+.player-wrapper video { object-fit: cover; }
+
+.react-player {
+    height: auto !important;
+    aspect-ratio: 16/9;
 }
-.VP-Player {}
+
 .VP-UnderPlayer-Wrapper {}
+
 .VP-Title-Wrapper {}
+
 .VP-Title {
     font-size: 1.35em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .VP-Lower-Wrapper {
     display: flex;
     flex-direction: row;
@@ -34,17 +41,20 @@
     justify-content: space-between;
     align-items: center;
 }
-.VP-Creator-Wrapper{
+
+.VP-Creator-Wrapper {
     display: flex;
     flex-direction: row;
     position: relative;
     height: 50px;
 }
-.VP-Creator-Img-Wrapper{
+
+.VP-Creator-Img-Wrapper {
     width: 80px;
     height: 100%;
 }
-.VP-Creator-Img{
+
+.VP-Creator-Img {
     position: relative;
     top: -10px;
     left: 0px;
@@ -57,29 +67,32 @@
     /* adjust this to the desired width of your image */
     height: 45px;
 }
-.VP-CreatorName-Wrapper{
+
+.VP-CreatorName-Wrapper {
     display: flex;
     flex-direction: column;
     position: relative;
     left: -15px;
     top: -45px;
 }
-.VP-CreatorName{
+
+.VP-CreatorName {
     position: relative;
     top: 20px;
 }
-.VP-Subscribers{
+
+.VP-Subscribers {
     font-weight: 500;
     font-size: .8em;
     color: grey;
 }
 
-.VP-Buttons{
+.VP-Buttons {
     display: flex;
     gap: 20px;
 }
 
-.VP-UpdateBtn{
+.VP-UpdateBtn {
     display: flex;
     width: 80px;
     height: 30px;
@@ -93,7 +106,7 @@
     cursor: pointer;
 }
 
-.VP-DeleteBtn{
+.VP-DeleteBtn {
     display: flex;
     width: 80px;
     height: 30px;
@@ -106,12 +119,13 @@
     bottom: 10px;
     cursor: pointer;
 }
+
 /* END */
 
 /* Description Box */
 /* in the future add a button to open the description box to see all the text./////////////////////////////////////////////////////////// */
 /*/////////////////////////// DESC CLOSED //////////////////////////////////////////////////////////////////////////////*/
-.VP-DescriptionBox-Wrapper-Sm{
+.VP-DescriptionBox-Wrapper-Sm {
     background-color: rgb(39, 39, 39);
     width: 1180px;
     height: 125px;
@@ -122,24 +136,29 @@
     padding-left: 10px;
     cursor: pointer;
 }
-.VP-DescriptionBox-Wrapper-Sm:hover{
+
+.VP-DescriptionBox-Wrapper-Sm:hover {
     background-color: rgb(63, 63, 63);
 }
-.VP-Desc-ViewsAndTime-Sm{
+
+.VP-Desc-ViewsAndTime-Sm {
     display: flex;
     flex-direction: row;
 }
-.VP-Description-Wrapper-Sm{
+
+.VP-Description-Wrapper-Sm {
     display: flex;
     flex-direction: column;
 }
-.VP-Description-Sm{
+
+.VP-Description-Sm {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     width: 80%;
 }
-.VP-Desc-ShowMore{
+
+.VP-Desc-ShowMore {
     position: relative;
     bottom: 20px;
     font-size: .9em;
@@ -149,7 +168,7 @@
 
 /* /////////////////////////////////DESC OPEN /////////////////////////////////////////////////////////////////////////*/
 
-.VP-DescriptionBox-Wrapper-Sl{
+.VP-DescriptionBox-Wrapper-Sl {
     background-color: rgb(39, 39, 39);
     width: 1180px;
     height: fit-content;
@@ -158,17 +177,20 @@
     border-radius: 13px;
     overflow: hidden;
     padding-left: 10px;
-    
+
 }
-.VP-Desc-ViewsAndTime-Sl{
+
+.VP-Desc-ViewsAndTime-Sl {
     display: flex;
     flex-direction: row;
 }
-.VP-Description-Sl{
+
+.VP-Description-Sl {
     white-space: wrap;
     width: 80%;
 }
-.VP-Desc-ShowLess{
+
+.VP-Desc-ShowLess {
     color: grey;
     cursor: pointer;
 }
@@ -177,34 +199,36 @@
 
 
 /* ADD COMMENTS */
-.VP-Comments-Wrapper{
+.VP-Comments-Wrapper {
     margin-top: 30px;
     width: 1180px;
     /* height 100 for now remove asap */
     height: 100px;
     position: relative;
 }
-.VP-AddComments-Wrapper{
+
+.VP-AddComments-Wrapper {
     display: flex;
     flex-direction: row;
     /* padding-bottom: 20px; */
 }
-.VP-Comments-UserIcon{
+
+.VP-Comments-UserIcon {
     width: 57px;
     height: 68px;
     font-size: 1.3em;
 }
-i.fa-solid.fa-circle-user:before{
+
+i.fa-solid.fa-circle-user:before {
     padding-left: 5px;
     font-size: 2em;
 }
-.VP-InputAndButtons-Wrapper{
 
-}
-.VP-Input-Wrapper{
+.VP-InputAndButtons-Wrapper {}
 
-}
-.VP-Comment-Input{
+.VP-Input-Wrapper {}
+
+.VP-Comment-Input {
     width: 1120px;
     height: 25px;
     border: 0;
@@ -213,19 +237,22 @@ i.fa-solid.fa-circle-user:before{
     background-color: rgb(15, 15, 15);
     padding-bottom: 5px;
     font-size: 1.1em;
-    cursor:text;
+    cursor: text;
 }
-.VP-Comment-Input:focus{
+
+.VP-Comment-Input:focus {
     outline: none;
 }
-.VP-CommentInputButton-Wrapper{
+
+.VP-CommentInputButton-Wrapper {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     height: 40px;
     align-items: center;
 }
-.VP-Submit{
+
+.VP-Submit {
     display: flex;
     width: 90px;
     height: 34px;
@@ -238,21 +265,24 @@ i.fa-solid.fa-circle-user:before{
     font-size: .9em;
     cursor: pointer;
 }
+
 /* END */
 
 
 /* USER COMMENTS */
-.VP-UC-Main-Wrapper{
+.VP-UC-Main-Wrapper {
     /* width: 1000px; */
 }
-.VP-UC-Card-Wrapper{
+
+.VP-UC-Card-Wrapper {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
 }
-.VP-UC-Icon-Wrapper{
+
+.VP-UC-Icon-Wrapper {
     /* width: 57px;
     height: 68px; */
     position: relative;
@@ -269,58 +299,66 @@ i.fa-solid.fa-circle-user:before{
     /* adjust this to the desired height of your image */
 
 }
-#VP-UC-Icon{
+
+#VP-UC-Icon {
     /* font-size: 1.3em; */
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-.VP-UC-RightBox-Wrapper{
+
+.VP-UC-RightBox-Wrapper {
     display: flex;
     flex-direction: column;
     max-width: 1070px;
 
-    
+
 }
-.VP-UC-Commenter-Wrapper{
+
+.VP-UC-Commenter-Wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 5px;
 }
-.VP-UC-Commenter{
+
+.VP-UC-Commenter {
     font-size: .95em;
     font-weight: 400;
     text-align: center;
 
-    
+
 }
-.VP-UC-Time{
+
+.VP-UC-Time {
     color: rgb(163, 163, 163);
     font-size: .75em;
     font-weight: 500;
 }
-.VP-UC-Comment-Wrapper{
+
+.VP-UC-Comment-Wrapper {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
 }
-.VP-UC-Comment{
+
+.VP-UC-Comment {
     position: relative;
     top: -15px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.VP-UC-NoComments-Wrapper{
 
-}
-.VP-UC-NoComment-Title{}
+.VP-UC-NoComments-Wrapper {}
+
+.VP-UC-NoComment-Title {}
+
 /* END */
 
 
 /* EDIT COMMENT CSS */
-.VP-Edit-CommentInputButton-Wrapper{
+.VP-Edit-CommentInputButton-Wrapper {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -328,10 +366,12 @@ i.fa-solid.fa-circle-user:before{
     align-items: center;
     gap: 10px;
 }
-.VP-UC-EditComment-Wrapper{
+
+.VP-UC-EditComment-Wrapper {
     display: flex;
 }
-.VP-Cancel{
+
+.VP-Cancel {
     display: flex;
     width: 90px;
     height: 34px;
@@ -343,7 +383,7 @@ i.fa-solid.fa-circle-user:before{
     font-weight: 400;
     font-size: .9em;
     cursor: pointer;
-    
+
 }
 
 
@@ -357,28 +397,35 @@ i.fa-solid.fa-circle-user:before{
     top: 100px;
     right: 30px;
 }
+
 .VP-Recomended-Wrapper {}
+
 .VP-Rec-Card-Wrapper {
     width: 380px;
     height: 106px;
     cursor: pointer;
 }
+
 .VP-Rec-Container {
     display: flex;
     flex-direction: row;
 }
+
 .VP-Rec-Img-Wrapper {
     margin-right: 10px;
     width: 169px;
     height: 96px;
-    border-radius: 10px;background-color: 
-    rgba(35, 35, 35, .9)
+    border-radius: 10px;
+    background-color:
+        rgba(35, 35, 35, .9)
 }
+
 .VP-Recomended-Img {
     width: 169px;
     height: 96px;
     border-radius: 10px;
 }
+
 .VP-Rec-Text-Wrapper {
     display: flex;
     flex-direction: column;
@@ -387,14 +434,16 @@ i.fa-solid.fa-circle-user:before{
     height: 96px;
     width: 200px;
     gap: 5px;
-    
+
 }
+
 .VP-Rec-Title-Wrapper {
     /* background-color: green; */
     height: 40px;
     font-size: .95em;
     font-weight: 500;
 }
+
 .VP-Rec-Title {
     position: relative;
     top: 5px;
@@ -403,7 +452,8 @@ i.fa-solid.fa-circle-user:before{
     margin: 0;
     overflow: hidden;
 }
-.VP-Rec-Uploader-Wrapper{
+
+.VP-Rec-Uploader-Wrapper {
     display: flex;
     flex-direction: row;
     gap: 6px;
@@ -411,8 +461,9 @@ i.fa-solid.fa-circle-user:before{
     position: relative;
     top: 3px;
 }
-.VP-Rec-Uploader-Img{
-    
+
+.VP-Rec-Uploader-Img {
+
     top: 13px;
     left: 18px;
     display: flex;
@@ -425,7 +476,8 @@ i.fa-solid.fa-circle-user:before{
     height: 16px;
     /* adjust this to the desired height of your image */
 }
-.VP-Rec-Uploader{
+
+.VP-Rec-Uploader {
     position: relative;
     top: 2px;
     height: 40px;
@@ -437,7 +489,8 @@ i.fa-solid.fa-circle-user:before{
     font-weight: 400;
     align-self: center;
 }
-.VP-Rec-ViewsAndTime-Wrapper{
+
+.VP-Rec-ViewsAndTime-Wrapper {
     display: flex;
     flex-direction: row;
     position: relative;
@@ -449,31 +502,36 @@ i.fa-solid.fa-circle-user:before{
     font-weight: 400;
     text-align: center;
 }
-.VP-Rec-Views{
+
+.VP-Rec-Views {
     top: 0;
     height: 40px;
     margin: 0;
 }
-.VP-Rec-Time{
+
+.VP-Rec-Time {
     top: 0;
     height: 40px;
     margin: 0;
 }
+
 /* END */
 
 
 
-.VP-UC-OwnerEdit-Wrapper{
+.VP-UC-OwnerEdit-Wrapper {
     height: 40px;
-} 
-#VP-UC-Edit{
+}
+
+#VP-UC-Edit {
     display: flex;
     position: absolute;
     right: 0px;
     align-content: center;
     cursor: pointer;
-} 
-.VP-EditMenu-Wrapper{
+}
+
+.VP-EditMenu-Wrapper {
     display: flex;
     flex-direction: row;
     width: 100px;
@@ -488,23 +546,24 @@ i.fa-solid.fa-circle-user:before{
     justify-content: space-around;
 }
 
-.VP-EditMenu-EditBtn{
+.VP-EditMenu-EditBtn {
     padding-right: 6px;
     border-right: 2px solid black;
     cursor: pointer;
     color: black;
     margin-left: 5px;
 }
-.VP-EditMenu-EditBtn:hover{
+
+.VP-EditMenu-EditBtn:hover {
     color: rgb(28, 115, 232);
 }
 
-.VP-EditMenu-DeleteBtn{
+.VP-EditMenu-DeleteBtn {
     cursor: pointer;
     color: black;
     margin-right: 3px;
 }
 
-.VP-EditMenu-DeleteBtn:hover{
+.VP-EditMenu-DeleteBtn:hover {
     color: rgb(28, 115, 232);
 }
