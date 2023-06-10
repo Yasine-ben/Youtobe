@@ -6,8 +6,8 @@ from sqlalchemy.sql import text
 def seed_reactions():
     # Create reactions
     reaction1 = Reaction(user_id=1, video_id=1, reaction_type="like")
-    reaction2 = Reaction(user_id=1, video_id=2, reaction_type="like")
-    reaction3 = Reaction(user_id=1, video_id=3, reaction_type="dislike")
+    reaction2 = Reaction(user_id=2, video_id=1, reaction_type="like")
+    reaction3 = Reaction(user_id=3, video_id=1, reaction_type="dislike")
     db.session.add_all([reaction1, reaction2, reaction3])
     db.session.commit()
 

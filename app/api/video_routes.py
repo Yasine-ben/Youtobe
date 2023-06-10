@@ -5,7 +5,7 @@ import os
 from flask import Blueprint, jsonify, redirect, request
 from flask_wtf.csrf import generate_csrf
 from flask_login import login_required, current_user
-from app.models import db, User, Video, Comment
+from app.models import db, User, Video, Comment, Reaction
 from app.forms import VideoForm
 from .AWS_helpers import get_unique_filename, upload_file_to_AWS
 
@@ -49,7 +49,6 @@ def userVideos(user_id):
     
     return {'videos': [video.to_dict() for video in videos]}
 
-# Working
 @video_routes.route('/<int:video_id>')
 def singleVideo(video_id):
     """
@@ -57,10 +56,20 @@ def singleVideo(video_id):
     """
     video = Video.query.get(video_id)
     if not video:
-        return { 'error' : 'Video not found', 'status': 404}
-    
-    else:
-        return { 'video': video.to_dict() }
+        return {'error': 'Video not found', 'status': 404}
+
+    # Get the video reactions
+    reactions = Reaction.query.filter_by(video_id=video.id).all()
+    print('////////////////////////////////////////////////////////////////')
+    print(reactions)
+    # Convert reactions to a list of dictionaries
+    reactions_data = [reaction.to_dict() for reaction in reactions]
+
+    # Add reactions to the video dictionary
+    video_data = video.to_dict()
+    video_data['reactions'] = reactions_data
+
+    return {'video': video_data}
 
 @video_routes.route('/createVideo', methods=['POST'])
 @login_required

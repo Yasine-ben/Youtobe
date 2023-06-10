@@ -15,3 +15,11 @@ class Reaction(db.Model):
 
     user = db.relationship('User', back_populates='reactions')
     video = db.relationship('Video', back_populates='reactions')
+
+    def to_dict(self):
+            return {
+                'id': self.id,
+                'user_id': self.user_id,
+                'video_id': self.video_id,
+                'reaction_type': self.reaction_type,
+            }
