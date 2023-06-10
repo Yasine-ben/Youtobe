@@ -25,8 +25,7 @@ class Video(db.Model):
     user = db.relationship('User', back_populates='videos')
     comments = db.relationship('Comment', back_populates='videos', cascade='all, delete')
     
-    likes = db.relationship('User', secondary='liked_videos', back_populates='likes')
-    dislikes = db.relationship('User', secondary='disliked_videos', back_populates='dislikes')
+    reactions = db.relationship('Reaction', back_populates='video', cascade='all, delete')
 
 
     def to_dict(self):
@@ -38,6 +37,7 @@ class Video(db.Model):
             'thumbnail': self.thumbnail,
             'length': self.length,
             'views': self.views,
+            'reactions': [reaction.reaction_type for reaction in self.reactions],
             'uploader': self.uploader,
             'cover_image': self.cover_image,
             'created_at': self.created_at,
