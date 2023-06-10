@@ -224,10 +224,29 @@ function SingleVideoPage() {
                                         <p className='VP-Subscribers'>{`0 subscribers`}</p>
                                     </div>
                                 </div>
-                                <div className='VP-Buttons-Wrapper'>
+                                
+                                <div className='VP-UserInteration-Wrapper'>
+                                    <div className='VP-Reactions-Wrapper' style={{ width: '160px', height: '36px' }}>
+                                        <div className='VP-Reactions'>
+                                            <div className='VP-Like-Container'>
+                                                <span id='like' class="material-symbols-outlined">thumb_up</span>
+                                                <p className='VP-Like-Count'>{"0"}</p>
+                                            </div>
+                                            <div className='VP-Dislike-Container'>
+                                                <span id='dislike' class="material-symbols-outlined">thumb_down</span>
+                                                <p className='VP-Dislike-Count'>{"0"}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='VP-ContextMenu-Wrapper'>
+                                        <div className='VP-ContextMenuIcon'>
+                                            <span class="material-symbols-outlined">more_horiz</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* <div className='VP-Buttons-Wrapper'>
                                     {(user?.id === video?.user_id) && (
                                         <div className='VP-Buttons'>
-                                            {/* <div className='VP-UpdateBtn'>Update</div> */}
                                             <OpenModalButton
                                                 className='VP-UpdateBtn'
                                                 buttonText='Update'
@@ -236,7 +255,7 @@ function SingleVideoPage() {
                                             <div className='VP-DeleteBtn' onClick={(e) => handleDelete(e)}>Delete</div>
                                         </div>
                                     )}
-                                </div>
+                                </div> */}
                             </div>
                         </div>
 
