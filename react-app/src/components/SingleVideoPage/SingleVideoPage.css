@@ -12,14 +12,7 @@
     margin-left: 20px;
 }
 
-@media only screen and (max-width: 1340px) {
-    .VP-Right-Wrapper{
-        display: none;
-    }
-    .VP-Left-Wrapper {
-        width: 99%;
-    }
-}
+
 
 .VP-Recomended-Wrapper {}
 
@@ -252,7 +245,7 @@
 /*/////////////////////////// DESC CLOSED //////////////////////////////////////////////////////////////////////////////*/
 .VP-DescriptionBox-Wrapper-Sm {
     background-color: rgb(39, 39, 39);
-    width: 1180px;
+    width: 68vw;
     height: 125px;
     position: relative;
     display: block;
@@ -295,7 +288,7 @@
 
 .VP-DescriptionBox-Wrapper-Sl {
     background-color: rgb(39, 39, 39);
-    width: 1180px;
+    width: 68vw;
     height: fit-content;
     position: relative;
     display: block;
@@ -326,7 +319,7 @@
 /* ADD COMMENTS */
 .VP-Comments-Wrapper {
     margin-top: 30px;
-    width: 1180px;
+    width: 68vw;
     /* height 100 for now remove asap */
     height: 100px;
     position: relative;
@@ -354,7 +347,7 @@ i.fa-solid.fa-circle-user:before {
 .VP-Input-Wrapper {}
 
 .VP-Comment-Input {
-    width: 1120px;
+    width: 65.5vw;
     height: 25px;
     border: 0;
     border-bottom: 1px solid grey;
@@ -566,4 +559,14 @@ i.fa-solid.fa-circle-user:before {
 
 .VP-EditMenu-DeleteBtn:hover {
     color: rgb(28, 115, 232);
+}
+
+
+@media only screen and (max-width: 1340px) {
+    .VP-Right-Wrapper{
+        display: none;
+    }
+    .VP-Left-Wrapper {
+        width: 99%;
+    }
 }
