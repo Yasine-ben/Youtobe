@@ -191,7 +191,7 @@ function SingleVideoPage() {
     return (
         (!isLoaded) ? <div className='LOADING-SCREEN'></div> :
             (
-
+            
                 <div className='VP-Wrapper'>
                     <div className='VP-Left-Wrapper'>
                         {/* VIDEO PLAYER LEFT */}

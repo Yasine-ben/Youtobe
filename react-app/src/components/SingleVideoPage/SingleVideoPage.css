@@ -1,20 +1,145 @@
-.VP-Left-Wrapper {
-    padding-top: 50px;
-    /* padding-left: 20px; */
-    padding-right: 20px;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 50px;
-    left: 50px;
-    height: 100vw;
-    width: 70vw;
-}
-
 .VP-Wrapper {
     display: flex;
     flex-direction: row;
+    padding-top: 95px;
 }
+
+.VP-Left-Wrapper {
+    width: 70%;
+}
+.VP-Right-Wrapper{
+    width: 20%;
+    margin-left: 20px;
+}
+
+@media only screen and (max-width: 1340px) {
+    .VP-Right-Wrapper{
+        display: none;
+    }
+    .VP-Left-Wrapper {
+        width: 99%;
+    }
+}
+
+.VP-Recomended-Wrapper {}
+
+.VP-Rec-Card-Wrapper {
+    width: 380px;
+    height: 106px;
+    cursor: pointer;
+}
+
+.VP-Rec-Container {
+    display: flex;
+    flex-direction: row;
+}
+
+.VP-Rec-Img-Wrapper {
+    margin-right: 10px;
+    width: 169px;
+    height: 96px;
+    border-radius: 10px;
+    background-color:
+        rgba(35, 35, 35, .9)
+}
+
+.VP-Recomended-Img {
+    width: 169px;
+    height: 96px;
+    border-radius: 10px;
+}
+
+.VP-Rec-Text-Wrapper {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* background-color: gray; */
+    height: 96px;
+    width: 200px;
+    gap: 5px;
+
+}
+
+.VP-Rec-Title-Wrapper {
+    /* background-color: green; */
+    height: 40px;
+    font-size: .95em;
+    font-weight: 500;
+}
+
+.VP-Rec-Title {
+    position: relative;
+    top: 5px;
+    /* change to 40px after making function to add ... to titles that are too long */
+    max-height: 34px;
+    margin: 0;
+    overflow: hidden;
+}
+
+.VP-Rec-Uploader-Wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    align-items: center;
+    position: relative;
+    top: 3px;
+}
+
+.VP-Rec-Uploader-Img {
+
+    top: 13px;
+    left: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 16px;
+    /* adjust this to the desired width of your image */
+    height: 16px;
+    /* adjust this to the desired height of your image */
+}
+
+.VP-Rec-Uploader {
+    position: relative;
+    top: 2px;
+    height: 40px;
+    margin: 0;
+    /* background-color: green; */
+    height: 20px;
+    color: rgb(163, 163, 163);
+    font-size: .9em;
+    font-weight: 400;
+    align-self: center;
+}
+
+.VP-Rec-ViewsAndTime-Wrapper {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    top: 0;
+    height: 40px;
+    margin: 0;
+    color: rgb(163, 163, 163);
+    font-size: .9em;
+    font-weight: 400;
+    text-align: center;
+}
+
+.VP-Rec-Views {
+    top: 0;
+    height: 40px;
+    margin: 0;
+}
+
+.VP-Rec-Time {
+    top: 0;
+    height: 40px;
+    margin: 0;
+}
+
+/* END */
+
 
 .player-wrapper video { object-fit: cover; }
 
@@ -391,131 +516,6 @@ i.fa-solid.fa-circle-user:before {
 /* END */
 
 
-/* RECOMENDED */
-.VP-Right-Wrapper {
-    position: absolute;
-    top: 100px;
-    right: 30px;
-}
-
-.VP-Recomended-Wrapper {}
-
-.VP-Rec-Card-Wrapper {
-    width: 380px;
-    height: 106px;
-    cursor: pointer;
-}
-
-.VP-Rec-Container {
-    display: flex;
-    flex-direction: row;
-}
-
-.VP-Rec-Img-Wrapper {
-    margin-right: 10px;
-    width: 169px;
-    height: 96px;
-    border-radius: 10px;
-    background-color:
-        rgba(35, 35, 35, .9)
-}
-
-.VP-Recomended-Img {
-    width: 169px;
-    height: 96px;
-    border-radius: 10px;
-}
-
-.VP-Rec-Text-Wrapper {
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    /* background-color: gray; */
-    height: 96px;
-    width: 200px;
-    gap: 5px;
-
-}
-
-.VP-Rec-Title-Wrapper {
-    /* background-color: green; */
-    height: 40px;
-    font-size: .95em;
-    font-weight: 500;
-}
-
-.VP-Rec-Title {
-    position: relative;
-    top: 5px;
-    /* change to 40px after making function to add ... to titles that are too long */
-    max-height: 34px;
-    margin: 0;
-    overflow: hidden;
-}
-
-.VP-Rec-Uploader-Wrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 6px;
-    align-items: center;
-    position: relative;
-    top: 3px;
-}
-
-.VP-Rec-Uploader-Img {
-
-    top: 13px;
-    left: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    overflow: hidden;
-    width: 16px;
-    /* adjust this to the desired width of your image */
-    height: 16px;
-    /* adjust this to the desired height of your image */
-}
-
-.VP-Rec-Uploader {
-    position: relative;
-    top: 2px;
-    height: 40px;
-    margin: 0;
-    /* background-color: green; */
-    height: 20px;
-    color: rgb(163, 163, 163);
-    font-size: .9em;
-    font-weight: 400;
-    align-self: center;
-}
-
-.VP-Rec-ViewsAndTime-Wrapper {
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    top: 0;
-    height: 40px;
-    margin: 0;
-    color: rgb(163, 163, 163);
-    font-size: .9em;
-    font-weight: 400;
-    text-align: center;
-}
-
-.VP-Rec-Views {
-    top: 0;
-    height: 40px;
-    margin: 0;
-}
-
-.VP-Rec-Time {
-    top: 0;
-    height: 40px;
-    margin: 0;
-}
-
-/* END */
 
 
 
