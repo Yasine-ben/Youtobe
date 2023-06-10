@@ -187,15 +187,17 @@ function SingleVideoPage() {
         dispatch(thunkUpdateViews(video.id))
     }
 
+    const wrapperRef = useRef(null);
+
 
     return (
         (!isLoaded) ? <div className='LOADING-SCREEN'></div> :
             (
-            
+
                 <div className='VP-Wrapper'>
                     <div className='VP-Left-Wrapper'>
                         {/* VIDEO PLAYER LEFT */}
-                        <div className='player-wrapper' >
+                        <div className='player-wrapper' ref={wrapperRef}>
                             <ReactPlayer
                                 url={url}
                                 controls={true}
@@ -242,7 +244,7 @@ function SingleVideoPage() {
 
                             (<div className='VP-DescriptionBox-Wrapper-Sl'>
                                 <div className='VP-Desc-ViewsAndTime-Sl'>
-                                    <p className='VP-Desc-Views-Sl'>{`${''} views`}&nbsp;•&nbsp;</p>
+                                    <p className='VP-Desc-Views-Sl'>{`${normalizeViews(video.views)} views`}&nbsp;•&nbsp;</p>
                                     <p className='VP-Desc-Time-Sl'>{dayjs(date).fromNow()}</p>
                                 </div>
                                 <div className='VP-Description-Wrapper-Sl'>
@@ -254,7 +256,7 @@ function SingleVideoPage() {
                             :
                             (<div className='VP-DescriptionBox-Wrapper-Sm' onClick={(e) => setShowMore(true)}>
                                 <div className='VP-Desc-ViewsAndTime-Sm'>
-                                    <p className='VP-Desc-Views-Sm'>{`${''} views`}&nbsp;•&nbsp;</p>
+                                    <p className='VP-Desc-Views-Sm'>{`${normalizeViews(video.views)} views`}&nbsp;•&nbsp;</p>
                                     <p className='VP-Desc-Time-Sm'>{dayjs(date).fromNow()}</p>
                                 </div>
                                 <div className='VP-Description-Wrapper-Sm'>

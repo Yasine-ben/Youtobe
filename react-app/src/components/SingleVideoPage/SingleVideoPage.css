@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     padding-top: 95px;
+    padding-bottom: 100px;
 }
 
 .VP-Left-Wrapper {
@@ -568,5 +569,38 @@ i.fa-solid.fa-circle-user:before {
     }
     .VP-Left-Wrapper {
         width: 99%;
+    }
+    .VP-DescriptionBox-Wrapper-Sl {
+        width: 95vw;
+    }
+    .VP-DescriptionBox-Wrapper-Sm {
+        width: 95vw;
+    }
+    .VP-Comments-Wrapper{
+        width: 100%;
+    }
+    .VP-Comment-Input {
+        width: 90vw;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .VP-Right-Wrapper{
+        display: none;
+    }
+    .VP-Left-Wrapper {
+        width: 99%;
+    }
+    .VP-DescriptionBox-Wrapper-Sl {
+        width: 93vw;
+    }
+    .VP-DescriptionBox-Wrapper-Sm {
+        width: 93vw;
+    }
+    .VP-Comments-Wrapper{
+        width: 95%;
+    }
+    .VP-Comment-Input {
+        width: 81vw;
     }
 }
