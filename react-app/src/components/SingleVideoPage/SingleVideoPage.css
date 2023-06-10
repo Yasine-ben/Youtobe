@@ -8,7 +8,8 @@
 .VP-Left-Wrapper {
     width: 70%;
 }
-.VP-Right-Wrapper{
+
+.VP-Right-Wrapper {
     width: 20%;
     margin-left: 20px;
 }
@@ -18,7 +19,9 @@
 
 
 
-.player-wrapper video { object-fit: cover; }
+.player-wrapper video {
+    object-fit: cover;
+}
 
 .react-player {
     height: auto !important;
@@ -44,12 +47,13 @@
     align-items: center;
 }
 
-.VP-UserInteration-Wrapper{
+.VP-UserInteration-Wrapper {
     width: 210px;
     display: flex;
     gap: 10px;
 }
-.VP-ContextMenu-Wrapper{
+
+.VP-ContextMenu-Wrapper {
     display: flex;
     background-color: rgb(36, 36, 36);
     padding: 7px;
@@ -57,11 +61,12 @@
     position: relative;
     bottom: 10px;
 }
-.VP-ContextMenuIcon{
-    display: flex; 
+
+.VP-ContextMenuIcon {
+    display: flex;
 }
 
-.VP-Reactions-Wrapper{
+.VP-Reactions-Wrapper {
     width: 150px;
     height: 36px;
     background-color: rgb(36, 36, 36);
@@ -73,13 +78,14 @@
     bottom: 10px;
 }
 
-.VP-Reactions{
+.VP-Reactions {
     width: 150px;
     height: 25px;
     display: flex;
     font-weight: 400;
 }
-.VP-Like-Container{
+
+.VP-Like-Container {
     border-right: 1px solid grey;
     width: 75px;
     max-width: 75px;
@@ -91,18 +97,22 @@
     align-items: center;
     gap: 5px;
 }
-.VP-Like-Count{
+
+.VP-Like-Count {
     font-weight: 300;
 }
-#like{
+
+/* #like {
     font-size: 1.6em;
     font-weight: 300;
 }
-#dislike{
+
+#dislike {
     font-size: 1.6em;
     font-weight: 300;
-}
-.VP-Dislike-Container{
+} */
+
+.VP-Dislike-Container {
     width: 75px;
     max-width: 75px;
     height: 25px;
@@ -113,7 +123,8 @@
     align-items: center;
     gap: 5px;
 }
-.VP-Dislike-Count{
+
+.VP-Dislike-Count {
     font-weight: 400;
 }
 
@@ -641,21 +652,26 @@ i.fa-solid.fa-circle-user:before {
 
 /* END */
 @media only screen and (max-width: 1340px) {
-    .VP-Right-Wrapper{
+    .VP-Right-Wrapper {
         display: none;
     }
+
     .VP-Left-Wrapper {
         width: 99%;
     }
+
     .VP-DescriptionBox-Wrapper-Sl {
         width: 95vw;
     }
+
     .VP-DescriptionBox-Wrapper-Sm {
         width: 95vw;
     }
-    .VP-Comments-Wrapper{
+
+    .VP-Comments-Wrapper {
         width: 100%;
     }
+
     .VP-Comment-Input {
         width: 90vw;
     }
@@ -664,31 +680,37 @@ i.fa-solid.fa-circle-user:before {
 
 
 @media only screen and (max-width: 750px) {
-    .VP-Right-Wrapper{
+    .VP-Right-Wrapper {
         display: none;
     }
+
     .VP-Left-Wrapper {
         width: 99%;
     }
+
     .VP-DescriptionBox-Wrapper-Sl {
         width: 93vw;
     }
+
     .VP-DescriptionBox-Wrapper-Sm {
         width: 93vw;
     }
-    .VP-Comments-Wrapper{
+
+    .VP-Comments-Wrapper {
         width: 95%;
     }
+
     .VP-Comment-Input {
         width: 81vw;
     }
+
     .VP-Comments-UserIcon {
         width: 57px;
         height: 68px;
         font-size: 1.3em;
         padding-right: 2px;
     }
-    
+
     i.fa-solid.fa-circle-user:before {
         padding-left: 0;
         font-size: 1.8em;

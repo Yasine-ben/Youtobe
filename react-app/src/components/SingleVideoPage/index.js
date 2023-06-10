@@ -15,7 +15,7 @@ function SingleVideoPage() {
     const dispatch = useDispatch()
     const history = useHistory()
     const { video_id } = useParams();
-
+    const wrapperRef = useRef(null);
     //import dayjs from 'dayjs' // ES 2015
     const dayjs = require('dayjs')
     let relativeTime = require('dayjs/plugin/relativeTime')
@@ -49,8 +49,79 @@ function SingleVideoPage() {
     const [editEnabled, setEditEnabled] = useState(false)
     const [editCommentId, setEditCommentId] = useState(null)
 
+    const [likes, setLikes] = useState(0);
+    const [dislikes, setDislikes] = useState(0);
+    const [userReaction, setUserReaction] = useState(null);
+
+    const [isLiked, setIsLiked] = useState(false);
+    const [isDisliked, setIsDisliked] = useState(false);
+
     const [errors, setErrors] = useState({})
 
+    useEffect(() => {
+        // Check if reactions exist
+        if (video?.reactions && video?.reactions.length > 0) {
+            let likeCount = 0;
+            let dislikeCount = 0;
+            let userReactionType = null;
+
+            // Count likes and dislikes
+            video?.reactions.forEach(reaction => {
+                if (reaction.reaction_type === 'like') {
+                    likeCount++;
+                    if (reaction.user_id === user.id) {
+                        userReactionType = 'like';
+                    }
+                } else if (reaction.reaction_type === 'dislike') {
+                    dislikeCount++;
+                    if (reaction.user_id === user.id) {
+                        userReactionType = 'dislike';
+                    }
+                }
+            });
+
+            // Update state variables
+            setLikes(likeCount);
+            setDislikes(dislikeCount);
+            setUserReaction(userReactionType);
+        }
+    }, [video?.reactions]);
+
+    const handleLike = () => {
+        // Check if the user has already liked the video
+        if (isLiked) {
+            // User already liked the video, handle unlike logic here
+            // ...
+            setIsLiked(false);
+        } else {
+            // User has not liked the video, handle like logic here
+            // ...
+            setIsLiked(true);
+
+            // If the user had previously disliked the video, update the dislike state
+            if (isDisliked) {
+                setIsDisliked(false);
+            }
+        }
+    };
+
+    const handleDislike = () => {
+        // Check if the user has already disliked the video
+        if (isDisliked) {
+            // User already disliked the video, handle undislike logic here
+            // ...
+            setIsDisliked(false);
+        } else {
+            // User has not disliked the video, handle dislike logic here
+            // ...
+            setIsDisliked(true);
+
+            // If the user had previously liked the video, update the like state
+            if (isLiked) {
+                setIsLiked(false);
+            }
+        }
+    };
 
 
     useEffect(() => {
@@ -142,7 +213,7 @@ function SingleVideoPage() {
         setEditCommentId(id)
         setEditEnabled(true)
     }
-
+    console.log(video)
     const handleEditComment = async (e, comment_id) => {
         e.preventDefault()
         const err = {}
@@ -187,7 +258,7 @@ function SingleVideoPage() {
         dispatch(thunkUpdateViews(video.id))
     }
 
-    const wrapperRef = useRef(null);
+
 
 
     return (
@@ -224,23 +295,29 @@ function SingleVideoPage() {
                                         <p className='VP-Subscribers'>{`0 subscribers`}</p>
                                     </div>
                                 </div>
-                                
+
                                 <div className='VP-UserInteration-Wrapper'>
                                     <div className='VP-Reactions-Wrapper' style={{ width: '160px', height: '36px' }}>
                                         <div className='VP-Reactions'>
-                                            <div className='VP-Like-Container'>
-                                                <span id='like' class="material-symbols-outlined">thumb_up</span>
-                                                <p className='VP-Like-Count'>{"0"}</p>
+                                            <div className='VP-Like-Container' onClick={() => { }}>
+                                                {userReaction == 'like' ?
+                                                    <i class="fa-solid fa-thumbs-up" id='like'></i>
+                                                    : <i class="fa-regular fa-thumbs-up" id='like'></i>
+                                                }
+                                                <p className='VP-Like-Count'>{likes}</p>
                                             </div>
-                                            <div className='VP-Dislike-Container'>
-                                                <span id='dislike' class="material-symbols-outlined">thumb_down</span>
-                                                <p className='VP-Dislike-Count'>{"0"}</p>
+                                            <div className='VP-Dislike-Container' onClick={() => {}}>
+                                                {userReaction == 'dislike' ?
+                                                    <i class="fa-solid fa-thumbs-down" id='dislike'></i>
+                                                    : <i class="fa-regular fa-thumbs-down" id='dislike'></i>
+                                                }
+                                                <p className='VP-Dislike-Count'>{dislikes}</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div className='VP-ContextMenu-Wrapper'>
                                         <div className='VP-ContextMenuIcon'>
-                                            <span class="material-symbols-outlined">more_horiz</span>
+                                            <span className="material-symbols-outlined">more_horiz</span>
                                         </div>
                                     </div>
                                 </div>
