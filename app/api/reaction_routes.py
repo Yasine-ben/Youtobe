@@ -18,11 +18,16 @@ def create_reaction():
     if not user or not video:
         return jsonify({'message': 'User or video not found'}), 404
 
+    existing_reaction = Reaction.query.filter_by(user=user, video=video).first()
+    if existing_reaction:
+        return jsonify({'message': 'User already has a reaction to this video'}), 400
+
     reaction = Reaction(user=user, video=video, reaction_type=reaction_type)
     db.session.add(reaction)
     db.session.commit()
 
     return jsonify({'message': 'Reaction created successfully'}), 201
+
 
 #update reaction
 @reaction_routes.route('/<int:reaction_id>', methods=['PUT'])
