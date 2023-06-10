@@ -148,11 +148,14 @@ export const thunkCreateReaction = (user_id, video_id, reaction_type) => async d
         })
     });
 
-    if (response.ok) {
-        return dispatch(thunkSingleVideo(video_id))
-    }
+    return response
 }
 
+export const thunkDeleteReaction = (user_id, video_id) => async dispatch => {
+    const response = await fetch(`/api/reactions/${user_id}/${video_id}`, {method:'DELETE'})
+
+    return response
+}
 
 
 // INITIAL 

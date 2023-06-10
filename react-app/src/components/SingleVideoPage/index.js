@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useRef, useState } from "react";
 import { Redirect, useHistory, useParams } from "react-router-dom";
-import { thunkAllVideos, thunkAllVideosRand, thunkDeleteVideo, thunkSingleVideo, thunkUpdateViews, thunkCreateReaction } from '../../store/video';
+import { thunkAllVideos, thunkAllVideosRand, thunkDeleteVideo, thunkSingleVideo, thunkUpdateViews, thunkCreateReaction, thunkDeleteReaction } from '../../store/video';
 import normalizeViews from '../../helpers/normalizeViews';
 import OpenModalButton from '../OpenModalButton'
 import ReactPlayer from 'react-player';
@@ -85,39 +85,43 @@ function SingleVideoPage() {
         }
     }, [video?.reactions]);
 
-    const handleLike = async () => {
+    function handleLike() {
         // Check if the user has already liked the video
-        if(user){
+        if (user) {
             if (userReaction == 'like') {
                 //delete reaction
-                await setIsDisabled(true)
-                
-                await setUserReaction(null)
-                await setIsDisabled(false)
-            } else {
+                setIsDisabled(true)
+                dispatch(thunkDeleteReaction(user.id, video.id))
+                setUserReaction(null)
+                setLikes(likes - 1)
+                setIsDisabled(false)
+            } else if(userReaction == null) {
                 //set video reaction to like
-                await setIsDisabled(true)
-                await dispatch(thunkCreateReaction(user.id, video.id, 'like'))
-                await setUserReaction('like');
-                await setIsDisabled(false)
+                setIsDisabled(true)
+                dispatch(thunkCreateReaction(user.id, video.id, 'like'))
+                setUserReaction('like');
+                setLikes(likes + 1)
+                setIsDisabled(false)
             }
         }
     };
 
-    const handleDislike = async () => {
+    function handleDislike() {
         // Check if the user has already disliked the video
         if (userReaction == 'dislike') {
             // Delete reaction
-            await setIsDisabled(true)
-
-            await setUserReaction(null)
-            await setIsDisabled(false)
-        } else {
+            setIsDisabled(true)
+            dispatch(thunkDeleteReaction(user.id, video.id))
+            setUserReaction(null)
+            setDislikes(dislikes - 1)
+            setIsDisabled(false)
+        } else if(userReaction == null) {
             // set video reaction to dislike
-            await setIsDisabled(true)
-            await dispatch(thunkCreateReaction(user.id, video.id, 'dislike'))
-            await setUserReaction('dislike');
-            await setIsDisabled(false)
+            setIsDisabled(true)
+            dispatch(thunkCreateReaction(user.id, video.id, 'dislike'))
+            setUserReaction('dislike');
+            setDislikes(dislikes + 1)
+            setIsDisabled(false)
         }
     };
 
