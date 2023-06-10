@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect, useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { thunkAllVideos, thunkAllVideosRand } from '../../store/video';
+import normalizeViews from '../../helpers/normalizeViews';
 import ad from '../../Images/PMAd.png'
 
 import './HomePage.css'
@@ -19,22 +20,6 @@ function HomePage() {
     dayjs().format()
 
     dayjs.extend(relativeTime)
-
-    // console.log(videos)
-
-    function randomInRange(min, max) {
-        const SUFFIXES = 'KM'
-        let randNum = Math.floor(Math.random() * (max - min + 1) + min);
-        let randPicker = Math.floor(Math.random() * (3 - 1 + 1) + 1)
-        switch (randPicker) {
-            case 1:
-                return (randNum + SUFFIXES[0])
-            case 2:
-                return (randNum + SUFFIXES[1])
-            case 3:
-                return (randNum.toString())
-        }
-    }
 
     // maybe add clean up in useEffect
     useEffect(() => {
@@ -91,7 +76,7 @@ function HomePage() {
                                 </div>
                                 <div className='HP-ViewsAndTime-Wrapper'>
                                     <div className='HP-Views-Wrapper'>
-                                        <p className='HP-Views'>{`${randomInRange(1, 100)} views`}</p>
+                                        <p className='HP-Views'>{`${normalizeViews(video.views)} views`}</p>
                                         <p className='HP-Time'>&nbsp;•&nbsp;{dayjs(video.updated_at).fromNow()}</p>
                                     </div>
                                 </div>

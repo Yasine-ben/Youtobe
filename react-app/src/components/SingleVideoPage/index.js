@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Redirect, useHistory, useParams } from "react-router-dom";
-import { thunkAllVideos, thunkAllVideosRand, thunkDeleteVideo, thunkSingleVideo } from '../../store/video';
+import { thunkAllVideos, thunkAllVideosRand, thunkDeleteVideo, thunkSingleVideo, thunkUpdateViews } from '../../store/video';
+import normalizeViews from '../../helpers/normalizeViews';
 import OpenModalButton from '../OpenModalButton'
 import ReactPlayer from 'react-player';
 import dayjs from 'dayjs';
@@ -14,7 +15,7 @@ function SingleVideoPage() {
     const dispatch = useDispatch()
     const history = useHistory()
     const { video_id } = useParams();
-
+    const wrapperRef = useRef(null);
     //import dayjs from 'dayjs' // ES 2015
     const dayjs = require('dayjs')
     let relativeTime = require('dayjs/plugin/relativeTime')
@@ -22,7 +23,7 @@ function SingleVideoPage() {
 
     dayjs.extend(relativeTime)
 
-    
+
 
     const video = Object.values(useSelector(state => state.videos?.singleVideo))[0]
     const allVideos = Object.values(useSelector(state => state.videos?.allVideos))
@@ -48,32 +49,78 @@ function SingleVideoPage() {
     const [editEnabled, setEditEnabled] = useState(false)
     const [editCommentId, setEditCommentId] = useState(null)
 
+    const [likes, setLikes] = useState(0);
+    const [dislikes, setDislikes] = useState(0);
+    const [userReaction, setUserReaction] = useState(null);
+    const [isDisabled, setIsDisabled] = useState(false)
+
     const [errors, setErrors] = useState({})
 
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-    function randomInRange(min, max) {
-        const SUFFIXES = 'KM'
-        let randNum = Math.floor(Math.random() * (max - min + 1) + min);
-        let randPicker = Math.floor(Math.random() * (3 - 1 + 1) + 1)
-        switch (randPicker) {
-            case 1:
-                return (randNum + SUFFIXES[0])
-            case 2:
-                return (randNum + SUFFIXES[1])
-            case 3:
-                return (randNum.toString())
-        }
-    }
-
-
     useEffect(() => {
-        function handleResize() {
-            setWindowWidth(window.innerWidth);
+        // Check if reactions exist
+        if (video?.reactions && video?.reactions.length > 0) {
+            let likeCount = 0;
+            let dislikeCount = 0;
+            let userReactionType = null;
+
+            // Count likes and dislikes
+            video?.reactions.forEach(reaction => {
+                if (reaction.reaction_type === 'like') {
+                    likeCount++;
+                    if (reaction.user_id === user.id) {
+                        userReactionType = 'like';
+                    }
+                } else if (reaction.reaction_type === 'dislike') {
+                    dislikeCount++;
+                    if (reaction.user_id === user.id) {
+                        userReactionType = 'dislike';
+                    }
+                }
+            });
+
+            // Update state variables
+            setLikes(likeCount);
+            setDislikes(dislikeCount);
+            setUserReaction(userReactionType);
         }
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    }, [video?.reactions]);
+
+    const handleLike = async () => {
+        // Check if the user has already liked the video
+        if(user){
+            if (userReaction == 'like') {
+                //delete reaction
+                await setIsDisabled(true)
+
+                await setUserReaction(null)
+                await setIsDisabled(false)
+            } else {
+                //set video reaction to like
+                await setIsDisabled(true)
+
+                await setUserReaction('like');
+                await setIsDisabled(false)
+            }
+        }
+    };
+
+    const handleDislike = async () => {
+        // Check if the user has already disliked the video
+        if (userReaction == 'dislike') {
+            // Delete reaction
+            await setIsDisabled(true)
+
+            await setUserReaction(null)
+            await setIsDisabled(false)
+        } else {
+            // set video reaction to dislike
+            await setIsDisabled(true)
+
+            await setUserReaction('dislike');
+            await setIsDisabled(false)
+        }
+    };
+
 
     useEffect(() => {
         if (video) {
@@ -105,7 +152,7 @@ function SingleVideoPage() {
         history.push('/')
     }
 
-    
+
 
     const handleCommentSubmit = async (e) => {
         e.preventDefault()
@@ -164,7 +211,7 @@ function SingleVideoPage() {
         setEditCommentId(id)
         setEditEnabled(true)
     }
-
+    console.log(video)
     const handleEditComment = async (e, comment_id) => {
         e.preventDefault()
         const err = {}
@@ -205,198 +252,233 @@ function SingleVideoPage() {
         return
     }
 
+    function handleVideoStart() {
+        dispatch(thunkUpdateViews(video.id))
+    }
+
+
+
+
     return (
         (!isLoaded) ? <div className='LOADING-SCREEN'></div> :
-            (<div className='VP-Wrapper'>
-                <div className='VP-Left-Wrapper'>
-                    {/* VIDEO PLAYER LEFT */}
-                    <div className='VP-Player-Wrapper'>
-                        <ReactPlayer
-                            url={url}
-                            controls={true}
-                            className='VP-Player'
-                            width={1180}
-                            height={720}
-                            onError={(e) => videoError()}
-                            playing={videoErr}
-                        // onEnded={((e) => '')
-                        />
-                    </div>
-                    <div className='VP-UnderPlayer-Wrapper'>
-                        <div className='VP-Title-Wrapper'>
-                            <p className='VP-Title'>{title}</p>
+            (
+
+                <div className='VP-Wrapper'>
+                    <div className='VP-Left-Wrapper'>
+                        {/* VIDEO PLAYER LEFT */}
+                        <div className='player-wrapper' ref={wrapperRef}>
+                            <ReactPlayer
+                                url={url}
+                                controls={true}
+                                className="react-player"
+                                width={'100%'}
+                                height={'100%'}
+                                onError={(e) => videoError()}
+                                playing={videoErr}
+                                onStart={() => handleVideoStart()}
+                            // onEnded={((e) => '')
+                            />
                         </div>
-                        <div className='VP-Lower-Wrapper'>
-                            <div className='VP-Creator-Wrapper'>
-                                <div className='VP-Creator-Img-Wrapper'>
-                                    <img className='VP-Creator-Img' src={video?.cover_image} alt='creatorImg' />
+                        <div className='VP-UnderPlayer-Wrapper'>
+                            <div className='VP-Title-Wrapper'>
+                                <p className='VP-Title'>{title}</p>
+                            </div>
+                            <div className='VP-Lower-Wrapper'>
+                                <div className='VP-Creator-Wrapper'>
+                                    <div className='VP-Creator-Img-Wrapper'>
+                                        <img className='VP-Creator-Img' src={video?.cover_image} alt='creatorImg' />
+                                    </div>
+                                    <div className='VP-CreatorName-Wrapper'>
+                                        <p className='VP-CreatorName'>{video?.uploader}</p>
+                                        <p className='VP-Subscribers'>{`0 subscribers`}</p>
+                                    </div>
                                 </div>
-                                <div className='VP-CreatorName-Wrapper'>
-                                    <p className='VP-CreatorName'>{video?.uploader}</p>
-                                    <p className='VP-Subscribers'>{`${randomInRange(1, 100)} subscribers`}</p>
+
+                                <div className='VP-UserInteration-Wrapper'>
+                                    <div className='VP-Reactions-Wrapper' style={{ width: '160px', height: '36px' }}>
+                                        <div className='VP-Reactions'>
+                                            <div className='VP-Like-Container' onClick={!isDisabled ? handleLike : null}>
+                                                {userReaction == 'like' ?
+                                                    <i className="fa-solid fa-thumbs-up" id='like'></i>
+                                                    : <i className="fa-regular fa-thumbs-up" id='like'></i>
+                                                }
+                                                <p className='VP-Like-Count'>{likes}</p>
+                                            </div>
+                                            <div className='VP-Dislike-Container' onClick={!isDisabled ? handleDislike : null}>
+                                                {userReaction == 'dislike' ?
+                                                    <i className="fa-solid fa-thumbs-down" id='dislike'></i>
+                                                    : <i className="fa-regular fa-thumbs-down" id='dislike'></i>
+                                                }
+                                                <p className='VP-Dislike-Count'>{dislikes}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='VP-ContextMenu-Wrapper'>
+                                        <div className='VP-ContextMenuIcon'>
+                                            <span className="material-symbols-outlined">more_horiz</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* <div className='VP-Buttons-Wrapper'>
+                                    {(user?.id === video?.user_id) && (
+                                        <div className='VP-Buttons'>
+                                            <OpenModalButton
+                                                className='VP-UpdateBtn'
+                                                buttonText='Update'
+                                                modalComponent={<UpdateVideoForm video_id={video_id} />}
+                                            />
+                                            <div className='VP-DeleteBtn' onClick={(e) => handleDelete(e)}>Delete</div>
+                                        </div>
+                                    )}
+                                </div> */}
+                            </div>
+                        </div>
+
+                        {showMore ?
+
+                            (<div className='VP-DescriptionBox-Wrapper-Sl'>
+                                <div className='VP-Desc-ViewsAndTime-Sl'>
+                                    <p className='VP-Desc-Views-Sl'>{`${normalizeViews(video.views)} views`}&nbsp;•&nbsp;</p>
+                                    <p className='VP-Desc-Time-Sl'>{dayjs(date).fromNow()}</p>
+                                </div>
+                                <div className='VP-Description-Wrapper-Sl'>
+                                    <p className='VP-Description-Sl'>{discription}</p>
+                                </div>
+                                <p className='VP-Desc-ShowLess' onClick={(e) => setShowMore(false)}>Show less</p>
+                            </div>
+                            )
+                            :
+                            (<div className='VP-DescriptionBox-Wrapper-Sm' onClick={(e) => setShowMore(true)}>
+                                <div className='VP-Desc-ViewsAndTime-Sm'>
+                                    <p className='VP-Desc-Views-Sm'>{`${normalizeViews(video.views)} views`}&nbsp;•&nbsp;</p>
+                                    <p className='VP-Desc-Time-Sm'>{dayjs(date).fromNow()}</p>
+                                </div>
+                                <div className='VP-Description-Wrapper-Sm'>
+                                    <p className='VP-Description-Sm'>{discription}</p>
+                                    <p className='VP-Desc-ShowMore'>Show more</p>
+                                </div>
+
+                            </div>)
+                        }
+
+                        {/* CREATE COMMENT */}
+                        <div className='VP-Comments-Wrapper'>
+                            <div className='VP-AddComments-Wrapper'>
+                                <div className='VP-Comments-UserIcon'>
+                                    <i className="fa-solid fa-circle-user"></i>
+                                </div>
+                                <div className='VP-InputAndButtons-Wrapper'>
+                                    <div className='VP-Input-Wrapper'>
+                                        <textarea className='VP-Comment-Input' type="text" placeholder='Add a Comment...' value={comment} onChange={(e) => setComment(e.target.value)} disabled={!disabled} id="Comment-Box" name="Comment-Box" required minLength="1" maxLength="1000" />
+                                    </div>
+                                    <div className='VP-CommentInputButton-Wrapper' onClick={(e) => !disabled ? alert('Please Login or Create a gooo account to comment on this video :)') : handleCommentSubmit(e)}>
+                                        <div className='VP-Submit'>
+                                            <p className='VP-Submit-Text'>Comment</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div className='VP-Buttons-Wrapper'>
-                                {(user?.id === video?.user_id) && (
-                                    <div className='VP-Buttons'>
-                                        {/* <div className='VP-UpdateBtn'>Update</div> */}
-                                        <OpenModalButton
-                                            className='VP-UpdateBtn'
-                                            buttonText='Update'
-                                            modalComponent={<UpdateVideoForm video_id={video_id} />}
-                                        />
-                                        <div className='VP-DeleteBtn' onClick={(e) => handleDelete(e)}>Delete</div>
+
+
+                            {/* USER COMMENTS */}
+                            <div className='VP-UC-Main-Wrapper'>
+
+                                {!(comments[1] === 404) ? (
+
+                                    comments?.slice().reverse().map((comment, idx) => (
+
+                                        editEnabled && comment.id === editCommentId ? (
+
+
+                                            <div className='VP-UC-EditComment-Wrapper' key={`Comment_${idx}`}>
+                                                <div className='VP-UC-Icon-Wrapper'>
+                                                    <i id='VP-UC-Icon' className="fa-solid fa-circle-user"></i>
+                                                </div>
+                                                <div className='VP-InputAndButtons-Wrapper'>
+                                                    <div className='VP-Input-Wrapper'>
+                                                        <textarea className='VP-Comment-Input' type="text" placeholder='Add a Comment...' value={editComment} onChange={(e) => setEditComment(e.target.value)} id="Edit-Comment-Box" name="Edit-Comment-Box" required minLength="1" maxLength="1000" />
+                                                    </div>
+                                                    <div className='VP-Edit-CommentInputButton-Wrapper' >
+                                                        <div className='VP-Cancel' onClick={(e) => setEditEnabled(false)}>
+                                                            <p className='VP-Cancel-Text'>Cancel</p>
+                                                        </div>
+                                                        <div className='VP-Submit' onClick={(e) => handleEditComment(e, comment.id)}>
+                                                            <p className='VP-Submit-Text'>Comment</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        ) : (
+
+
+                                            <div key={`Comment_${idx}`} className='VP-UC-Card-Wrapper'>
+                                                <div className='VP-UC-Icon-Wrapper'>
+                                                    {/* <i id='VP-UC-Icon' className="fa-solid fa-circle-user"></i> */}
+                                                    <img id='VP-UC-Icon' src={comment?.cover_image} alt='userImg' />
+                                                </div>
+                                                <div className='VP-UC-RightBox-Wrapper'>
+                                                    <div className='VP-UC-Commenter-Wrapper'>
+                                                        <p className='VP-UC-Commenter'>{comment?.user_name}</p>
+                                                        <p className='VP-UC-Time'>{dayjs(comment?.updated_at).fromNow()}</p>
+                                                    </div>
+                                                    <div className='VP-UC-Comment-Wrapper'>
+                                                        <p className='VP-UC-Comment'>{comment?.comment}</p>
+                                                    </div>
+                                                </div>
+                                                {user?.id === comment?.user_id && (
+                                                    <div className='VP-UC-OwnerEdit-Wrapper' onClick={(e) => { openMenuFunc(idx) }}>
+                                                        <span id='VP-UC-Edit' className="material-symbols-outlined"> more_vert </span>
+                                                        {commentEditOpen && commentCardId == idx && (
+                                                            <div className='VP-EditMenu-Wrapper'>
+                                                                <p className='VP-EditMenu-EditBtn' onClick={(e) => { editHelper(comment.id, comment.comment) }}>Edit</p>
+                                                                <p className='VP-EditMenu-DeleteBtn' onClick={((e) => handleCommentDelete(e, comment.id))}>Delete</p>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )
+                                    ))
+                                ) : (
+                                    <div className='VP-UC-NoComments-Wrapper'>
+                                        <p className='VP-UC-NoComment-Title'>No Comments Yet</p>
                                     </div>
                                 )}
                             </div>
                         </div>
                     </div>
 
-                    {showMore ?
 
-                        (<div className='VP-DescriptionBox-Wrapper-Sl'>
-                            <div className='VP-Desc-ViewsAndTime-Sl'>
-                                <p className='VP-Desc-Views-Sl'>{`${randomInRange(1, 100)} views`}&nbsp;</p>
-                                <p className='VP-Desc-Time-Sl'>{dayjs(date).fromNow()}</p>
-                            </div>
-                            <div className='VP-Description-Wrapper-Sl'>
-                                <p className='VP-Description-Sl'>{discription}</p>
-                            </div>
-                            <p className='VP-Desc-ShowLess' onClick={(e) => setShowMore(false)}>Show less</p>
-                        </div>
-                        )
-                        :
-                        (<div className='VP-DescriptionBox-Wrapper-Sm' onClick={(e) => setShowMore(true)}>
-                            <div className='VP-Desc-ViewsAndTime-Sm'>
-                                <p className='VP-Desc-Views-Sm'>{`${randomInRange(1, 100)} views`}&nbsp;</p>
-                                <p className='VP-Desc-Time-Sm'>{dayjs(date).fromNow()}</p>
-                            </div>
-                            <div className='VP-Description-Wrapper-Sm'>
-                                <p className='VP-Description-Sm'>{discription}</p>
-                                <p className='VP-Desc-ShowMore'>Show more</p>
-                            </div>
-                            
-                        </div>)
-                    }
-
-                    {/* CREATE COMMENT */}
-                    <div className='VP-Comments-Wrapper'>
-                        <div className='VP-AddComments-Wrapper'>
-                            <div className='VP-Comments-UserIcon'>
-                                <i className="fa-solid fa-circle-user"></i>
-                            </div>
-                            <div className='VP-InputAndButtons-Wrapper'>
-                                <div className='VP-Input-Wrapper'>
-                                    <textarea className='VP-Comment-Input' type="text" placeholder='Add a Comment...' value={comment} onChange={(e) => setComment(e.target.value)} disabled={!disabled} id="Comment-Box" name="Comment-Box" required minLength="1" maxLength="1000" />
-                                </div>
-                                <div className='VP-CommentInputButton-Wrapper' onClick={(e) => !disabled ? alert('Please Login or Create a gooo account to comment on this video :)') : handleCommentSubmit(e)}>
-                                    <div className='VP-Submit'>
-                                        <p className='VP-Submit-Text'>Comment</p>
+                    {/* RECOMENDED VIDEOS RIGHT SIDE */}
+                    <div className='VP-Right-Wrapper'>
+                        <div className='VP-Recomended-Wrapper'>
+                            {allVideos?.map((video, idx) => (
+                                <div key={`Recomended_${idx}`} className='VP-Rec-Card-Wrapper' onClick={(e) => { history.push(`/Videos/${video.id}`) }}>
+                                    <div className='VP-Rec-Container'>
+                                        <div className='VP-Rec-Img-Wrapper'>
+                                            <img src={video?.thumbnail} alt='recomeneded thumbnail' className='VP-Recomended-Img' />
+                                        </div>
+                                        <div className='VP-Rec-Text-Wrapper'>
+                                            <div className='VP-Rec-Title-Wrapper'>
+                                                <p className='VP-Rec-Title'>{video?.title}</p>
+                                            </div>
+                                            <div className='VP-Rec-Uploader-Wrapper'>
+                                                <img className='VP-Rec-Uploader-Img' src={video?.cover_image} alt='' />
+                                                <p className='VP-Rec-Uploader'>{video?.uploader}</p>
+                                            </div>
+                                            <div className='VP-Rec-ViewsAndTime-Wrapper'>
+                                                <p className='VP-Rec-Views'>{`${normalizeViews(video.views)} views`}&nbsp;</p>
+                                                <p className='VP-Rec-Time'>•&nbsp;{dayjs(video?.updated_at).fromNow()}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-
-
-                        {/* USER COMMENTS */}
-                        <div className='VP-UC-Main-Wrapper'>
-
-                            {!(comments[1] === 404) ? (
-
-                                comments?.slice().reverse().map((comment, idx) => (
-
-                                    editEnabled && comment.id === editCommentId ? (
-
-
-                                        <div className='VP-UC-EditComment-Wrapper' key={`Comment_${idx}`}>
-                                            <div className='VP-UC-Icon-Wrapper'>
-                                                <i id='VP-UC-Icon' className="fa-solid fa-circle-user"></i>
-                                            </div>
-                                            <div className='VP-InputAndButtons-Wrapper'>
-                                                <div className='VP-Input-Wrapper'>
-                                                    <textarea className='VP-Comment-Input' type="text" placeholder='Add a Comment...' value={editComment} onChange={(e) => setEditComment(e.target.value)} id="Edit-Comment-Box" name="Edit-Comment-Box" required minLength="1" maxLength="1000" />
-                                                </div>
-                                                <div className='VP-Edit-CommentInputButton-Wrapper' >
-                                                    <div className='VP-Cancel' onClick={(e) => setEditEnabled(false)}>
-                                                        <p className='VP-Cancel-Text'>Cancel</p>
-                                                    </div>
-                                                    <div className='VP-Submit' onClick={(e) => handleEditComment(e, comment.id)}>
-                                                        <p className='VP-Submit-Text'>Comment</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    ) : (
-
-
-                                        <div key={`Comment_${idx}`} className='VP-UC-Card-Wrapper'>
-                                            <div className='VP-UC-Icon-Wrapper'>
-                                                {/* <i id='VP-UC-Icon' className="fa-solid fa-circle-user"></i> */}
-                                                <img id='VP-UC-Icon' src={comment?.cover_image} alt='userImg'/>
-                                            </div>
-                                            <div className='VP-UC-RightBox-Wrapper'>
-                                                <div className='VP-UC-Commenter-Wrapper'>
-                                                    <p className='VP-UC-Commenter'>{comment?.user_name}</p>
-                                                    <p className='VP-UC-Time'>{dayjs(comment?.updated_at).fromNow()}</p>
-                                                </div>
-                                                <div className='VP-UC-Comment-Wrapper'>
-                                                    <p className='VP-UC-Comment'>{comment?.comment}</p>
-                                                </div>
-                                            </div>
-                                            {user?.id === comment?.user_id && (
-                                                <div className='VP-UC-OwnerEdit-Wrapper' onClick={(e) => { openMenuFunc(idx) }}>
-                                                    <span id='VP-UC-Edit' className="material-symbols-outlined"> more_vert </span>
-                                                    {commentEditOpen && commentCardId == idx && (
-                                                        <div className='VP-EditMenu-Wrapper'>
-                                                            <p className='VP-EditMenu-EditBtn' onClick={(e) => { editHelper(comment.id, comment.comment) }}>Edit</p>
-                                                            <p className='VP-EditMenu-DeleteBtn' onClick={((e) => handleCommentDelete(e, comment.id))}>Delete</p>
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            )}
-                                        </div>
-                                    )
-                                ))
-                            ) : (
-                                <div className='VP-UC-NoComments-Wrapper'>
-                                    <p className='VP-UC-NoComment-Title'>No Comments Yet</p>
-                                </div>
-                            )}
+                            ))}
                         </div>
                     </div>
-                </div>
-
-
-                {/* RECOMENDED VIDEOS RIGHT SIDE */}
-                <div className='VP-Right-Wrapper'>
-                    <div className='VP-Recomended-Wrapper'>
-                        {allVideos?.map((video, idx) => (
-                            <div key={`Recomended_${idx}`} className='VP-Rec-Card-Wrapper' onClick={(e) => { history.push(`/Videos/${video.id}`) }}>
-                                <div className='VP-Rec-Container'>
-                                    <div className='VP-Rec-Img-Wrapper'>
-                                        <img src={video?.thumbnail} alt='recomeneded thumbnail' className='VP-Recomended-Img' />
-                                    </div>
-                                    <div className='VP-Rec-Text-Wrapper'>
-                                        <div className='VP-Rec-Title-Wrapper'>
-                                            <p className='VP-Rec-Title'>{video?.title}</p>
-                                        </div>
-                                        <div className='VP-Rec-Uploader-Wrapper'>
-                                            <img className='VP-Rec-Uploader-Img' src={video?.cover_image} alt='' />
-                                            <p className='VP-Rec-Uploader'>{video?.uploader}</p>
-                                        </div>
-                                        <div className='VP-Rec-ViewsAndTime-Wrapper'>
-                                            <p className='VP-Rec-Views'>{`${randomInRange(1, 100)} views`}&nbsp;</p>
-                                            <p className='VP-Rec-Time'>•&nbsp;{dayjs(video?.updated_at).fromNow()}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>)
+                </div>)
     )
 }
 

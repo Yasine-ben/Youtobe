@@ -5,7 +5,7 @@ import os
 from flask import Blueprint, jsonify, redirect, request
 from flask_wtf.csrf import generate_csrf
 from flask_login import login_required, current_user
-from app.models import db, User, Video, Comment
+from app.models import db, User, Video, Comment, Reaction
 from app.forms import VideoForm
 from .AWS_helpers import get_unique_filename, upload_file_to_AWS
 
@@ -22,6 +22,19 @@ def allVideos():
     videos = Video.query.all()
     return { 'videos': [video.to_dict() for video in videos] }
 
+@video_routes.route('/addView/<int:video_id>')
+def addView(video_id):
+    if video_id:
+        video = Video.query.get(video_id)
+        if(video):
+            video.views += 1
+            db.session.commit()
+            return jsonify({"message": "Video views successfully updated"}), 201
+        else:
+            return jsonify({"message": "Video does not exist"}), 404
+    else:
+        return jsonify({"message": "Error with video_id provided"}), 403
+
 @video_routes.route('/userVideos/<int:user_id>')
 @login_required
 def userVideos(user_id):
@@ -36,7 +49,6 @@ def userVideos(user_id):
     
     return {'videos': [video.to_dict() for video in videos]}
 
-# Working
 @video_routes.route('/<int:video_id>')
 def singleVideo(video_id):
     """
@@ -44,10 +56,20 @@ def singleVideo(video_id):
     """
     video = Video.query.get(video_id)
     if not video:
-        return { 'error' : 'Video not found', 'status': 404}
-    
-    else:
-        return { 'video': video.to_dict() }
+        return {'error': 'Video not found', 'status': 404}
+
+    # Get the video reactions
+    reactions = Reaction.query.filter_by(video_id=video.id).all()
+    print('////////////////////////////////////////////////////////////////')
+    print(reactions)
+    # Convert reactions to a list of dictionaries
+    reactions_data = [reaction.to_dict() for reaction in reactions]
+
+    # Add reactions to the video dictionary
+    video_data = video.to_dict()
+    video_data['reactions'] = reactions_data
+
+    return {'video': video_data}
 
 @video_routes.route('/createVideo', methods=['POST'])
 @login_required
@@ -58,9 +80,7 @@ def createVideo():
     data = request.files
     dataStrings = request.form
     user = current_user
-    
-    print(data)
-    
+        
     form = VideoForm(
         title=dataStrings['title'],
         description=dataStrings['description'],

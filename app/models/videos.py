@@ -17,13 +17,16 @@ class Video(db.Model):
     length = db.Column(db.Float, nullable=False)
     uploader = db.Column(db.String, nullable=False)
     cover_image = db.Column(db.String, nullable=False)
+    views = db.Column(db.Integer, default=0, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    
     user_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('users.id')))
-
+    
     user = db.relationship('User', back_populates='videos')
     comments = db.relationship('Comment', back_populates='videos', cascade='all, delete')
+    
+    reactions = db.relationship('Reaction', back_populates='video', cascade='all, delete')
+
 
     def to_dict(self):
         return {
@@ -33,6 +36,8 @@ class Video(db.Model):
             'video': self.video,
             'thumbnail': self.thumbnail,
             'length': self.length,
+            'views': self.views,
+            'reactions': [reaction.reaction_type for reaction in self.reactions],
             'uploader': self.uploader,
             'cover_image': self.cover_image,
             'created_at': self.created_at,

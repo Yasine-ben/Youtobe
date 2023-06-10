@@ -16,9 +16,12 @@ class User(db.Model, UserMixin):
     cover_image = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-
+    
     videos = db.relationship("Video", back_populates="user")
     comments = db.relationship("Comment", back_populates="user")
+    
+    reactions = db.relationship('Reaction', back_populates='user', cascade='all, delete')
+
 
     @property
     def password(self):
@@ -38,5 +41,6 @@ class User(db.Model, UserMixin):
             "first_name": self.first_name,
             "last_name": self.last_name,
             "cover_image": self.cover_image,
+            'reactions': [reaction.reaction_type for reaction in self.reactions],
             "firstNam" "email": self.email,
         }

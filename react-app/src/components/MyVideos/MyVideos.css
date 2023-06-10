@@ -93,11 +93,31 @@
 
 .MV-Video-TitleAndDescription-Wrapper {
     align-self: center;
+    /* min-width: 140px; */
 }
 
-.MV-Video-Title-Wrapper {}
+.MV-Video-Title-Wrapper {
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width:120px;
+    max-height: 80px;
+    
+}
 
-.MV-Video-Title {}
+.MV-Video-Title {
+    text-overflow: ellipsis;
+}
+
+.MV-Video-Date-Wrapper{
+    font-size: .9em;
+}
+
+.MV-Video-Date{
+
+}
 
 .MV-Video-Description-Wrapper {}
 
@@ -157,4 +177,13 @@
 .MV-ChannelName{
     font-size: .9em;
     color: grey;
+}
+
+@media only screen and (max-width: 1050px) {
+    .MV-Left-Wrapper{
+        display: none;
+    }
+    .MV-Right-Wrapper{
+        width: 100%;
+    }
 }
