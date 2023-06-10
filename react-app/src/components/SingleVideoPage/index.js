@@ -85,43 +85,61 @@ function SingleVideoPage() {
         }
     }, [video?.reactions]);
 
-    function handleLike() {
+    const  handleLike = async() => {
         // Check if the user has already liked the video
         if (user) {
             if (userReaction == 'like') {
                 //delete reaction
-                setIsDisabled(true)
-                dispatch(thunkDeleteReaction(user.id, video.id))
-                setUserReaction(null)
-                setLikes(likes - 1)
-                setIsDisabled(false)
-            } else if(userReaction == null) {
+                await setIsDisabled(true)
+                await dispatch(thunkDeleteReaction(user.id, video.id))
+                await setUserReaction(null)
+                await setLikes(likes - 1)
+                await setIsDisabled(false)
+            } else if (userReaction == null) {
                 //set video reaction to like
-                setIsDisabled(true)
-                dispatch(thunkCreateReaction(user.id, video.id, 'like'))
-                setUserReaction('like');
-                setLikes(likes + 1)
-                setIsDisabled(false)
+                await setIsDisabled(true)
+                await dispatch(thunkCreateReaction(user.id, video.id, 'like'))
+                await setUserReaction('like');
+                await setLikes(likes + 1)
+                await setIsDisabled(false)
+            }else {
+                await setIsDisabled(true)
+                await setDislikes(dislikes - 1)
+                await setLikes(likes + 1)
+                await setUserReaction('like');
+                await dispatch(thunkDeleteReaction(user.id, video.id))
+                await dispatch(thunkCreateReaction(user.id, video.id, 'like'))
+                await setIsDisabled(false)
             }
         }
     };
 
-    function handleDislike() {
+    const handleDislike = async () => {
         // Check if the user has already disliked the video
-        if (userReaction == 'dislike') {
-            // Delete reaction
-            setIsDisabled(true)
-            dispatch(thunkDeleteReaction(user.id, video.id))
-            setUserReaction(null)
-            setDislikes(dislikes - 1)
-            setIsDisabled(false)
-        } else if(userReaction == null) {
-            // set video reaction to dislike
-            setIsDisabled(true)
-            dispatch(thunkCreateReaction(user.id, video.id, 'dislike'))
-            setUserReaction('dislike');
-            setDislikes(dislikes + 1)
-            setIsDisabled(false)
+        if (user) {
+            if (userReaction == 'dislike') {
+                // Delete reaction
+                await setIsDisabled(true)
+                await dispatch(thunkDeleteReaction(user.id, video.id))
+                await setUserReaction(null)
+                await setDislikes(dislikes - 1)
+                await setIsDisabled(false)
+            } else if (userReaction == null) {
+                // set video reaction to dislike
+                await setIsDisabled(true)
+                await dispatch(thunkCreateReaction(user.id, video.id, 'dislike'))
+                await setUserReaction('dislike');
+                await setDislikes(dislikes + 1)
+                await setIsDisabled(false)
+            } else {
+                await setIsDisabled(true)
+                await setDislikes(dislikes + 1)
+                await setLikes(likes - 1)
+                await setUserReaction('dislike');
+                await dispatch(thunkDeleteReaction(user.id, video.id))
+                await dispatch(thunkCreateReaction(user.id, video.id, 'dislike'))
+                await setIsDisabled(false)
+            }
         }
     };
 
