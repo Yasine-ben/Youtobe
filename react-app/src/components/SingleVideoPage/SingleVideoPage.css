@@ -603,4 +603,15 @@ i.fa-solid.fa-circle-user:before {
     .VP-Comment-Input {
         width: 81vw;
     }
+    .VP-Comments-UserIcon {
+        width: 57px;
+        height: 68px;
+        font-size: 1.3em;
+        padding-right: 2px;
+    }
+    
+    i.fa-solid.fa-circle-user:before {
+        padding-left: 0;
+        font-size: 1.8em;
+    }
 }
