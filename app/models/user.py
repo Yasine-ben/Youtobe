@@ -16,9 +16,12 @@ class User(db.Model, UserMixin):
     cover_image = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-
+    
     videos = db.relationship("Video", back_populates="user")
     comments = db.relationship("Comment", back_populates="user")
+    
+    likes = db.relationship('Video', secondary='liked_videos', back_populates='likes')
+    dislikes = db.relationship('Video', secondary='disliked_videos', back_populates='dislikes')
 
     @property
     def password(self):

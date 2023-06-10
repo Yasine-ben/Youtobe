@@ -20,11 +20,14 @@ class Video(db.Model):
     views = db.Column(db.Integer, default=0, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    
     user_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('users.id')))
-
+    
     user = db.relationship('User', back_populates='videos')
     comments = db.relationship('Comment', back_populates='videos', cascade='all, delete')
+    
+    likes = db.relationship('User', secondary='liked_videos', back_populates='likes')
+    dislikes = db.relationship('User', secondary='disliked_videos', back_populates='dislikes')
+
 
     def to_dict(self):
         return {

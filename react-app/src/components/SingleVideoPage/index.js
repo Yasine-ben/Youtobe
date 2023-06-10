@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from "react";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import { thunkAllVideos, thunkAllVideosRand, thunkDeleteVideo, thunkSingleVideo, thunkUpdateViews} from '../../store/video';
+import normalizeViews from '../../helpers/normalizeViews';
 import OpenModalButton from '../OpenModalButton'
 import ReactPlayer from 'react-player';
 import dayjs from 'dayjs';
@@ -51,21 +52,6 @@ function SingleVideoPage() {
     const [errors, setErrors] = useState({})
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-    function randomInRange(min, max) {
-        const SUFFIXES = 'KM'
-        let randNum = Math.floor(Math.random() * (max - min + 1) + min);
-        let randPicker = Math.floor(Math.random() * (3 - 1 + 1) + 1)
-        switch (randPicker) {
-            case 1:
-                return (randNum + SUFFIXES[0])
-            case 2:
-                return (randNum + SUFFIXES[1])
-            case 3:
-                return (randNum.toString())
-        }
-    }
-
 
     useEffect(() => {
         function handleResize() {
@@ -238,7 +224,7 @@ function SingleVideoPage() {
                                 </div>
                                 <div className='VP-CreatorName-Wrapper'>
                                     <p className='VP-CreatorName'>{video?.uploader}</p>
-                                    <p className='VP-Subscribers'>{`${randomInRange(1, 100)} subscribers`}</p>
+                                    <p className='VP-Subscribers'>{`0 subscribers`}</p>
                                 </div>
                             </div>
                             <div className='VP-Buttons-Wrapper'>
@@ -261,7 +247,7 @@ function SingleVideoPage() {
 
                         (<div className='VP-DescriptionBox-Wrapper-Sl'>
                             <div className='VP-Desc-ViewsAndTime-Sl'>
-                                <p className='VP-Desc-Views-Sl'>{`${randomInRange(1, 100)} views`}&nbsp;</p>
+                                <p className='VP-Desc-Views-Sl'>{`${normalizeViews(video.views)} views`}&nbsp;•&nbsp;</p>
                                 <p className='VP-Desc-Time-Sl'>{dayjs(date).fromNow()}</p>
                             </div>
                             <div className='VP-Description-Wrapper-Sl'>
@@ -273,7 +259,7 @@ function SingleVideoPage() {
                         :
                         (<div className='VP-DescriptionBox-Wrapper-Sm' onClick={(e) => setShowMore(true)}>
                             <div className='VP-Desc-ViewsAndTime-Sm'>
-                                <p className='VP-Desc-Views-Sm'>{`${randomInRange(1, 100)} views`}&nbsp;</p>
+                                <p className='VP-Desc-Views-Sm'>{`${normalizeViews(video.views)} views`}&nbsp;•&nbsp;</p>
                                 <p className='VP-Desc-Time-Sm'>{dayjs(date).fromNow()}</p>
                             </div>
                             <div className='VP-Description-Wrapper-Sm'>
@@ -392,7 +378,7 @@ function SingleVideoPage() {
                                             <p className='VP-Rec-Uploader'>{video?.uploader}</p>
                                         </div>
                                         <div className='VP-Rec-ViewsAndTime-Wrapper'>
-                                            <p className='VP-Rec-Views'>{`${randomInRange(1, 100)} views`}&nbsp;</p>
+                                            <p className='VP-Rec-Views'>{`${normalizeViews(video.views)} views`}&nbsp;</p>
                                             <p className='VP-Rec-Time'>•&nbsp;{dayjs(video?.updated_at).fromNow()}</p>
                                         </div>
                                     </div>

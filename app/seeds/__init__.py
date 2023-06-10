@@ -2,6 +2,8 @@ from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .comments import seed_comments, undo_comments
 from .videos import seed_videos, undo_videos
+from .liked_videos import seed_liked_videos, undo_liked_videos
+from .disliked_videos import seed_disliked_videos, undo_disliked_videos
 
 from app.models.db import db, environment, SCHEMA
 
@@ -21,9 +23,13 @@ def seed():
         undo_comments()
         undo_videos()
         undo_users()
+        undo_liked_videos()
+        undo_disliked_videos()
     seed_users()
     seed_videos()
     seed_comments()
+    seed_liked_videos()
+    seed_disliked_videos()
     # Add other seed functions here
 
 
@@ -33,4 +39,6 @@ def undo():
     undo_users()
     undo_videos()
     undo_comments()
+    undo_liked_videos()
+    undo_disliked_videos()
     # Add other undo functions here

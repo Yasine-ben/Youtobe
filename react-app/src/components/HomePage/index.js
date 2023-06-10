@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect, useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { thunkAllVideos, thunkAllVideosRand } from '../../store/video';
+import normalizeViews from '../../helpers/normalizeViews';
 import ad from '../../Images/PMAd.png'
 
 import './HomePage.css'
@@ -19,30 +20,6 @@ function HomePage() {
     dayjs().format()
 
     dayjs.extend(relativeTime)
-
-    // console.log(videos)
-
-    function normalizeViews(views) {
-        const abbreviations = {
-            K: 1000,
-            M: 1000000,
-            B: 1000000000
-        };
-
-        // Loop through the abbreviations in descending order
-        const sortedKeys = Object.keys(abbreviations).sort((a, b) => abbreviations[b] - abbreviations[a]);
-
-        for (let key of sortedKeys) {
-            const value = abbreviations[key];
-
-            if (views >= value) {
-                const normalizedViews = parseFloat((views / value).toFixed(1));
-                return normalizedViews + key;
-            }
-        }
-
-        return views.toString();
-    }
 
     // maybe add clean up in useEffect
     useEffect(() => {
