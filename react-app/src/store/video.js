@@ -17,7 +17,7 @@ export const actionSingleVideo = (video) => {
 }
 
 export const actionUserVideos = (videos) => {
-    return { type: USER_VIDEOS, videos}
+    return { type: USER_VIDEOS, videos }
 }
 
 const normalizeAllVideos = (videos) => {
@@ -31,8 +31,8 @@ const normalizeAllVideos = (videos) => {
 export const thunkUpdateViews = (video_id) => async dispatch => {
     const response = await fetch(`/api/videos/addView/${video_id}`)
 
-    if(response.ok){
-        return  
+    if (response.ok) {
+        return
     }
 }
 
@@ -40,7 +40,7 @@ export const thunkUpdateViews = (video_id) => async dispatch => {
 export const thunkAllUserVideos = (user_id) => async dispatch => {
     const response = await fetch(`/api/videos/userVideos/${user_id}`)
 
-    if(response.ok){
+    if (response.ok) {
         const videos = await response.json()
         const normalized = normalizeAllVideos(videos.videos)
         dispatch(actionUserVideos(normalized))
@@ -84,22 +84,22 @@ export const thunkSingleVideo = (video_id) => async dispatch => {
 
 export const thunkUploadVideo = (title, description, video, length, thumbnail, uploader, user_id) => async dispatch => {
     const response = await fetch(`/api/videos/createVideo`, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({
-			title, 
-            description, 
-            video, 
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            title,
+            description,
+            video,
             length,
-            thumbnail, 
-            uploader, 
+            thumbnail,
+            uploader,
             user_id
-		}),
-	});
+        }),
+    });
 
-    if(response.ok){
+    if (response.ok) {
         return dispatch(thunkAllVideos())
     }
 }
@@ -109,7 +109,7 @@ export const thunkDeleteVideo = (video_id) => async dispatch => {
         method: 'DELETE'
     })
 
-    if(response.ok){
+    if (response.ok) {
         dispatch(thunkAllVideos())
         return
     }
@@ -118,30 +118,51 @@ export const thunkDeleteVideo = (video_id) => async dispatch => {
 export const thunkEditVideo = (video_id, title, description, thumbnail) => async dispatch => {
     const response = await fetch(`/api/videos/updateVideo/${video_id}`, {
         method: 'PUT',
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({
-			title, 
-            description, 
-            thumbnail, 
-		}),
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            title,
+            description,
+            thumbnail,
+        }),
 
     })
 
-    if(response.ok){
+    if (response.ok) {
         dispatch(thunkSingleVideo(video_id))
         return
     }
 }
 
+export const thunkCreateReaction = (user_id, video_id, reaction_type) => async dispatch => {
+    const response = await fetch('/api/reactions/', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            user_id: user_id,
+            video_id: video_id,
+            reaction_type: reaction_type,
+        })
+    });
+
+    return response
+}
+
+export const thunkDeleteReaction = (user_id, video_id) => async dispatch => {
+    const response = await fetch(`/api/reactions/${user_id}/${video_id}`, {method:'DELETE'})
+
+    return response
+}
 
 
 // INITIAL 
 const initialState = {
     allVideos: {},
     singleVideo: {},
-    userVideos:{},
+    userVideos: {},
 }
 
 // Reducer
@@ -150,9 +171,9 @@ const videosReducer = (state = initialState, action) => {
         case ALL_VIDEOS:
             return { ...state, allVideos: { ...action.videos } }
         case SINGLE_VIDEO:
-            return { ...state, singleVideo: { ...action.video }}
+            return { ...state, singleVideo: { ...action.video } }
         case USER_VIDEOS:
-            return { ...state, userVideos: { ...action.videos }}
+            return { ...state, userVideos: { ...action.videos } }
         default: return { ...state }
     }
 }

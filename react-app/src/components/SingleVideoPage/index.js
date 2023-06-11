@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useRef, useState } from "react";
 import { Redirect, useHistory, useParams } from "react-router-dom";
-import { thunkAllVideos, thunkAllVideosRand, thunkDeleteVideo, thunkSingleVideo, thunkUpdateViews } from '../../store/video';
+import { thunkAllVideos, thunkAllVideosRand, thunkDeleteVideo, thunkSingleVideo, thunkUpdateViews, thunkCreateReaction, thunkDeleteReaction } from '../../store/video';
 import normalizeViews from '../../helpers/normalizeViews';
 import OpenModalButton from '../OpenModalButton'
 import ReactPlayer from 'react-player';
@@ -10,6 +10,7 @@ import dayjs from 'dayjs';
 import './SingleVideoPage.css'
 import { thunkAllComments, thunkCreateComment, thunkDeleteComment, thunkUpdateComment } from '../../store/comments';
 import UpdateVideoForm from '../Forms/UpdateVideoForm';
+import ToolTipMenu from './ToolTip';
 
 function SingleVideoPage() {
     const dispatch = useDispatch()
@@ -23,7 +24,7 @@ function SingleVideoPage() {
 
     dayjs.extend(relativeTime)
 
-
+    
 
     const video = Object.values(useSelector(state => state.videos?.singleVideo))[0]
     const allVideos = Object.values(useSelector(state => state.videos?.allVideos))
@@ -54,8 +55,10 @@ function SingleVideoPage() {
     const [userReaction, setUserReaction] = useState(null);
     const [isDisabled, setIsDisabled] = useState(false)
 
-    const [errors, setErrors] = useState({})
+    const [menuOpen, setMenuOpen] = useState(false)
 
+    const [errors, setErrors] = useState({})
+console.log(menuOpen)
     useEffect(() => {
         // Check if reactions exist
         if (video?.reactions && video?.reactions.length > 0) {
@@ -87,18 +90,28 @@ function SingleVideoPage() {
 
     const handleLike = async () => {
         // Check if the user has already liked the video
-        if(user){
+        if (user) {
             if (userReaction == 'like') {
                 //delete reaction
                 await setIsDisabled(true)
-
+                await dispatch(thunkDeleteReaction(user.id, video.id))
                 await setUserReaction(null)
+                await setLikes(likes - 1)
                 await setIsDisabled(false)
-            } else {
+            } else if (userReaction == null) {
                 //set video reaction to like
                 await setIsDisabled(true)
-
+                await dispatch(thunkCreateReaction(user.id, video.id, 'like'))
                 await setUserReaction('like');
+                await setLikes(likes + 1)
+                await setIsDisabled(false)
+            } else {
+                await setIsDisabled(true)
+                await setDislikes(dislikes - 1)
+                await setLikes(likes + 1)
+                await setUserReaction('like');
+                await dispatch(thunkDeleteReaction(user.id, video.id))
+                await dispatch(thunkCreateReaction(user.id, video.id, 'like'))
                 await setIsDisabled(false)
             }
         }
@@ -106,18 +119,30 @@ function SingleVideoPage() {
 
     const handleDislike = async () => {
         // Check if the user has already disliked the video
-        if (userReaction == 'dislike') {
-            // Delete reaction
-            await setIsDisabled(true)
-
-            await setUserReaction(null)
-            await setIsDisabled(false)
-        } else {
-            // set video reaction to dislike
-            await setIsDisabled(true)
-
-            await setUserReaction('dislike');
-            await setIsDisabled(false)
+        if (user) {
+            if (userReaction == 'dislike') {
+                // Delete reaction
+                await setIsDisabled(true)
+                await dispatch(thunkDeleteReaction(user.id, video.id))
+                await setUserReaction(null)
+                await setDislikes(dislikes - 1)
+                await setIsDisabled(false)
+            } else if (userReaction == null) {
+                // set video reaction to dislike
+                await setIsDisabled(true)
+                await dispatch(thunkCreateReaction(user.id, video.id, 'dislike'))
+                await setUserReaction('dislike');
+                await setDislikes(dislikes + 1)
+                await setIsDisabled(false)
+            } else {
+                await setIsDisabled(true)
+                await setDislikes(dislikes + 1)
+                await setLikes(likes - 1)
+                await setUserReaction('dislike');
+                await dispatch(thunkDeleteReaction(user.id, video.id))
+                await dispatch(thunkCreateReaction(user.id, video.id, 'dislike'))
+                await setIsDisabled(false)
+            }
         }
     };
 
@@ -187,6 +212,16 @@ function SingleVideoPage() {
             // console.log('FRONT END ERROR FRONT END ERROR')
             return
         }
+    }
+
+    function openTTMFunc(e) {
+        e.preventDefault()
+        if (!menuOpen) {
+            setMenuOpen(true)
+        } else {
+            setMenuOpen(false)
+        }
+
     }
 
     function openMenuFunc(id) {
@@ -297,24 +332,25 @@ function SingleVideoPage() {
                                 <div className='VP-UserInteration-Wrapper'>
                                     <div className='VP-Reactions-Wrapper' style={{ width: '160px', height: '36px' }}>
                                         <div className='VP-Reactions'>
-                                            <div className='VP-Like-Container' onClick={!isDisabled ? handleLike : null}>
+                                            <div className='VP-Like-Container' onClick={!isDisabled ? handleLike : null} style={{cursor:'pointer'}}>
                                                 {userReaction == 'like' ?
                                                     <i className="fa-solid fa-thumbs-up" id='like'></i>
                                                     : <i className="fa-regular fa-thumbs-up" id='like'></i>
                                                 }
                                                 <p className='VP-Like-Count'>{likes}</p>
                                             </div>
-                                            <div className='VP-Dislike-Container' onClick={!isDisabled ? handleDislike : null}>
+                                            <div className='VP-Dislike-Container' onClick={!isDisabled ? handleDislike : null} style={{cursor:'pointer'}}>
                                                 {userReaction == 'dislike' ?
-                                                    <i className="fa-solid fa-thumbs-down" id='dislike'></i>
+                                                    <i className="fa-solid fa-thumbs-down" id='dislike' ></i>
                                                     : <i className="fa-regular fa-thumbs-down" id='dislike'></i>
                                                 }
                                                 <p className='VP-Dislike-Count'>{dislikes}</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className='VP-ContextMenu-Wrapper'>
-                                        <div className='VP-ContextMenuIcon'>
+                                    {menuOpen && <ToolTipMenu video={video} setMenuOpen={setMenuOpen} menuOpen={menuOpen} />}
+                                    <div className='VP-ContextMenu-Wrapper' onClick={(e) => openTTMFunc(e)} style={{cursor:'pointer'}}>
+                                        <div className='VP-ContextMenuIcon' >
                                             <span className="material-symbols-outlined">more_horiz</span>
                                         </div>
                                     </div>

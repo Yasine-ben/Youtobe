@@ -18,11 +18,16 @@ def create_reaction():
     if not user or not video:
         return jsonify({'message': 'User or video not found'}), 404
 
+    existing_reaction = Reaction.query.filter_by(user=user, video=video).first()
+    if existing_reaction:
+        return jsonify({'message': 'User already has a reaction to this video'}), 400
+
     reaction = Reaction(user=user, video=video, reaction_type=reaction_type)
     db.session.add(reaction)
     db.session.commit()
 
     return jsonify({'message': 'Reaction created successfully'}), 201
+
 
 #update reaction
 @reaction_routes.route('/<int:reaction_id>', methods=['PUT'])
@@ -42,19 +47,24 @@ def update_reaction(reaction_id):
 
     return jsonify({'message': 'Reaction updated successfully'})
 
-#delete reaction
-@reaction_routes.route('/<int:reaction_id>', methods=['DELETE'])
+
+
+
+@reaction_routes.route('/<int:user_id>/<int:video_id>', methods=['DELETE'])
 @login_required
-def delete_reaction(reaction_id):
-    reaction = Reaction.query.get(reaction_id)
+def delete_user_reactions(user_id, video_id):
+    reactions = Reaction.query.filter_by(user_id=user_id, video_id=video_id).first()
 
-    if not reaction:
-        return jsonify({'message': 'Reaction not found'}), 404
+    if not reactions:
+        return jsonify({'message': 'Reactions not found'}), 404
 
-    db.session.delete(reaction)
+    db.session.delete(reactions)
     db.session.commit()
 
-    return jsonify({'message': 'Reaction deleted successfully'})
+    return jsonify({'message': 'Reactions deleted successfully'})
+
+
+
 
 #get video reactions
 @reaction_routes.route('/videos/<int:video_id>')
