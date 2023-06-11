@@ -10,6 +10,7 @@ import dayjs from 'dayjs';
 import './SingleVideoPage.css'
 import { thunkAllComments, thunkCreateComment, thunkDeleteComment, thunkUpdateComment } from '../../store/comments';
 import UpdateVideoForm from '../Forms/UpdateVideoForm';
+import ToolTipMenu from './ToolTip';
 
 function SingleVideoPage() {
     const dispatch = useDispatch()
@@ -23,7 +24,7 @@ function SingleVideoPage() {
 
     dayjs.extend(relativeTime)
 
-
+    
 
     const video = Object.values(useSelector(state => state.videos?.singleVideo))[0]
     const allVideos = Object.values(useSelector(state => state.videos?.allVideos))
@@ -54,8 +55,10 @@ function SingleVideoPage() {
     const [userReaction, setUserReaction] = useState(null);
     const [isDisabled, setIsDisabled] = useState(false)
 
-    const [errors, setErrors] = useState({})
+    const [menuOpen, setMenuOpen] = useState(false)
 
+    const [errors, setErrors] = useState({})
+console.log(menuOpen)
     useEffect(() => {
         // Check if reactions exist
         if (video?.reactions && video?.reactions.length > 0) {
@@ -85,7 +88,7 @@ function SingleVideoPage() {
         }
     }, [video?.reactions]);
 
-    const  handleLike = async() => {
+    const handleLike = async () => {
         // Check if the user has already liked the video
         if (user) {
             if (userReaction == 'like') {
@@ -102,7 +105,7 @@ function SingleVideoPage() {
                 await setUserReaction('like');
                 await setLikes(likes + 1)
                 await setIsDisabled(false)
-            }else {
+            } else {
                 await setIsDisabled(true)
                 await setDislikes(dislikes - 1)
                 await setLikes(likes + 1)
@@ -209,6 +212,16 @@ function SingleVideoPage() {
             // console.log('FRONT END ERROR FRONT END ERROR')
             return
         }
+    }
+
+    function openTTMFunc(e) {
+        e.preventDefault()
+        if (!menuOpen) {
+            setMenuOpen(true)
+        } else {
+            setMenuOpen(false)
+        }
+
     }
 
     function openMenuFunc(id) {
@@ -319,24 +332,25 @@ function SingleVideoPage() {
                                 <div className='VP-UserInteration-Wrapper'>
                                     <div className='VP-Reactions-Wrapper' style={{ width: '160px', height: '36px' }}>
                                         <div className='VP-Reactions'>
-                                            <div className='VP-Like-Container' onClick={!isDisabled ? handleLike : null}>
+                                            <div className='VP-Like-Container' onClick={!isDisabled ? handleLike : null} style={{cursor:'pointer'}}>
                                                 {userReaction == 'like' ?
                                                     <i className="fa-solid fa-thumbs-up" id='like'></i>
                                                     : <i className="fa-regular fa-thumbs-up" id='like'></i>
                                                 }
                                                 <p className='VP-Like-Count'>{likes}</p>
                                             </div>
-                                            <div className='VP-Dislike-Container' onClick={!isDisabled ? handleDislike : null}>
+                                            <div className='VP-Dislike-Container' onClick={!isDisabled ? handleDislike : null} style={{cursor:'pointer'}}>
                                                 {userReaction == 'dislike' ?
-                                                    <i className="fa-solid fa-thumbs-down" id='dislike'></i>
+                                                    <i className="fa-solid fa-thumbs-down" id='dislike' ></i>
                                                     : <i className="fa-regular fa-thumbs-down" id='dislike'></i>
                                                 }
                                                 <p className='VP-Dislike-Count'>{dislikes}</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className='VP-ContextMenu-Wrapper'>
-                                        <div className='VP-ContextMenuIcon'>
+                                    {menuOpen && <ToolTipMenu video={video} setMenuOpen={setMenuOpen} menuOpen={menuOpen} />}
+                                    <div className='VP-ContextMenu-Wrapper' onClick={(e) => openTTMFunc(e)} style={{cursor:'pointer'}}>
+                                        <div className='VP-ContextMenuIcon' >
                                             <span className="material-symbols-outlined">more_horiz</span>
                                         </div>
                                     </div>
