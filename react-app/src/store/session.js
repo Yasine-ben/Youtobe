@@ -108,7 +108,7 @@ export const signUp = (username, first_name, last_name, cover_image, email, pass
 
 // Thunk action for subscribing to a user
 export const subscribe = (subscriberId, subscribedToId) => async (dispatch) => {
-	const response = await fetch('/subscribe', {
+	const response = await fetch('/api/users/subscribe', {
 		method: 'POST',
 		headers: {
 			"Content-Type": "application/json",
@@ -120,13 +120,19 @@ export const subscribe = (subscriberId, subscribedToId) => async (dispatch) => {
 	});
 
 	if (response.ok) {
-
+		const data = await response.json()
+		await dispatch(currentUser(subscriberId))
+		console.log(data)
+	}
+	else{
+		const data = await response.json()
+		console.log(data)
 	}
 };
 
 // Thunk action for unsubscribing from a user
 export const unsubscribe = (subscriberId, subscribedToId) => async (dispatch) => {
-	const response = await fetch('/unsubscribe', {
+	const response = await fetch('/api/users/unsubscribe', {
 		method: 'DELETE',
 		headers: {
 			"Content-Type": "application/json",
@@ -138,7 +144,13 @@ export const unsubscribe = (subscriberId, subscribedToId) => async (dispatch) =>
 	});
 
 	if (response.ok) {
-
+		const data = await response.json()
+		await dispatch(currentUser(subscriberId))
+		console.log(data)
+	}
+	else{
+		const data = await response.json()
+		console.log(data)
 	}
 
 };

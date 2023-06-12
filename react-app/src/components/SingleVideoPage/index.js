@@ -12,6 +12,8 @@ import { thunkAllComments, thunkCreateComment, thunkDeleteComment, thunkUpdateCo
 import UpdateVideoForm from '../Forms/UpdateVideoForm';
 import ToolTipMenu from './ToolTip';
 import { currentUser } from '../../store/session';
+import { subscribe } from '../../store/session';
+import { unsubscribe } from '../../store/session';
 
 function SingleVideoPage() {
     const dispatch = useDispatch()
@@ -55,11 +57,12 @@ function SingleVideoPage() {
     const [dislikes, setDislikes] = useState(0);
     const [userReaction, setUserReaction] = useState(null);
     const [isDisabled, setIsDisabled] = useState(false)
+    const [isSubscribed, setIsSubscribed] = useState(false)
 
     const [menuOpen, setMenuOpen] = useState(false)
 
     const [errors, setErrors] = useState({})
-    console.log(menuOpen)
+    // console.log(menuOpen)
     useEffect(() => {
         // Check if reactions exist
         if (video?.reactions && video?.reactions.length > 0) {
@@ -168,20 +171,19 @@ function SingleVideoPage() {
             await dispatch(thunkAllVideosRand());
             await dispatch(thunkAllComments(video_id));
             if (user !== null) {
-                await dispatch(currentUser(user?.id))
+                await dispatch(currentUser(user.id))
             }
+
             setIsLoaded(true);
         };
         fetchData();
-    }, [dispatch, user?.id, history.location])
+    }, [dispatch, user.id, history.location])
 
     const handleDelete = (e) => {
         e.preventDefault()
         dispatch(thunkDeleteVideo(video_id))
         history.push('/')
     }
-
-    console.log(user?.subscribers?.length)
 
     const handleCommentSubmit = async (e) => {
         e.preventDefault()
@@ -238,7 +240,6 @@ function SingleVideoPage() {
         }
 
     }
-
     function videoError() {
         setUrl('https://www.youtube.com/watch?v=YnP94m5pwls')
         setVideoErr(true)
@@ -250,7 +251,7 @@ function SingleVideoPage() {
         setEditCommentId(id)
         setEditEnabled(true)
     }
-    console.log(video)
+    // console.log(video)
     const handleEditComment = async (e, comment_id) => {
         e.preventDefault()
         const err = {}
@@ -295,7 +296,23 @@ function SingleVideoPage() {
         dispatch(thunkUpdateViews(video.id))
     }
 
+    const handleSubscribe = async () => {
+        if(!isSubscribed){
+            await dispatch(subscribe(user.id, video.user_id))
+            await setIsSubscribed(true)
+        }else{
+            await dispatch(unsubscribe(user.id, video.user_id))
+            await setIsSubscribed(false)
+        }
+    }
 
+    useEffect(() => {
+        for (let i = 0; i < user.subscriptions?.length; i++) {
+            if (video.user_id == user.subscriptions[i].subscribed_to_id) {
+                setIsSubscribed(true)
+            }
+        }
+    })
 
 
     return (
@@ -333,9 +350,14 @@ function SingleVideoPage() {
                                             <p className='VP-Subscribers'>{`${normalizeViews(video?.subscribers?.length)} subscribers`}</p>
                                         </div>
                                     </div>
-                                    <div className='VP-Subscribe-Wrapper'>
-                                        <p className='VP-Subscribe'>Subscribe</p>
-                                        {/* <p className='VP-Subscribe'></p> */}
+                                    <div className='VP-Subscribe-Wrapper' onClick={() => {handleSubscribe()}}>
+                                        {user && (
+                                            isSubscribed ? (
+                                                <p className='VP-Subscribe'style={{backgroundColor:'white', color:'black'}}>Subscribed</p>
+                                            ) : (
+                                                <p className='VP-Subscribe'>Subscribe</p>
+                                            )
+                                        )}
                                     </div>
                                 </div>
                                 <div className='VP-UserInteration-Wrapper'>

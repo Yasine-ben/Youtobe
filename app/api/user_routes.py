@@ -32,9 +32,10 @@ def user(id):
 @user_routes.route('/subscribe', methods=['POST'])
 @login_required
 def subscribe():
+    print('////////////////////////////////////////////////////////////////////////////////')
     data = request.json
-    subscriber_id = data['subscriber_id']
-    subscribed_to_id = data['subscribed_to_id']
+    subscriber_id = data.get('subscriber_id')
+    subscribed_to_id = data.get('subscribed_to_id')
 
     if subscriber_id == subscribed_to_id:
         return jsonify(message='Cannot subscribe to your own channel.')
@@ -56,9 +57,10 @@ def subscribe():
     except Exception as e:
         return jsonify(message='Failed to subscribe.', error=str(e))
     
-@user_routes.route('/subscribe', methods=['DELETE'])
+@user_routes.route('/unsubscribe', methods=['DELETE'])
 @login_required
 def unsubscribe():
+    print('////////////////////////////////////////////////////////////////////////////////us')
     data = request.json
     subscriber_id = data['subscriber_id']
     subscribed_to_id = data['subscribed_to_id']

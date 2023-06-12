@@ -30,7 +30,7 @@ function MyVideos() {
     }, []);
 
 
-    console.log('VIDEOS VIDEOS VIDEOS', videos)
+    // console.log('VIDEOS VIDEOS VIDEOS', videos)
     // console.log(sessionUser)
 
     if (!sessionUser) history.push('/')
