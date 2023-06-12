@@ -302,8 +302,7 @@ function SingleVideoPage() {
             }
         }
     }
-    // console.log(video)
-    // console.log(user)
+
 
     useEffect(() => {
         if (user !== null && video) {
