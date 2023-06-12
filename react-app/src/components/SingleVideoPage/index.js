@@ -11,6 +11,7 @@ import './SingleVideoPage.css'
 import { thunkAllComments, thunkCreateComment, thunkDeleteComment, thunkUpdateComment } from '../../store/comments';
 import UpdateVideoForm from '../Forms/UpdateVideoForm';
 import ToolTipMenu from './ToolTip';
+import { currentUser } from '../../store/session';
 
 function SingleVideoPage() {
     const dispatch = useDispatch()
@@ -166,10 +167,13 @@ function SingleVideoPage() {
             await dispatch(thunkSingleVideo(video_id));
             await dispatch(thunkAllVideosRand());
             await dispatch(thunkAllComments(video_id));
+            if (user !== null) {
+                await dispatch(currentUser(user?.id))
+            }
             setIsLoaded(true);
         };
         fetchData();
-    }, [dispatch, user, history.location])
+    }, [dispatch, user?.id, history.location])
 
     const handleDelete = (e) => {
         e.preventDefault()
@@ -177,7 +181,7 @@ function SingleVideoPage() {
         history.push('/')
     }
 
-
+    console.log(user?.subscribers?.length)
 
     const handleCommentSubmit = async (e) => {
         e.preventDefault()
@@ -326,7 +330,7 @@ function SingleVideoPage() {
                                         </div>
                                         <div className='VP-CreatorName-Wrapper'>
                                             <p className='VP-CreatorName'>{video?.uploader}</p>
-                                            <p className='VP-Subscribers'>{`0 subscribers`}</p>
+                                            <p className='VP-Subscribers'>{`${normalizeViews(video?.subscribers?.length)} subscribers`}</p>
                                         </div>
                                     </div>
                                     <div className='VP-Subscribe-Wrapper'>

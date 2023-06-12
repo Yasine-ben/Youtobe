@@ -56,7 +56,7 @@ class User(db.Model, UserMixin):
         return self.subscriptions.filter_by(subscribed_to=user).first() is not None
 
     def get_subscriptions(self):
-        return self.subscribed_to.all()
+        return self.subscriptions.all()
 
     def get_subscribers(self):
         return self.subscribers.all()

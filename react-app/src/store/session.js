@@ -29,6 +29,15 @@ export const authenticate = () => async (dispatch) => {
 	}
 };
 
+export const currentUser = (userId) => async (dispatch) => {
+	const response = await fetch(`/api/users/${userId}`)
+	if(response.ok){
+		const data = await response.json()
+		dispatch(setUser(data))
+	}
+	
+};
+
 export const login = (email, password) => async (dispatch) => {
 	const response = await fetch("/api/auth/login", {
 		method: "POST",
@@ -67,7 +76,7 @@ export const logout = () => async (dispatch) => {
 	}
 };
 
-export const signUp = (username,first_name, last_name, cover_image, email, password) => async (dispatch) => {
+export const signUp = (username, first_name, last_name, cover_image, email, password) => async (dispatch) => {
 	const response = await fetch("/api/auth/signup", {
 		method: "POST",
 		headers: {
@@ -95,6 +104,43 @@ export const signUp = (username,first_name, last_name, cover_image, email, passw
 	} else {
 		return ["An error occurred. Please try again."];
 	}
+};
+
+// Thunk action for subscribing to a user
+export const subscribe = (subscriberId, subscribedToId) => async (dispatch) => {
+	const response = await fetch('/subscribe', {
+		method: 'POST',
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			subscriber_id: subscriberId,
+			subscribed_to_id: subscribedToId,
+		})
+	});
+
+	if (response.ok) {
+
+	}
+};
+
+// Thunk action for unsubscribing from a user
+export const unsubscribe = (subscriberId, subscribedToId) => async (dispatch) => {
+	const response = await fetch('/unsubscribe', {
+		method: 'DELETE',
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			subscriber_id: subscriberId,
+			subscribed_to_id: subscribedToId,
+		})
+	});
+
+	if (response.ok) {
+
+	}
+
 };
 
 export default function reducer(state = initialState, action) {

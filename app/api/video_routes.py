@@ -60,14 +60,17 @@ def singleVideo(video_id):
 
     # Get the video reactions
     reactions = Reaction.query.filter_by(video_id=video.id).all()
-    print('////////////////////////////////////////////////////////////////')
-    print(reactions)
+
     # Convert reactions to a list of dictionaries
     reactions_data = [reaction.to_dict() for reaction in reactions]
 
-    # Add reactions to the video dictionary
+    # Get the video subscribers
+    subscribers = [subscriber.to_dict() for subscriber in video.user.get_subscribers()]
+
+    # Add reactions and subscribers to the video dictionary
     video_data = video.to_dict()
     video_data['reactions'] = reactions_data
+    video_data['subscribers'] = subscribers
 
     return {'video': video_data}
 

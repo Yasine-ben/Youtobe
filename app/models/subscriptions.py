@@ -19,3 +19,10 @@ class Subscription(db.Model):
             raise ValueError("Cannot subscribe to oneself.")
         self.subscriber_id = subscriber_id
         self.subscribed_to_id = subscribed_to_id
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "subscriber_id": self.subscriber_id,
+            "subscribed_to_id": self.subscribed_to_id
+        }
