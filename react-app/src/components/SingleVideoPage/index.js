@@ -11,7 +11,6 @@ import './SingleVideoPage.css'
 import { thunkAllComments, thunkCreateComment, thunkDeleteComment, thunkUpdateComment } from '../../store/comments';
 import UpdateVideoForm from '../Forms/UpdateVideoForm';
 import ToolTipMenu from './ToolTip';
-import { currentUser } from '../../store/session';
 import { subscribe } from '../../store/session';
 import { unsubscribe } from '../../store/session';
 
@@ -74,12 +73,12 @@ function SingleVideoPage() {
             video?.reactions.forEach(reaction => {
                 if (reaction.reaction_type === 'like') {
                     likeCount++;
-                    if (reaction.user_id === user.id) {
+                    if (reaction.user_id === user?.id) {
                         userReactionType = 'like';
                     }
                 } else if (reaction.reaction_type === 'dislike') {
                     dislikeCount++;
-                    if (reaction.user_id === user.id) {
+                    if (reaction.user_id === user?.id) {
                         userReactionType = 'dislike';
                     }
                 }
@@ -170,14 +169,10 @@ function SingleVideoPage() {
             await dispatch(thunkSingleVideo(video_id));
             await dispatch(thunkAllVideosRand());
             await dispatch(thunkAllComments(video_id));
-            if (user !== null) {
-                await dispatch(currentUser(user.id))
-            }
-
             setIsLoaded(true);
         };
         fetchData();
-    }, [dispatch, user.id, history.location])
+    }, [dispatch, user?.id, history.location])
 
     const handleDelete = (e) => {
         e.preventDefault()
@@ -297,19 +292,25 @@ function SingleVideoPage() {
     }
 
     const handleSubscribe = async () => {
-        if(!isSubscribed){
-            await dispatch(subscribe(user.id, video.user_id))
-            await setIsSubscribed(true)
-        }else{
-            await dispatch(unsubscribe(user.id, video.user_id))
-            await setIsSubscribed(false)
+        if (user) {
+            if (!isSubscribed) {
+                await dispatch(subscribe(user.id, video.user_id))
+                setIsSubscribed(true)
+            } else {
+                await dispatch(unsubscribe(user.id, video.user_id))
+                setIsSubscribed(false)
+            }
         }
     }
+    // console.log(video)
+    // console.log(user)
 
     useEffect(() => {
-        for (let i = 0; i < user.subscriptions?.length; i++) {
-            if (video.user_id == user.subscriptions[i].subscribed_to_id) {
-                setIsSubscribed(true)
+        if (user !== null && video) {
+            for (let i = 0; i < user.subscriptions?.length; i++) {
+                if (video.user_id == user.subscriptions[i].subscribed_to_id) {
+                    setIsSubscribed(true)
+                }
             }
         }
     })
@@ -350,10 +351,10 @@ function SingleVideoPage() {
                                             <p className='VP-Subscribers'>{`${normalizeViews(video?.subscribers?.length)} subscribers`}</p>
                                         </div>
                                     </div>
-                                    <div className='VP-Subscribe-Wrapper' onClick={() => {handleSubscribe()}}>
+                                    <div className='VP-Subscribe-Wrapper' onClick={() => { handleSubscribe() }}>
                                         {user && (
                                             isSubscribed ? (
-                                                <p className='VP-Subscribe'style={{backgroundColor:'white', color:'black'}}>Subscribed</p>
+                                                <p className='VP-Subscribe' style={{ backgroundColor: 'white', color: 'black' }}>Subscribed</p>
                                             ) : (
                                                 <p className='VP-Subscribe'>Subscribe</p>
                                             )

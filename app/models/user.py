@@ -70,4 +70,6 @@ class User(db.Model, UserMixin):
             "cover_image": self.cover_image,
             "reactions": [reaction.reaction_type for reaction in self.reactions],
             "email": self.email,
+            "subscribers": [subscriber.to_dict() for subscriber in self.get_subscribers()],
+            "subscriptions": [subscription.to_dict() for subscription in self.get_subscriptions()]
         }

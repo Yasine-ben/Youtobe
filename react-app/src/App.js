@@ -38,6 +38,12 @@ function App() {
             <Sidebar isLoaded={isLoaded} />
             <HomePage />
           </Route>
+          
+          <Route exact path='/Subscriptions'>
+            <Topbar isLoaded={isLoaded} />
+            <Sidebar isLoaded={isLoaded} />
+            <HomePage />
+          </Route>
 
           <Route exact path='/MyVideos'>
             <Topbar isLoaded={isLoaded} />

@@ -2,16 +2,19 @@
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 
+
 const setUser = (user) => ({
 	type: SET_USER,
 	payload: user,
 });
 
+
 const removeUser = () => ({
 	type: REMOVE_USER,
 });
 
-const initialState = { user: null };
+
+const initialState = { user: null};
 
 export const authenticate = () => async (dispatch) => {
 	const response = await fetch("/api/auth/", {
@@ -29,14 +32,23 @@ export const authenticate = () => async (dispatch) => {
 	}
 };
 
-export const currentUser = (userId) => async (dispatch) => {
-	const response = await fetch(`/api/users/${userId}`)
-	if(response.ok){
-		const data = await response.json()
-		dispatch(setUser(data))
-	}
-	
-};
+// export const thunkSetSubs = () => async (dispatch) => {
+// 	const response = await fetch("/api/users/userSubs", {
+// 		headers: {
+// 			"Content-Type": "application/json",
+// 		},
+// 	});
+// 	if (response.ok) {
+// 		const data = await response.json();
+// 		if (data.errors) {
+// 			return;
+// 		}
+
+// 		dispatch(setUser(data));
+// 	}
+// };
+
+
 
 export const login = (email, password) => async (dispatch) => {
 	const response = await fetch("/api/auth/login", {
@@ -121,10 +133,10 @@ export const subscribe = (subscriberId, subscribedToId) => async (dispatch) => {
 
 	if (response.ok) {
 		const data = await response.json()
-		await dispatch(currentUser(subscriberId))
+		await dispatch(authenticate())
 		console.log(data)
 	}
-	else{
+	else {
 		const data = await response.json()
 		console.log(data)
 	}
@@ -145,10 +157,10 @@ export const unsubscribe = (subscriberId, subscribedToId) => async (dispatch) =>
 
 	if (response.ok) {
 		const data = await response.json()
-		await dispatch(currentUser(subscriberId))
+		await dispatch(authenticate())
 		console.log(data)
 	}
-	else{
+	else {
 		const data = await response.json()
 		console.log(data)
 	}
