@@ -1,10 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect, useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { thunkAllVideos, thunkAllVideosRand } from '../../store/video';
 import normalizeViews from '../../helpers/normalizeViews';
 import ad from '../../Images/PMAd.png'
-
 import './HomePage.css'
 
 function HomePage() {
@@ -13,6 +12,7 @@ function HomePage() {
     const videos = Object.values(useSelector(state => state.videos.allVideos))
 
     const [isLoaded, setIsLoaded] = useState(false)
+    const [showAd, setShowAd] = useState(true)
 
     //import dayjs from 'dayjs' // ES 2015
     const dayjs = require('dayjs')
@@ -31,13 +31,38 @@ function HomePage() {
         fetchData();
     }, [dispatch])
 
+    useEffect(() => {
+        const checkScreenSize = () => {
+            if (window.innerWidth < 1400) {
+                setShowAd(false)
+            } else {
+                setShowAd(true)
+            }
+        };
+
+        checkScreenSize();
+
+        window.addEventListener('resize', checkScreenSize);
+        return () => {
+            window.removeEventListener('resize', checkScreenSize);
+        };
+    }, []);
+
+    const handleRedirect = () => {
+        window.location.href = "https://pearmusic.onrender.com"; // Replace with the URL you want to redirect to
+    };
+
+
     return (
         (!isLoaded) ? <div className='LOADING-SCREEN'></div> :
             (
                 <div className='HP-Container'>
-                    <div className='HP-BlockAdWrapper'>
-                        <img className='HP-BlockAd' src='https://i.ibb.co/QpNXVQd/pearAd.png' alt='pearAd'/>
-                    </div>
+                    {showAd &&
+                        <div className='HP-BlockAdWrapper' style={{ cursor: 'pointer' }} onClick={handleRedirect}>
+                            <img className='HP-BlockAd' src='https://i.ibb.co/QpNXVQd/pearAd.png' alt='pearAd' />
+                            <span id='Ad-External' className="material-symbols-outlined"> open_in_new </span>
+                        </div>
+                    }
                     <div className='HP-Wrapper'>
                         <a className='HP-Video-Wrapper-Ad' href='https://pearmusic.onrender.com/'>
                             <div className='HP-Thumbnail-Wrapper'>

@@ -28,7 +28,7 @@ function Sidebar() {
 
     useEffect(() => {
         const hpWrapper = document.querySelector('.HP-Wrapper');
-        const hpAd = document.querySelector('HP-BlockAdWrapper')
+        const hpAd = document.querySelector('.HP-BlockAdWrapper')
 
         if (hpWrapper) {
             if (menuOpen) {
