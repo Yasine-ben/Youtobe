@@ -56,7 +56,7 @@ function HomePage() {
     return (
         (!isLoaded) ? <div className='LOADING-SCREEN'></div> :
             (
-                <div className='HP-Container'>
+                <>
                     {showAd &&
                         <div className='HP-BlockAdWrapper' style={{ cursor: 'pointer' }} onClick={handleRedirect}>
                             <img className='HP-BlockAd' src='https://i.ibb.co/QpNXVQd/pearAd.png' alt='pearAd' />
@@ -64,7 +64,7 @@ function HomePage() {
                         </div>
                     }
                     <div className='HP-Wrapper'>
-                        <a className='HP-Video-Wrapper-Ad' href='https://pearmusic.onrender.com/'>
+                        {!showAd && <a className='HP-Video-Wrapper-Ad' href='https://pearmusic.onrender.com/'>
                             <div className='HP-Thumbnail-Wrapper'>
                                 <img src={ad} alt='thumbnail alt' className='HP-Thumbnail' />
                                 <span id='ad-External' className="material-symbols-outlined"> open_in_new </span>
@@ -86,7 +86,7 @@ function HomePage() {
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        </a>}
                         {videos.map((video, idx) => (
                             <div key={`Video_${idx}`} className='HP-Video-Wrapper' onClick={((e) => history.push(`/Videos/${video.id}`))}>
                                 <div className='HP-Thumbnail-Wrapper'>
@@ -115,7 +115,7 @@ function HomePage() {
                             </div>
                         ))}
                     </div>
-                </div>
+                </>
             )
     )
 }

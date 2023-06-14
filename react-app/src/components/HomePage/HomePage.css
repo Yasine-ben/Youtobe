@@ -17,19 +17,21 @@
     border-radius: 20px;
     overflow-y: hidden;
     position: relative;
+    margin-left: 0;
     top: 60px;
     left: 50%;
-    transform: translate(-50%)
+    transform: translate(-45%)
 }
 
 .HP-BlockAdWrapper{
     width: 45%;
     border-radius: 20px;
+    margin-left: 120px;
     overflow-y: hidden;
     position: relative;
     top: 60px;
     left: 50%;
-    transform: translate(-40%)
+    transform: translate(-50%)
 }
 
 .HP-BlockAd{
