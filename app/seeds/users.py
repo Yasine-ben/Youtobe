@@ -14,87 +14,116 @@ def seed_users():
         password="password",
     )
     # 2
-    drake = User(
-        username="drake69",
-        first_name="Drake",
-        last_name="Bake",
-        cover_image="https://i.ibb.co/vzSPbYd/2.png",
-        email="drake@aa.io",
-        password="password",
+    AlmostFridayTv = User(
+        username="AlmostFridayTv",
+        first_name="Almost",
+        last_name="Friday TV",
+        cover_image="https://i.ibb.co/x34Cmbj/amostfridaytv-prof-pic.jpg",
+        email="random_email1@example.com",
+        password="random_password1",
     )
+
     # 3
-    marnie = User(
-        username="marnie123",
-        first_name="Marnie",
-        last_name="User",
-        cover_image="https://i.ibb.co/PgJCxSS/3.png",
-        email="marnie@aa.io",
-        password="password",
+    JoelHaver = User(
+        username="JoelHaver",
+        first_name="Joel",
+        last_name="Haver",
+        cover_image="https://i.ibb.co/jHrQw8s/unnamed-1.jpg",
+        email="random_email2@example.com",
+        password="random_password2",
     )
+
     # 4
-    bobbie = User(
-        username="bobbie_slobbie192",
-        first_name="Demo",
-        last_name="User",
-        cover_image="https://i.ibb.co/MnWFNf0/4.png",
-        email="bobbie@aa.io",
-        password="password",
+    videogamedunkey = User(
+        username="videogamedunkey",
+        first_name="",
+        last_name="",
+        cover_image="https://i.ibb.co/mShpnh1/dunkey-prof-pic.jpg",
+        email="random_email3@example.com",
+        password="random_password3",
     )
+
     # 5
-    gobbie = User(
-        username="gobbiegobbiegobbie",
-        first_name="Demo",
-        last_name="User",
-        cover_image="https://i.ibb.co/PQ6vBqq/5.png",
-        email="gobbie@aa.io",
-        password="password",
+    KevinPowell = User(
+        username="KevinPowell",
+        first_name="Kevin",
+        last_name="Powell",
+        cover_image="https://i.ibb.co/xf411RH/images.jpg",
+        email="random_email4@example.com",
+        password="random_password4",
     )
+
     # 6
-    scobbie = User(
-        username="scobbie0_0",
-        first_name="Demo",
-        last_name="User",
-        cover_image="https://i.ibb.co/34RBgJ5/6.png",
-        email="scobbie@aa.io",
-        password="password",
+    KeyAndPeele = User(
+        username="KeyAndPeele",
+        first_name="Key",
+        last_name="& Peele",
+        cover_image="https://i.ibb.co/HN3nqQ6/unnamed.jpg",
+        email="random_email5@example.com",
+        password="random_password5",
     )
+
     # 7
-    lobbie = User(
-        username="lobbiesmobbie",
-        first_name="lobbie",
-        last_name="Smith",
-        cover_image="https://i.ibb.co/YjRfzQx/7.png",
-        email="lobbie@aa.io",
-        password="password",
+    InternetHistorian = User(
+        username="InternetHistorian",
+        first_name="Internet",
+        last_name="Historian",
+        cover_image="https://i.ibb.co/RQCybQc/ih-prof-pic.jpg",
+        email="random_email6@example.com",
+        password="random_password6",
     )
+
     # 8
-    tobby = User(
-        username="tobbythefighter",
-        first_name="toby",
-        last_name="Finkja",
-        cover_image="https://i.ibb.co/ky9yvHS/8.png",
-        email="tobby@aa.io",
-        password="password",
+    NakeyJakey = User(
+        username="NakeyJakey",
+        first_name="Nakey",
+        last_name="Jakey",
+        cover_image="https://i.ibb.co/xHL2j8n/unnamed-2.jpg",
+        email="random_email7@example.com",
+        password="random_password7",
     )
+
     # 9
-    mobby = User(
-        username="supertoby",
-        first_name="Toby",
-        last_name="Sming",
-        cover_image="https://i.ibb.co/wJP9NXK/9.png",
-        email="mobby@aa.io",
-        password="password",
+    styropyro = User(
+        username="styropyro",
+        first_name="Drake",
+        last_name="drackobs",
+        cover_image="https://i.ibb.co/b1MsZtP/unnamed-3.jpg",
+        email="random_email8@example.com",
+        password="random_password8",
+    )
+
+    # 10
+    MattParker = User(
+        username="Matt_Parker",
+        first_name="Matt",
+        last_name="Parker",
+        cover_image="https://i.ibb.co/5WDVym1/unnamed-4.jpg",
+        email="random_email9@example.com",
+        password="random_password9",
+    )
+
+    # 11
+    FilmCow = User(
+        username="FilmCow",
+        first_name="Film",
+        last_name="Cow",
+        cover_image="https://i.ibb.co/hZrfY8f/unnamed-5.jpg",
+        email="random_email10@example.com",
+        password="random_password10",
     )
 
     db.session.add(demo)
-    db.session.add(drake)
-    db.session.add(marnie)
-    db.session.add(bobbie)
-    db.session.add(gobbie)
-    db.session.add(scobbie)
-    db.session.add(lobbie)
-    db.session.add(tobby)
-    db.session.add(mobby)
+    db.session.add(AlmostFridayTv)
+    db.session.add(JoelHaver)
+    db.session.add(videogamedunkey)
+    db.session.add(KevinPowell)
+    db.session.add(KeyAndPeele)
+    db.session.add(InternetHistorian)
+    db.session.add(NakeyJakey)
+    db.session.add(styropyro)
+    db.session.add(MattParker)
+    db.session.add(FilmCow)
     db.session.commit()
 
 
