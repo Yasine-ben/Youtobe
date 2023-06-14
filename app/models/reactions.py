@@ -5,20 +5,17 @@ from sqlalchemy import CheckConstraint, ForeignKey
 
 class Reaction(db.Model):
     __tablename__ = 'reactions'
-    
-    if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('users.id')))
     video_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('videos.id')))
     reaction_type = db.Column(db.String(10), nullable=False)
     
-    # Add a CheckConstraint to enforce the allowed values
-    __table_args__ = (
-        CheckConstraint(reaction_type.in_(['like', 'dislike']), name='reaction_type_check'),
-    )
 
+    if environment == "production":
+        __table_args__ = (
+        CheckConstraint(reaction_type.in_(['like', 'dislike']), name='reaction_type_check'),{'schema': SCHEMA})
+        
     user = db.relationship('User', back_populates='reactions')
     video = db.relationship('Video', back_populates='reactions')
 
