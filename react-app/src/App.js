@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
@@ -9,6 +9,7 @@ import Topbar from "./components/Nav/Topbar";
 import Sidebar from "./components/Nav/Sidebar";
 import HomePage from "./components/HomePage";
 import SingleVideoPage from "./components/SingleVideoPage";
+import Subscriptions from "./components/Subscriptions";
 import MyVideos from "./components/MyVideos";
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
       {/* <Navigation isLoaded={isLoaded} /> */}
       {isLoaded && (
         <Switch>
-          <Route exact path="/login" >
+          <Route exact path="/login">
             {/* <Topbar isLoaded={isLoaded} />
             <Sidebar isLoaded={isLoaded} /> */}
             <LoginFormPage />
@@ -32,21 +33,28 @@ function App() {
             {/* <Topbar isLoaded={isLoaded} />
             <Sidebar isLoaded={isLoaded} /> */}
             <SignupFormPage />
-            </Route>
-          <Route exact path='/'>
+          </Route>
+          <Route exact path="/">
             <Topbar isLoaded={isLoaded} />
             <Sidebar isLoaded={isLoaded} />
             <HomePage />
           </Route>
-
-          <Route exact path='/MyVideos'>
+          <Route exact path="/Subscriptions">
+            <Topbar isLoaded={isLoaded} />
+            <Sidebar isLoaded={isLoaded} />
+            <Subscriptions />
+          </Route>
+          <Route exact path="/MyVideos">
             <Topbar isLoaded={isLoaded} />
             <MyVideos />
           </Route>
-          
-          <Route path='/Videos/:video_id'>
+          <Route path="/Videos/:video_id">
             <Topbar isLoaded={isLoaded} />
             <SingleVideoPage />
+          </Route>
+          {/* Fallback route for unmatched URLs */}
+          <Route>
+            <Redirect to="/" />
           </Route>
         </Switch>
       )}

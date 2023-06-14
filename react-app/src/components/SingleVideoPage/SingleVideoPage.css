@@ -14,9 +14,30 @@
     margin-left: 20px;
 }
 
-
-
-
+.VP-Creator-Left{
+    /* background-color: red; */
+    width: 300px;
+    display: flex;
+}
+.VP-Subscribe-Wrapper{
+    /* background-color: yellow; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    bottom: 10px;
+}
+.VP-Subscribe{
+    width: 120px;
+    height: 35px;
+    background-color: rgb(41,41,41);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    font-size: .9em;
+}
 
 
 .player-wrapper video {
@@ -173,6 +194,7 @@
     font-weight: 500;
     font-size: .8em;
     color: grey;
+    width: 80px;
 }
 
 .VP-Buttons {

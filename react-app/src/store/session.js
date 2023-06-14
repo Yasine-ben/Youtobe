@@ -2,16 +2,19 @@
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 
+
 const setUser = (user) => ({
 	type: SET_USER,
 	payload: user,
 });
 
+
 const removeUser = () => ({
 	type: REMOVE_USER,
 });
 
-const initialState = { user: null };
+
+const initialState = { user: null};
 
 export const authenticate = () => async (dispatch) => {
 	const response = await fetch("/api/auth/", {
@@ -28,6 +31,24 @@ export const authenticate = () => async (dispatch) => {
 		dispatch(setUser(data));
 	}
 };
+
+// export const thunkSetSubs = () => async (dispatch) => {
+// 	const response = await fetch("/api/users/userSubs", {
+// 		headers: {
+// 			"Content-Type": "application/json",
+// 		},
+// 	});
+// 	if (response.ok) {
+// 		const data = await response.json();
+// 		if (data.errors) {
+// 			return;
+// 		}
+
+// 		dispatch(setUser(data));
+// 	}
+// };
+
+
 
 export const login = (email, password) => async (dispatch) => {
 	const response = await fetch("/api/auth/login", {
@@ -67,7 +88,7 @@ export const logout = () => async (dispatch) => {
 	}
 };
 
-export const signUp = (username,first_name, last_name, cover_image, email, password) => async (dispatch) => {
+export const signUp = (username, first_name, last_name, cover_image, email, password) => async (dispatch) => {
 	const response = await fetch("/api/auth/signup", {
 		method: "POST",
 		headers: {
@@ -95,6 +116,55 @@ export const signUp = (username,first_name, last_name, cover_image, email, passw
 	} else {
 		return ["An error occurred. Please try again."];
 	}
+};
+
+// Thunk action for subscribing to a user
+export const subscribe = (subscriberId, subscribedToId) => async (dispatch) => {
+	const response = await fetch('/api/users/subscribe', {
+		method: 'POST',
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			subscriber_id: subscriberId,
+			subscribed_to_id: subscribedToId,
+		})
+	});
+
+	if (response.ok) {
+		const data = await response.json()
+		await dispatch(authenticate())
+		// console.log(data)
+	}
+	else {
+		const data = await response.json()
+		// console.log(data)
+	}
+};
+
+// Thunk action for unsubscribing from a user
+export const unsubscribe = (subscriberId, subscribedToId) => async (dispatch) => {
+	const response = await fetch('/api/users/unsubscribe', {
+		method: 'DELETE',
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			subscriber_id: subscriberId,
+			subscribed_to_id: subscribedToId,
+		})
+	});
+
+	if (response.ok) {
+		const data = await response.json()
+		await dispatch(authenticate())
+		// console.log(data)
+	}
+	else {
+		const data = await response.json()
+		// console.log(data)
+	}
+
 };
 
 export default function reducer(state = initialState, action) {

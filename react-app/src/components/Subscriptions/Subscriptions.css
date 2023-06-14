@@ -12,31 +12,12 @@
     transition: width 0.3s ease;
 }
 
-.HP-BlockAdWrapper.full-width{
-    width: 45%;
-    border-radius: 20px;
-    overflow-y: hidden;
-    position: relative;
-    margin-left: 0;
-    top: 60px;
-    left: 50%;
-    transform: translate(-45%)
-}
-
-.HP-BlockAdWrapper{
-    width: 45%;
-    border-radius: 20px;
-    margin-left: 120px;
-    overflow-y: hidden;
-    position: relative;
-    top: 60px;
-    left: 50%;
-    transform: translate(-50%)
-}
-
-.HP-BlockAd{
+.SUB-Title{
+    position: absolute;
+    top: 28px;
+    font-size: 1.8em;
     width: 100%;
-    height: 100%;
+    border-bottom: 1px solid grey;
 }
 
 .HP-Wrapper.full-width {
@@ -176,12 +157,6 @@
     bottom: 30px;
     left: 90%;
     color: white;
-}
-
-#Ad-External{
-    position: relative;
-    left: 95%;
-    bottom: 30px;
 }
 
 .HP-Lower-Wrapper-Ad {

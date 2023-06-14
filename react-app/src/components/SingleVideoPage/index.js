@@ -11,6 +11,8 @@ import './SingleVideoPage.css'
 import { thunkAllComments, thunkCreateComment, thunkDeleteComment, thunkUpdateComment } from '../../store/comments';
 import UpdateVideoForm from '../Forms/UpdateVideoForm';
 import ToolTipMenu from './ToolTip';
+import { subscribe } from '../../store/session';
+import { unsubscribe } from '../../store/session';
 
 function SingleVideoPage() {
     const dispatch = useDispatch()
@@ -24,7 +26,7 @@ function SingleVideoPage() {
 
     dayjs.extend(relativeTime)
 
-    
+
 
     const video = Object.values(useSelector(state => state.videos?.singleVideo))[0]
     const allVideos = Object.values(useSelector(state => state.videos?.allVideos))
@@ -54,11 +56,12 @@ function SingleVideoPage() {
     const [dislikes, setDislikes] = useState(0);
     const [userReaction, setUserReaction] = useState(null);
     const [isDisabled, setIsDisabled] = useState(false)
+    const [isSubscribed, setIsSubscribed] = useState(false)
 
     const [menuOpen, setMenuOpen] = useState(false)
 
     const [errors, setErrors] = useState({})
-console.log(menuOpen)
+    // console.log(menuOpen)
     useEffect(() => {
         // Check if reactions exist
         if (video?.reactions && video?.reactions.length > 0) {
@@ -70,12 +73,12 @@ console.log(menuOpen)
             video?.reactions.forEach(reaction => {
                 if (reaction.reaction_type === 'like') {
                     likeCount++;
-                    if (reaction.user_id === user.id) {
+                    if (reaction.user_id === user?.id) {
                         userReactionType = 'like';
                     }
                 } else if (reaction.reaction_type === 'dislike') {
                     dislikeCount++;
-                    if (reaction.user_id === user.id) {
+                    if (reaction.user_id === user?.id) {
                         userReactionType = 'dislike';
                     }
                 }
@@ -169,15 +172,7 @@ console.log(menuOpen)
             setIsLoaded(true);
         };
         fetchData();
-    }, [dispatch, user, history.location])
-
-    const handleDelete = (e) => {
-        e.preventDefault()
-        dispatch(thunkDeleteVideo(video_id))
-        history.push('/')
-    }
-
-
+    }, [dispatch, user?.id, history.location])
 
     const handleCommentSubmit = async (e) => {
         e.preventDefault()
@@ -234,7 +229,6 @@ console.log(menuOpen)
         }
 
     }
-
     function videoError() {
         setUrl('https://www.youtube.com/watch?v=YnP94m5pwls')
         setVideoErr(true)
@@ -246,7 +240,7 @@ console.log(menuOpen)
         setEditCommentId(id)
         setEditEnabled(true)
     }
-    console.log(video)
+    // console.log(video)
     const handleEditComment = async (e, comment_id) => {
         e.preventDefault()
         const err = {}
@@ -291,7 +285,28 @@ console.log(menuOpen)
         dispatch(thunkUpdateViews(video.id))
     }
 
+    const handleSubscribe = async () => {
+        if (user) {
+            if (!isSubscribed) {
+                await dispatch(subscribe(user.id, video.user_id))
+                setIsSubscribed(true)
+            } else {
+                await dispatch(unsubscribe(user.id, video.user_id))
+                setIsSubscribed(false)
+            }
+        }
+    }
 
+
+    useEffect(() => {
+        if (user !== null && video) {
+            for (let i = 0; i < user.subscriptions?.length; i++) {
+                if (video.user_id == user.subscriptions[i].subscribed_to_id) {
+                    setIsSubscribed(true)
+                }
+            }
+        }
+    })
 
 
     return (
@@ -319,27 +334,37 @@ console.log(menuOpen)
                                 <p className='VP-Title'>{title}</p>
                             </div>
                             <div className='VP-Lower-Wrapper'>
-                                <div className='VP-Creator-Wrapper'>
-                                    <div className='VP-Creator-Img-Wrapper'>
-                                        <img className='VP-Creator-Img' src={video?.cover_image} alt='creatorImg' />
+                                <div className='VP-Creator-Left'>
+                                    <div className='VP-Creator-Wrapper'>
+                                        <div className='VP-Creator-Img-Wrapper'>
+                                            <img className='VP-Creator-Img' src={video?.cover_image} alt='creatorImg' />
+                                        </div>
+                                        <div className='VP-CreatorName-Wrapper'>
+                                            <p className='VP-CreatorName'>{video?.uploader}</p>
+                                            <p className='VP-Subscribers'>{`${normalizeViews(video?.subscribers?.length)} subscribers`}</p>
+                                        </div>
                                     </div>
-                                    <div className='VP-CreatorName-Wrapper'>
-                                        <p className='VP-CreatorName'>{video?.uploader}</p>
-                                        <p className='VP-Subscribers'>{`0 subscribers`}</p>
+                                    <div className='VP-Subscribe-Wrapper' onClick={() => { handleSubscribe() }}>
+                                        {user && (user.id !== video.user_id) && (
+                                            isSubscribed ? (
+                                                <p className='VP-Subscribe' style={{ backgroundColor: 'white', color: 'black', cursor:'pointer' }}>Subscribed</p>
+                                            ) : (
+                                                <p className='VP-Subscribe' style={{cursor:'pointer'}}>Subscribe</p>
+                                            )
+                                        )}
                                     </div>
                                 </div>
-
                                 <div className='VP-UserInteration-Wrapper'>
                                     <div className='VP-Reactions-Wrapper' style={{ width: '160px', height: '36px' }}>
                                         <div className='VP-Reactions'>
-                                            <div className='VP-Like-Container' onClick={!isDisabled ? handleLike : null} style={{cursor:'pointer'}}>
+                                            <div className='VP-Like-Container' onClick={!isDisabled ? handleLike : null} style={{ cursor: 'pointer' }}>
                                                 {userReaction == 'like' ?
                                                     <i className="fa-solid fa-thumbs-up" id='like'></i>
                                                     : <i className="fa-regular fa-thumbs-up" id='like'></i>
                                                 }
                                                 <p className='VP-Like-Count'>{likes}</p>
                                             </div>
-                                            <div className='VP-Dislike-Container' onClick={!isDisabled ? handleDislike : null} style={{cursor:'pointer'}}>
+                                            <div className='VP-Dislike-Container' onClick={!isDisabled ? handleDislike : null} style={{ cursor: 'pointer' }}>
                                                 {userReaction == 'dislike' ?
                                                     <i className="fa-solid fa-thumbs-down" id='dislike' ></i>
                                                     : <i className="fa-regular fa-thumbs-down" id='dislike'></i>
@@ -348,12 +373,12 @@ console.log(menuOpen)
                                             </div>
                                         </div>
                                     </div>
-                                    {menuOpen && <ToolTipMenu video={video} setMenuOpen={setMenuOpen} menuOpen={menuOpen} />}
-                                    <div className='VP-ContextMenu-Wrapper' onClick={(e) => openTTMFunc(e)} style={{cursor:'pointer'}}>
+                                    {menuOpen && user?.id === video?.user_id &&<ToolTipMenu video={video} setMenuOpen={setMenuOpen} menuOpen={menuOpen} />}
+                                    {user?.id === video?.user_id && <div className='VP-ContextMenu-Wrapper' onClick={(e) => openTTMFunc(e)} style={{ cursor: 'pointer' }}>
                                         <div className='VP-ContextMenuIcon' >
                                             <span className="material-symbols-outlined">more_horiz</span>
                                         </div>
-                                    </div>
+                                    </div>}
                                 </div>
                                 {/* <div className='VP-Buttons-Wrapper'>
                                     {(user?.id === video?.user_id) && (

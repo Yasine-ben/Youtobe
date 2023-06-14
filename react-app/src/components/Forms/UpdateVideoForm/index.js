@@ -12,8 +12,7 @@ function UpdateVideoForm({ video_id }) {
     const video = Object.values(useSelector(state => state.videos?.singleVideo))[0]
     const dispatch = useDispatch();
     const { closeModal } = useModal();
-
-    const [title, setTitle] = useState(video.video || '')
+    const [title, setTitle] = useState(video.title || '')
     const [description, setDescription] = useState(video.description || '')
     const [thumbnail, setThumbnail] = useState(video.thumbnail || '')
     const [errors, setErrors] = useState({})
@@ -29,9 +28,7 @@ function UpdateVideoForm({ video_id }) {
 
         if (description.length < 1) err.description = 'Description must be filled in'
         if (description.length > 1000) err.description = 'Description must be less than 1001 characters in length'
-        
-        if (!isValidUrl(thumbnail)) err.thumbnail = 'Thumbnail Url must be a valid url'
-        if (!isImageUrl(thumbnail)) err.thumbnail = 'Thumbnail url must lead to an image'
+
 
         if (!Object.values(err).length) {
             setErrors(err)
@@ -55,19 +52,7 @@ function UpdateVideoForm({ video_id }) {
         }
     }       
 
-    function isValidUrl(string) {
-        try {
-            new URL(string);
-            return true;
-        } catch (_) {
-            return false;
-        }
-    }
 
-    function isImageUrl(url) {
-        const imageExtensions = /\.(jpg|jpeg|png|gif)$/i;
-        return imageExtensions.test(url);
-    }
 
     return (
         sessionUser && (
@@ -96,11 +81,6 @@ function UpdateVideoForm({ video_id }) {
                         <p className='UVF-CD-VD-Count'>{`${description.length}/1000`}</p>
                     </div>
 
-                    <div className='UVF-CD-VThumbnail-Wrapper'>
-                        <div className='UVF-CD-VThumbnail-Input-Wrapper'>
-                            <input className='UVF-CD-VThumbnail-Input' type='text' value={thumbnail} placeholder='Thumbnail Url' onChange={(e) => setThumbnail(e.target.value)} maxLength={1000} />
-                        </div>
-                    </div>
                 </div>
 
                 <div className='UVF-Errors-Wrapper'>
