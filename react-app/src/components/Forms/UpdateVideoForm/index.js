@@ -52,6 +52,12 @@ function UpdateVideoForm({ video_id }) {
         }
     }       
 
+    const isFormValid = () => {
+        return (
+            title.trim().length > 0 &&
+            description.trim().length > 0 
+        );
+    };
 
 
     return (
@@ -91,7 +97,7 @@ function UpdateVideoForm({ video_id }) {
                 </div>
 
                 <div className='UVF-Footer'>
-                    <div className='UVF-Footer-Submit' onClick={((e) => handleSubmit(e))}>Upload</div>
+                    <button className='UVF-Footer-Submit' disabled={!isFormValid()} onClick={((e) => handleSubmit(e))}>Upload</button>
                 </div>
             </div>)
     )

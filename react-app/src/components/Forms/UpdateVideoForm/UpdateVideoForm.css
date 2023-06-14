@@ -292,4 +292,10 @@
     top: 7px;
     right: 15px;
     cursor: pointer;
+    border: none;
+}
+
+.UVF-Footer-Submit:disabled{
+    background-color: grey;
+    cursor: not-allowed;
 }
