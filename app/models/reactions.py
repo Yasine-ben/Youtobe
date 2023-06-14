@@ -11,7 +11,7 @@ class Reaction(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('users.id')))
-    video_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('users.id')))
+    video_id = db.Column(db.Integer, ForeignKey(add_prefix_for_prod('videos.id')))
     reaction_type = db.Column(db.String(10), nullable=False)
     
     # Add a CheckConstraint to enforce the allowed values

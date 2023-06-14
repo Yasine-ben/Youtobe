@@ -1,6 +1,3 @@
-env.py /////////////////////////////////////////////////////////
-//////////////////////////////////////////
-
 from __future__ import with_statement
 
 import logging
@@ -102,24 +99,3 @@ if context.is_offline_mode():
     run_migrations_offline()
 else:
     run_migrations_online()
-
-
-
-///////////////////////////////////////////////////////
-end///////////////////////////////////////////////////////////////////////////////////
-
-
-
-version///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////
-
-import os
-environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get("SCHEMA")
-
-if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE videos SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE reactions SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE subscriptions SET SCHEMA {SCHEMA};")
