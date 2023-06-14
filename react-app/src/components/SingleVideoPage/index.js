@@ -345,11 +345,11 @@ function SingleVideoPage() {
                                         </div>
                                     </div>
                                     <div className='VP-Subscribe-Wrapper' onClick={() => { handleSubscribe() }}>
-                                        {user && (
+                                        {user && (user.id !== video.user_id) && (
                                             isSubscribed ? (
-                                                <p className='VP-Subscribe' style={{ backgroundColor: 'white', color: 'black' }}>Subscribed</p>
+                                                <p className='VP-Subscribe' style={{ backgroundColor: 'white', color: 'black', cursor:'pointer' }}>Subscribed</p>
                                             ) : (
-                                                <p className='VP-Subscribe'>Subscribe</p>
+                                                <p className='VP-Subscribe' style={{cursor:'pointer'}}>Subscribe</p>
                                             )
                                         )}
                                     </div>

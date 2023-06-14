@@ -12,7 +12,6 @@ function UpdateVideoForm({ video_id }) {
     const video = Object.values(useSelector(state => state.videos?.singleVideo))[0]
     const dispatch = useDispatch();
     const { closeModal } = useModal();
-    console.log(video)
     const [title, setTitle] = useState(video.title || '')
     const [description, setDescription] = useState(video.description || '')
     const [thumbnail, setThumbnail] = useState(video.thumbnail || '')

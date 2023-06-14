@@ -134,11 +134,11 @@ export const subscribe = (subscriberId, subscribedToId) => async (dispatch) => {
 	if (response.ok) {
 		const data = await response.json()
 		await dispatch(authenticate())
-		console.log(data)
+		// console.log(data)
 	}
 	else {
 		const data = await response.json()
-		console.log(data)
+		// console.log(data)
 	}
 };
 
@@ -158,11 +158,11 @@ export const unsubscribe = (subscriberId, subscribedToId) => async (dispatch) =>
 	if (response.ok) {
 		const data = await response.json()
 		await dispatch(authenticate())
-		console.log(data)
+		// console.log(data)
 	}
 	else {
 		const data = await response.json()
-		console.log(data)
+		// console.log(data)
 	}
 
 };
