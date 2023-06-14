@@ -1,20 +1,19 @@
 """empty message
 
-Revision ID: 27cd0d020711
+Revision ID: 90ffe754ba23
 Revises: 
-Create Date: 2023-06-13 22:47:07.576569
+Create Date: 2023-06-13 22:53:14.959417
 
 """
 from alembic import op
 import sqlalchemy as sa
-
 
 import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '27cd0d020711'
+revision = '90ffe754ba23'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -74,7 +73,8 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('video_id', sa.Integer(), nullable=True),
-    sa.Column('reaction_type', sa.Enum('reaction_type_enum', 'like', 'dislike'), nullable=False),
+    sa.Column('reaction_type', sa.String(length=10), nullable=False),
+    sa.CheckConstraint("reaction_type IN ('like', 'dislike')", name='reaction_type_check'),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.ForeignKeyConstraint(['video_id'], ['videos.id'], ),
     sa.PrimaryKeyConstraint('id')
