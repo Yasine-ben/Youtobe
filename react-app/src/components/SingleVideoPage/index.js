@@ -174,12 +174,6 @@ function SingleVideoPage() {
         fetchData();
     }, [dispatch, user?.id, history.location])
 
-    const handleDelete = (e) => {
-        e.preventDefault()
-        dispatch(thunkDeleteVideo(video_id))
-        history.push('/')
-    }
-
     const handleCommentSubmit = async (e) => {
         e.preventDefault()
         const err = {}
@@ -379,12 +373,12 @@ function SingleVideoPage() {
                                             </div>
                                         </div>
                                     </div>
-                                    {menuOpen && <ToolTipMenu video={video} setMenuOpen={setMenuOpen} menuOpen={menuOpen} />}
-                                    <div className='VP-ContextMenu-Wrapper' onClick={(e) => openTTMFunc(e)} style={{ cursor: 'pointer' }}>
+                                    {menuOpen && user?.id === video?.user_id &&<ToolTipMenu video={video} setMenuOpen={setMenuOpen} menuOpen={menuOpen} />}
+                                    {user?.id === video?.user_id && <div className='VP-ContextMenu-Wrapper' onClick={(e) => openTTMFunc(e)} style={{ cursor: 'pointer' }}>
                                         <div className='VP-ContextMenuIcon' >
                                             <span className="material-symbols-outlined">more_horiz</span>
                                         </div>
-                                    </div>
+                                    </div>}
                                 </div>
                                 {/* <div className='VP-Buttons-Wrapper'>
                                     {(user?.id === video?.user_id) && (

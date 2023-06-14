@@ -107,7 +107,7 @@ function HomePage() {
                                         <div className='HP-ViewsAndTime-Wrapper'>
                                             <div className='HP-Views-Wrapper'>
                                                 <p className='HP-Views'>{`${normalizeViews(video.views)} views`}</p>
-                                                <p className='HP-Time'>&nbsp;•&nbsp;{dayjs(video.updated_at).fromNow()}</p>
+                                                <p className='HP-Time'>&nbsp;•&nbsp;{dayjs(video.created_at).fromNow()}</p>
                                             </div>
                                         </div>
                                     </div>
