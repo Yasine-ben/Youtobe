@@ -233,7 +233,7 @@ function VideoForm() {
                             <div className="VF-CD-VTI-Wrapper">
                                 <div {...getThumbnailRootProps({ className: `dropzone ${isThumbnailDragActive ? "active" : ""} ${isThumbnailDragAccept ? "accept" : ""} ${isThumbnailDragReject ? "reject" : ""}` })}>
                                     <input {...getThumbnailInputProps()} />
-                                    {!isThumbnailDragActive && !thumbnailPreview && (<i class="fa-solid fa-image" id='CI-Cloud'></i>)}
+                                    {!isThumbnailDragActive && !thumbnailPreview && (<i className="fa-solid fa-image" id='CI-Cloud'></i>)}
                                     {!isThumbnailDragActive && !thumbnailPreview && !errors.thumbnail && (<p>Tap or drop an image here</p>)}
                                     {errors.thumbnail && <p className="" style={{ color: 'red' }}>Invalid file format for thumbnail image. Please upload a JPEG or PNG file.</p>}
                                     {thumbnailPreview && <div className=""><img src={thumbnailPreview} alt="Thumbnail Preview" className="" style={{ width: '200px' }} /></div>}
@@ -243,7 +243,7 @@ function VideoForm() {
                             {<div className={"VF-CD-VVI-Wrapper"}>
                                 <div {...getVideoRootProps({ className: `dropzone ${isVideoDragActive ? "active" : ""} ${isVideoDragAccept ? "accept" : ""} ${isVideoDragReject ? "reject" : ""}` })}>
                                     <input {...getVideoInputProps()} />
-                                    {!isVideoDragActive && !videoPreview && (<i class="fa-solid fa-video" id='CI-Cloud'></i>)}
+                                    {!isVideoDragActive && !videoPreview && (<i className="fa-solid fa-video" id='CI-Cloud'></i>)}
                                     {!isVideoDragActive && !videoPreview && !errors.video && (<p>Tap or drop your video here</p>)}
                                     {errors.video && <p className="" style={{ color: 'red' }}>Invalid file format for Video file. Please upload an mp4 file.</p>}
                                     

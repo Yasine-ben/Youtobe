@@ -52,12 +52,12 @@ function Topbar() {
                     <p className='TB-Title'>Youtobe</p>
                 </div>
             </div>
-            <div className='TB-Search-Wrapper'>
+            {/* <div className='TB-Search-Wrapper'>
                 <input className='TB-Search-Input' type='text' placeholder='Search' />
                 <div className='TB-SearchIcon-Wrapper'>
                     <i className="fa-solid fa-magnifying-glass" id='search-icon' />
                 </div>
-            </div>
+            </div> */}
             <div className='TB-RightSide-Wrapper'>
                 <div className='TB-RightSide-MyLinks-Wrapper'>
                     <a href='https://www.linkedin.com/in/yasine-benzekri-389457271'>

@@ -87,7 +87,7 @@
     color: gray;
     width: fit-content;
     top: -10px;
-    left: 480px;
+    left: 10px;
 }
 
 /*/////////////////////////////////////////////////////////*/
@@ -126,7 +126,7 @@
     color: gray;
     width: fit-content;
     top: -20px;
-    left: 475px;
+    left: 10px;
 }
 
 /*/////////////////////////////////////////////////////////*/
@@ -270,6 +270,11 @@
     top: 7px;
     right: 15px;
     cursor: pointer;
+    border: none;
+}
+.VF-Footer-Submit:disabled {
+    background-color: grey;
+    cursor: not-allowed;
 }
 
 /*/////////////////////////////////////////////////////////*/
