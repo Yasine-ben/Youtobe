@@ -22,6 +22,20 @@ def allVideos():
     videos = Video.query.all()
     return { 'videos': [video.to_dict() for video in videos] }
 
+
+@video_routes.route('/subscribedVideos')
+@login_required
+def get_subscribed_videos():
+    subscribed_users = [subscription.subscribed_to_id for subscription in current_user.get_subscriptions()]
+    subscribed_videos = Video.query.filter(Video.user_id.in_(subscribed_users)).order_by(Video.created_at.desc()).all()
+    # print('///////////////////////////////////////////////')
+    # for video in subscribed_videos:
+    #     print('/////////////////////////////////')
+    #     print(video.created_at)
+    # print(subscribed_videos[0].created_at)
+    return { 'videos': [video.to_dict() for video in subscribed_videos] }
+
+
 @video_routes.route('/addView/<int:video_id>')
 def addView(video_id):
     if video_id:

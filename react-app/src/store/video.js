@@ -28,6 +28,14 @@ const normalizeAllVideos = (videos) => {
     return normalize;
 }
 
+const normalizeSubVideos = (videos) => {
+    let normalize = {};
+    videos.forEach((video,idx) => {
+        normalize[idx] = video;
+    })
+    return normalize;
+}
+
 export const thunkUpdateViews = (video_id) => async dispatch => {
     const response = await fetch(`/api/videos/addView/${video_id}`)
 
@@ -54,6 +62,17 @@ export const thunkAllVideos = () => async dispatch => {
     if (response.ok) {
         const videos = await response.json()
         const normalized = normalizeAllVideos(videos.videos)
+        dispatch(actionAllVideos(normalized))
+        return
+    }
+}
+
+export const thunkVideoSubscription = () => async dispatch => {
+    const response = await fetch('/api/videos/subscribedVideos')
+
+    if (response.ok) {
+        const videos = await response.json()
+        const normalized = normalizeSubVideos(videos.videos)
         dispatch(actionAllVideos(normalized))
         return
     }

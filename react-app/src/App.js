@@ -9,6 +9,7 @@ import Topbar from "./components/Nav/Topbar";
 import Sidebar from "./components/Nav/Sidebar";
 import HomePage from "./components/HomePage";
 import SingleVideoPage from "./components/SingleVideoPage";
+import Subscriptions from "./components/Subscriptions";
 import MyVideos from "./components/MyVideos";
 
 function App() {
@@ -42,7 +43,7 @@ function App() {
           <Route exact path='/Subscriptions'>
             <Topbar isLoaded={isLoaded} />
             <Sidebar isLoaded={isLoaded} />
-            <HomePage />
+            <Subscriptions />
           </Route>
 
           <Route exact path='/MyVideos'>
