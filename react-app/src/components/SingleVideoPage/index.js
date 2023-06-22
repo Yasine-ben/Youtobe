@@ -19,7 +19,6 @@ function SingleVideoPage() {
     const history = useHistory()
     const { video_id } = useParams();
     const wrapperRef = useRef(null);
-    //import dayjs from 'dayjs' // ES 2015
     const dayjs = require('dayjs')
     let relativeTime = require('dayjs/plugin/relativeTime')
     dayjs().format()
@@ -61,7 +60,6 @@ function SingleVideoPage() {
     const [menuOpen, setMenuOpen] = useState(false)
 
     const [errors, setErrors] = useState({})
-    // console.log(menuOpen)
     useEffect(() => {
         // Check if reactions exist
         if (video?.reactions && video?.reactions.length > 0) {
@@ -156,12 +154,9 @@ function SingleVideoPage() {
             setTitle(video.title)
             setDescription(video.description)
             setDate(video.updated_at)
-            // setIsloaded(true)
         }
 
     }, [video])
-    // console.log(disabled)
-    // console.log(dayjs(date).fromNow())
 
     useEffect(() => {
         const fetchData = async () => {
@@ -190,11 +185,8 @@ function SingleVideoPage() {
             const data = await dispatch(thunkCreateComment(video_id, user_id, comment, user_name));
 
             if (data) {
-                // console.log('SERVER ERRORS')
-                // console.log(data)
             }
             else {
-                // console.log("SUBMITTED")
                 setComment('')
                 return
             }
@@ -203,8 +195,6 @@ function SingleVideoPage() {
         } else {
             setErrors(err)
             alert(err.comment)
-            // console.log(err)
-            // console.log('FRONT END ERROR FRONT END ERROR')
             return
         }
     }
@@ -248,18 +238,13 @@ function SingleVideoPage() {
         if (editComment.length > 1000) err.comment = 'Comment must be 1000 or less characters in length'
 
         const video_id = video.id
-        // console.log('ERRORS => ', err)
-        // console.log('NEW COMMENT DATA => ', editComment)
         if (!Object.values(err).length) {
             setErrors(err)
             const data = await dispatch(thunkUpdateComment(video_id, comment_id, editComment));
 
             if (data) {
-                // console.log('SERVER ERROR')
-                // console.log(data)
             }
             else {
-                // console.log('COMMENT UPDATED')
                 setEditCommentId(null)
                 setEditEnabled(false)
                 setEditComment('')
@@ -268,7 +253,6 @@ function SingleVideoPage() {
         }
         else {
             setErrors(err)
-            // console.log('ELSE ELSE')
             return
         }
 
@@ -326,7 +310,6 @@ function SingleVideoPage() {
                                 onError={(e) => videoError()}
                                 playing={videoErr}
                                 onStart={() => handleVideoStart()}
-                            // onEnded={((e) => '')
                             />
                         </div>
                         <div className='VP-UnderPlayer-Wrapper'>
@@ -380,18 +363,6 @@ function SingleVideoPage() {
                                         </div>
                                     </div>}
                                 </div>
-                                {/* <div className='VP-Buttons-Wrapper'>
-                                    {(user?.id === video?.user_id) && (
-                                        <div className='VP-Buttons'>
-                                            <OpenModalButton
-                                                className='VP-UpdateBtn'
-                                                buttonText='Update'
-                                                modalComponent={<UpdateVideoForm video_id={video_id} />}
-                                            />
-                                            <div className='VP-DeleteBtn' onClick={(e) => handleDelete(e)}>Delete</div>
-                                        </div>
-                                    )}
-                                </div> */}
                             </div>
                         </div>
 
@@ -434,7 +405,7 @@ function SingleVideoPage() {
                                     </div>
                                     <div className='VP-CommentInputButton-Wrapper' onClick={(e) => !disabled ? alert('Please Login or Create a gooo account to comment on this video :)') : handleCommentSubmit(e)}>
                                         <div className='VP-Submit'>
-                                            <p className='VP-Submit-Text'>Comment</p>
+                                            <button className='VP-Submit-Text'>Comment</button>
                                         </div>
                                     </div>
                                 </div>
@@ -476,7 +447,6 @@ function SingleVideoPage() {
 
                                             <div key={`Comment_${idx}`} className='VP-UC-Card-Wrapper'>
                                                 <div className='VP-UC-Icon-Wrapper'>
-                                                    {/* <i id='VP-UC-Icon' className="fa-solid fa-circle-user"></i> */}
                                                     <img id='VP-UC-Icon' src={comment?.cover_image} alt='userImg' />
                                                 </div>
                                                 <div className='VP-UC-RightBox-Wrapper'>
