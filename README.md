@@ -1,4 +1,4 @@
-# WELCOME TO Youtobe
+# Welcome to Youtobe
 
 Youtobe is a Video streaming application that allows users to upload & connect with their favorite creators & discover new content. As an Youtube clone, it offers a comprehensive online platform for uploading & streaming Videos & accessing exclusive content Creators all over the world. With a user-friendly interface Youtobe provides a seamless & personalized Video Watching experience for all types of people.
 
